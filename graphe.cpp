@@ -94,8 +94,6 @@ void Graphe::chargerPond(const std::string& nomfic)
                 break;
         }
     }
-
-
 }
 
 

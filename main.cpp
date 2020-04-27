@@ -11,6 +11,8 @@ int main()
 
     Graphe nouv;
     nouv.Afficher();
+    nouv.chargerPond("graphe_pond.txt");
+    nouv.Afficher();
 
     std::cout << "Hello world!" << std::endl;
     return 0;
