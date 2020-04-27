@@ -67,6 +67,7 @@ Graphe::~Graphe()
     }
 }
 
+
 void Graphe::chargerPond(const std::string& nomfic)
 {
     std::ifstream ifs{nomfic};
@@ -91,10 +92,12 @@ void Graphe::chargerPond(const std::string& nomfic)
         tab.push_back(tempPond);
     }
 
-    for(auto a : m_arete)
+    for(auto a : m_aretes)
     {
         a->changerPond(tab);
     }
+}
+
 
 void Graphe::Afficher() const
 {

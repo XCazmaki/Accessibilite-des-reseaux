@@ -24,6 +24,7 @@ Arete::~Arete()
 void Arete::changerPond(const std::vector<float>& tab)
 {
     m_poid = tab[m_indice];
+}
 void Arete::afficher() const
 {
     std::cout << "Arete numero : " << m_indice << " de poid " << m_poid << " reliant " << m_arc.first->get_nom();
