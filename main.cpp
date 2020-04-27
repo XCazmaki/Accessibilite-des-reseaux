@@ -8,12 +8,15 @@
 
 int main()
 {
-
+    std::string choixpond;
     Graphe nouv;
     nouv.Afficher();
-    nouv.chargerPond("graphe_pond.txt");
+
+    std::cout << "Nom du fichier de ponderation : ";
+    std::cin>> choixpond;
+    std::cout<<std::endl;
+    nouv.chargerPond(choixpond);
     nouv.Afficher();
 
-    std::cout << "Hello world!" << std::endl;
     return 0;
 }
