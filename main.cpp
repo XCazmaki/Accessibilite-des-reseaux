@@ -20,7 +20,7 @@ int main()
     std::cin>> choixpond;
     std::cout<<std::endl;
     nouv.chargerPond(choixpond);
-    nouv.Afficher();
+    nouv.afficher_console();
 
     return 0;
 }

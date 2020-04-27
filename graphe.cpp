@@ -97,7 +97,7 @@ void Graphe::chargerPond(const std::string& nomfic)
 }
 
 
-void Graphe::Afficher() const
+
 void Graphe::afficher_console() const
 {
     for(auto i: m_sommets)

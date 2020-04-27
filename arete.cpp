@@ -31,7 +31,7 @@ bool Arete::changerPond(const std::pair<int, float>& values)
     else
         return false;
 }
-void Arete::afficher() const
+
 void Arete::afficher_console() const
 {
     std::cout << "Arete numero : " << m_indice << " de poid " << m_poid << " reliant " << m_arc.first->get_nom();
