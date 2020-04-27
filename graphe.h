@@ -23,6 +23,9 @@ public:
 
     ~Graphe();
 
+
+    void chargerPond(const std::string&);
+
 };
 
 #endif // GRAPHE_H_INCLUDED
