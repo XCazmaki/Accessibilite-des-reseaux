@@ -122,5 +122,4 @@ void Graphe::afficher_Svgfile(Svgfile &svgout)
     {
         i->afficher_Svgfile(svgout);
     }
-
 }
