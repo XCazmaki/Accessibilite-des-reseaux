@@ -29,6 +29,30 @@ public:
 
     ~Arete();
 
+    /// Getters
+
+    Sommet* get_arc1()
+    {
+        return  m_arc.first;
+    }
+
+    Sommet* get_arc2()
+    {
+        return  m_arc.second;
+    }
+
+    /// Setter
+
+    void set_arc1(Sommet* nouv)
+    {
+        m_arc.first=nouv;
+    }
+
+    void set_arc2(Sommet* nouv)
+    {
+        m_arc.second=nouv;
+    }
+
 
     bool changerPond(const std::pair<int, float>&);
     void afficher() const;

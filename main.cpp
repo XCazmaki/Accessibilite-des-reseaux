@@ -21,6 +21,10 @@ int main()
 
     nouv.afficher_console();
 
+    nouv.centralite_vecteur_propre();
+
+    nouv.afficher_console();
+
     nouv.afficher_Svgfile(svgout);
 
 

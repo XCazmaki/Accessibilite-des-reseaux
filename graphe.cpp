@@ -182,8 +182,9 @@ void Graphe::centralite_degre()
 
 void Graphe::centralite_vecteur_propre()
 {
-    float lambda=0;
-    float valeur_max=2;     /// va permettre de sortir de la boucle while quand les valeurs seront normalisée
+    float lambda=100;
+    float lambda2=0;
+    float valeur_max=0;     /// va permettre de sortir de la boucle while quand les valeurs seront normalisée
 
     /// Initialisation (on met 1 à l'indice)
     for (auto i: m_sommets)
@@ -194,10 +195,43 @@ void Graphe::centralite_vecteur_propre()
     /// tant que lambda "varie trop"
     do
     {
+        lambda2=lambda;
+        lambda=0;
+        valeur_max=0;
         for(auto i: m_sommets)
         {
-
+            for(auto j: m_aretes)
+            {
+                if(j->get_arc1()->get_nom()==i->get_nom())
+                {
+                    i->set_central(i->get_central()+j->get_arc2()->get_central());
+                    i->set_central_norm(i->get_central()+j->get_arc2()->get_central());
+                }
+                if(j->get_arc2()->get_nom()==i->get_nom())
+                {
+                    i->set_central(i->get_central()+j->get_arc1()->get_central());
+                    i->set_central_norm(i->get_central()+j->get_arc1()->get_central());
+                }
+            }
         }
-    }
-    while(valeur_max>=1)
+        /// Calcul lambda
+        for(auto i: m_sommets)
+        {
+            lambda+=(i->get_central()*i->get_central());
+        }
+        lambda=sqrt(lambda);
+        std::cout << "lambda"<< lambda << std::endl;
+        for(auto i: m_sommets)
+        {
+            i->set_central(i->get_central()/lambda);
+            i->set_central_norm(i->get_central_norm()/lambda);
+        }
+        /// Test valeur max
+        for(auto i: m_sommets)
+        {
+            if(i->get_central()>valeur_max)
+                valeur_max=i->get_central();
+        }
+        std::cout << " Lamba " << lambda << " Lambda 2 " << lambda2 << std::endl;
+    }while(lambda2-lambda>=0.00000001);
 }

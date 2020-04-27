@@ -60,6 +60,16 @@ public:
         return m_liaison.size();
     }
 
+    float get_central() const
+    {
+        return m_central;
+    }
+
+    float get_central_norm() const
+    {
+        return m_central_norm;
+    }
+
     /// Setter
 
     void set_central(float central)
