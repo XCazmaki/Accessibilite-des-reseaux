@@ -97,7 +97,7 @@ void Graphe::chargerPond(const std::string& nomfic)
 }
 
 
-
+/// Affiche le graphe dans la console
 void Graphe::afficher_console() const
 {
     for(auto i: m_sommets)
@@ -112,6 +112,7 @@ void Graphe::afficher_console() const
 
 }
 
+/// Affiche le graphe dans Svgfile
 void Graphe::afficher_Svgfile(Svgfile &svgout)
 {
     for(auto i: m_aretes)
@@ -122,4 +123,18 @@ void Graphe::afficher_Svgfile(Svgfile &svgout)
     {
         i->afficher_Svgfile(svgout);
     }
+}
+
+void Graphe::centralite_degre()
+{
+    for(auto i: m_sommets)
+    {
+        /// l'indice de chaque sommet equivaux à son degrès
+        i->set_central(i->get_degre());
+    }
+}
+
+void Graphe::centralite_vecteur_propre()
+{
+    ///
 }

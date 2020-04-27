@@ -27,9 +27,11 @@ public:
 
     void chargerPond(const std::string&);
 
-    void Afficher() const;
     void afficher_console() const;
     void afficher_Svgfile(Svgfile &svgout);
+
+    void centralite_degre();
+    void centralite_vecteur_propre();
 };
 
 #endif // GRAPHE_H_INCLUDED
