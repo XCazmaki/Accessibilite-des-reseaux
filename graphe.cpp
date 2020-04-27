@@ -16,6 +16,7 @@ Graphe::Graphe()
     int orient=0;
     /// 0=non orient�
     monFlux >> orient;
+    m_orientation = orient;
 
     /// On reccup�re l'ordre
     int ordre=0;
@@ -187,20 +188,15 @@ void Graphe::centralite_vecteur_propre()
 
 void Graphe::centralite_proximite()
 {
-    int i=0;
     for(auto s: m_sommets)
     {
-        std::cout<< "tour " << i <<std::endl;
         std::queue<Sommet*> F;
         F.push(s);
 
         do{
             std::vector<std::pair<Sommet*, float>> adjacents;
-            std::cout<<"\t 1" <<std::endl;
-            F.front()->getAdjacence(adjacents);
-            std::cout<<"\t 2" <<std::endl;
+            rechercheAdj(F.front(), adjacents);
             F.front()->traitementDij(F, adjacents);/// on applique le traitement de dijkstra au premier element de la file
-            std::cout<<"\t 3" <<std::endl;
         }while(F.size()>0);/// tant que la file n'est pas vide
 
         float poidsTot = 0;
@@ -212,6 +208,15 @@ void Graphe::centralite_proximite()
         s->set_central_norm((m_sommets.size() - 1)/ poidsTot);
 
         reset();/// on reset les parametres de parcours des sommets
+    }
+}
+
+void Graphe::rechercheAdj(Sommet* depart, std::vector<std::pair<Sommet*, float>>& adjacents)
+{
+    for(auto ar: m_aretes)
+    {
+        if(ar->testAppartenance(depart, m_orientation))
+            adjacents.push_back(std::make_pair(ar->getSommet(depart), ar->getPoids()));
     }
 }
 

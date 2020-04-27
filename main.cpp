@@ -16,9 +16,9 @@ int main()
     nouv.chargerPond();
 
     //nouv.afficher_console();
-    std::cout<<"ok"<<std::endl;
+
     nouv.centralite_proximite();
-    std::cout<<"okk"<<std::endl;
+
 
     nouv.afficher_console();
 

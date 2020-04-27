@@ -13,6 +13,7 @@ class Graphe
 private:
     std::vector<Sommet*> m_sommets;
     std::vector<Arete*> m_aretes;
+    int m_orientation;
 
 public:
 
@@ -36,6 +37,7 @@ public:
     float calcul_indice();
 
     void centralite_proximite();
+    void rechercheAdj(Sommet*, std::vector<std::pair<Sommet*, float>>&);
     void reset();
 
 };

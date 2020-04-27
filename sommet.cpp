@@ -35,7 +35,7 @@ void Sommet::ajouter_liaison(Arete* arc)
 
 void Sommet::afficher_console() const
 {
-    std::cout << "Sommet numero : " << m_indice << " de nom " << m_nom << "" << m_coordx<< m_coordy << std::endl;
+    std::cout << "Sommet numero : " << m_indice << " de nom " << m_nom << "" << m_coordx<< " "<< m_coordy << std::endl;
     std::cout << "Son indice est : " << m_central_norm << std::endl;
     //std::cout << "Il est relie a : " << m_liaison.size() << std::endl;
 }
@@ -99,3 +99,13 @@ void Sommet::traitementDij(std::queue<Sommet*>& F, std::vector<std::pair<Sommet*
     for(auto s : temp)
         F.push(s); /// on remplit a nouveau la file de telle sorte que le sommet avec la plus petite distance soit en front
 }
+
+/*void Sommet::getAdjacence(std::vector< std::pair<Sommet*, float>>& adjacents)
+{
+    for(auto a : m_liaison)
+    {
+        Sommet* temp;// = a->getSommet(this);
+        float poids = a->getPoids();
+        adjacents.push_back(std::make_pair(temp, poids));
+    }
+}*/

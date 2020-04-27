@@ -43,18 +43,12 @@ void Arete::afficher_Svgfile(Svgfile &svgout,float indice)
     svgout.addLine(m_arc.first->get_coordx()*indice,m_arc.first->get_coordy()*indice,m_arc.second->get_coordx()*indice,m_arc.second->get_coordy()*indice,"black");
 }
 
-void Sommet::getAdjacence(std::vector< std::pair<Sommet*, float>>& adjacents)
+bool Arete::testAppartenance(const Sommet* depart, const int& orient)
 {
-    std::cout<< "\t\t2.1"<<std::endl;
-    for(auto a : m_liaison)
-    {
-        std::cout<<"\t\t2.1.1"<<std::endl;
-        Sommet* temp;// = a->getSommet(this);
-        std::cout<<"\t\t2.1.2"<<std::endl;
-        float poids = a->getPoids();
-        std::cout<<"\t\t2.1.3"<<std::endl;
-        adjacents.push_back(std::make_pair(temp, poids));
-        std::cout<<"\t\t2.1.4"<<std::endl;
-    }
-    std::cout<<"\t\t2.2"<<std::endl;
+    if((orient == 0)&&((depart == m_arc.first)||(depart == m_arc.second)))
+        return true;
+    else if((orient == 1)&&(depart == m_arc.first))
+        return true;
+    else
+        return false;
 }

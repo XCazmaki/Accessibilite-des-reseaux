@@ -31,12 +31,10 @@ public:
 
     Sommet* getSommet(const Sommet* depart)
     {
-        std::cout<<"\t\t\t2.1.1.1"<<std::endl;
         if(m_arc.first == depart)
             return m_arc.second;
         else
             return m_arc.first;
-        std::cout<<"\t\t\t2.1.1.2"<<std::endl;
     }
 
     ///methodes
@@ -46,6 +44,7 @@ public:
     void afficher_console() const;
     void afficher_Svgfile(Svgfile &svgout,float indice);
 
+    bool testAppartenance(const Sommet*, const int&);
 };
 
 #endif // ARETE_H_INCLUDED
