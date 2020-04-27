@@ -6,6 +6,7 @@
 #include <sstream>
 #include <fstream>
 #include <string>
+#include "svgfile.h"
 
 class Arete;
 
@@ -59,7 +60,8 @@ public:
 
     /// Methodes
 
-    void afficher() const;
+    void afficher_console() const;
+    void afficher_Svgfile(Svgfile &svgout);
 };
 
 #endif // SOMMET_H_INCLUDED

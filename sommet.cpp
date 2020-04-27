@@ -27,7 +27,12 @@ void Sommet::ajouter_liaison(Arete* arc)
     m_liaison.push_back(arc);
 }
 
-void Sommet::afficher() const
+void Sommet::afficher_console() const
 {
     std::cout << "Sommet numero : " << m_indice << " de nom " << m_nom << "" << m_coordx<< m_coordy << std::endl;
+}
+
+void Sommet::afficher_Svgfile(Svgfile &svgout)
+{
+    svgout.addDisk(m_coordx*100,m_coordy*100,10,"red");
 }

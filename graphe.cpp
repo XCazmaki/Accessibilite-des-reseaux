@@ -98,15 +98,29 @@ void Graphe::chargerPond(const std::string& nomfic)
 
 
 void Graphe::Afficher() const
+void Graphe::afficher_console() const
 {
     for(auto i: m_sommets)
     {
-        i->afficher();
+        i->afficher_console();
     }
 
     for(auto i: m_aretes)
     {
-        i->afficher();
+        i->afficher_console();
+    }
+
+}
+
+void Graphe::afficher_Svgfile(Svgfile &svgout)
+{
+    for(auto i: m_aretes)
+    {
+        i->afficher_Svgfile(svgout);
+    }
+    for(auto i: m_sommets)
+    {
+        i->afficher_Svgfile(svgout);
     }
 
 }

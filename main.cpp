@@ -10,7 +10,11 @@ int main()
 {
     std::string choixpond;
     Graphe nouv;
-    nouv.Afficher();
+
+    Svgfile svgout;
+
+    nouv.afficher_console();
+    nouv.afficher_Svgfile(svgout);
 
     std::cout << "Nom du fichier de ponderation : ";
     std::cin>> choixpond;
