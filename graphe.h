@@ -34,6 +34,8 @@ public:
     void centralite_vecteur_propre();
 
     float calcul_indice();
+    void centralite_proximite();
+    void reset();
 };
 
 #endif // GRAPHE_H_INCLUDED

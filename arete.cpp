@@ -5,16 +5,16 @@ Arete::Arete()
     m_indice=-1;
     m_arc.first=nullptr;
     m_arc.second=nullptr;
-    m_poid=0;
+    m_poids=0;
 }
 
 
-Arete::Arete(int indice, Sommet* dep, Sommet* arr, float poid)
+Arete::Arete(int indice, Sommet* dep, Sommet* arr, float poids)
 {
     m_indice=indice;
     m_arc.first=dep;
     m_arc.second=arr;
-    m_poid=poid;
+    m_poids=poids;
 }
 
 Arete::~Arete()
@@ -25,7 +25,7 @@ bool Arete::changerPond(const std::pair<int, float>& values)
 {
     if(m_indice == values.first)
     {
-        m_poid = values.second;
+        m_poids = values.second;
         return true;
     }
     else
@@ -34,11 +34,21 @@ bool Arete::changerPond(const std::pair<int, float>& values)
 
 void Arete::afficher_console() const
 {
-    std::cout << "Arete numero : " << m_indice << " de poid " << m_poid << " reliant " << m_arc.first->get_nom();
+    std::cout << "Arete numero : " << m_indice << " de poid " << m_poids << " reliant " << m_arc.first->get_nom();
     std::cout << m_arc.second->get_nom() << std::endl;
 }
 
 void Arete::afficher_Svgfile(Svgfile &svgout,float indice)
 {
     svgout.addLine(m_arc.first->get_coordx()*indice,m_arc.first->get_coordy()*indice,m_arc.second->get_coordx()*indice,m_arc.second->get_coordy()*indice,"black");
+}
+
+void Sommet::getAdjacence(std::vector< std::pair<Sommet*, float>>& adjacents)
+{
+    for(auto a : m_liaison)
+    {
+        Sommet* temp = a->getSommet(this);
+        float poids = a->getPoids();
+        adjacents.push_back(std::make_pair(temp, poids));
+    }
 }

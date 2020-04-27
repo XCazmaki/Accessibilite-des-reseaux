@@ -8,7 +8,7 @@ class Arete
 private:
     int m_indice;                       /// Indice de l'arête
     std::pair<Sommet*,Sommet*> m_arc;   /// Pair de pointeurs vers les deux sommets de l'arête
-    float m_poid;                       /// Poid (éventuel) de l'arête (vaut 1 par default - en
+    float m_poids;                       /// Poid (éventuel) de l'arête (vaut 1 par default - en
                                         /// cas de graphe non orienté
 
 public:
@@ -22,6 +22,22 @@ public:
 
     ~Arete();
 
+    /// Getter
+
+    float getPoids()
+    {
+        return m_poids;
+    }
+
+    Sommet* getSommet(const Sommet* depart)
+    {
+        if(m_arc.first == depart)
+            return m_arc.second;
+        else
+            return m_arc.first;
+    }
+
+    ///methodes
 
     bool changerPond(const std::pair<int, float>&);
     void afficher() const;
