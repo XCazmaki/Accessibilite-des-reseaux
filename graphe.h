@@ -10,8 +10,6 @@
 class Graphe
 {
 private:
-    int ordre;
-    int taille;
     std::vector<Sommet*> m_sommet;
     std::vector<Arete*> m_arete;
 

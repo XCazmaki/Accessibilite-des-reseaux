@@ -6,10 +6,10 @@
 class Arete
 {
 private:
-    int m_indice;       /// Indice de l'arête
-    Sommet* m_dep;      /// Sommet de départ
-    Sommet* m_arr;      /// Sommet d'arrivée
-    int m_poid;         /// Poid (éventuel) de l'arête
+    int m_indice;                       /// Indice de l'arête
+    std::pair<Sommet*,Sommet*> m_arc;   /// Pair de pointeurs vers les deux sommets de l'arête
+    int m_poid;                         /// Poid (éventuel) de l'arête (vaut 1 par default - en
+                                        /// cas de graphe non orienté
 
 public:
 

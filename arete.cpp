@@ -3,8 +3,8 @@
 Arete::Arete()
 {
     m_indice=-1;
-    m_dep=nullptr;
-    m_arr=nullptr;
+    m_arc.first=nullptr;
+    m_arc.second=nullptr;
     m_poid=0;
 }
 
@@ -12,8 +12,8 @@ Arete::Arete()
 Arete::Arete(int indice, Sommet* dep, Sommet* arr, int poid)
 {
     m_indice=indice;
-    m_dep=dep;
-    m_arr=arr;
+    m_arc.first=dep;
+    m_arc.second=arr;
     m_poid=poid;
 }
 
