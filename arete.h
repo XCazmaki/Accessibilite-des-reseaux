@@ -16,8 +16,7 @@ public:
     /// Constructeurs
 
     Arete();
-
-    Arete(int indice, Sommet* dep, Sommet* arr, int poid);
+    Arete(int indice, Sommet* dep, Sommet* arr, float poid);
 
     /// Destructeur
 
@@ -25,6 +24,7 @@ public:
 
 
     void changerPond(const std::vector<float>&);
+    void afficher() const;
 
 };
 

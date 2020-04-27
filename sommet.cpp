@@ -20,3 +20,14 @@ Sommet::Sommet(int indice, std::string nom, int coordx, int coordy)
 
 Sommet::~Sommet()
 {}
+
+
+void Sommet::ajouter_liaison(Arete* arc)
+{
+    m_liaison.push_back(arc);
+}
+
+void Sommet::afficher() const
+{
+    std::cout << "Sommet numero : " << m_indice << " de nom " << m_nom << "" << m_coordx<< m_coordy << std::endl;
+}
