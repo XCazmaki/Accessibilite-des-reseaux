@@ -42,7 +42,7 @@ void Arete::afficher_Svgfile(Svgfile &svgout,float indice)
 {
     svgout.addLine(m_arc.first->get_coordx()*indice,m_arc.first->get_coordy()*indice,m_arc.second->get_coordx()*indice,m_arc.second->get_coordy()*indice,"black");
 
-    int x1 = m_arc.first->get_coordx();
+    /*int x1 = m_arc.first->get_coordx();
     int y1 = m_arc.first->get_coordy();
     int x2 = m_arc.second->get_coordx();
     int y2 = m_arc.second->get_coordy();
@@ -147,7 +147,7 @@ void Arete::afficher_Svgfile(Svgfile &svgout,float indice)
         y2F = ((pm * x2F) + ph);
 
         svgout.addTriangle(x2, y2, x2F, y2F, x1F, y1F,"black");
-        std::cout<<"mmmmmm"<<std::endl;
+        std::cout<<"mmmmmm"<<std::endl;*/
     }
 }
 
