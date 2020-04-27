@@ -2,6 +2,7 @@
 #define SOMMET_H_INCLUDED
 
 #include <iostream>
+#include <vector>
 
 class Arete;
 
@@ -13,6 +14,8 @@ private:
     int m_coordx;       /// Coordonnée en X du sommet
     int m_coordy;       /// Coordonnée en Y du sommet
     int m_central;      /// Indice de centralité
+    std::vector<Arete*> m_liaison;
+
 public:
 
     /// Constructeurs
