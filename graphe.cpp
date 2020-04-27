@@ -188,8 +188,12 @@ void Graphe::centralite_vecteur_propre()
 
 void Graphe::centralite_proximite()
 {
+    int i = 0;
     for(auto s: m_sommets)
     {
+        std::cout << " tour " << i << std::endl;
+        i++;
+
         std::queue<Sommet*> F;
         F.push(s);
 
@@ -202,10 +206,15 @@ void Graphe::centralite_proximite()
         float poidsTot = 0;
         for(auto ss: m_sommets)
         {
+            std::cout<<ss->getDist()<< " ";
             poidsTot += ss->getDist();
         }
+        std::cout<< "\n" <<std::endl;
         s->set_central(1/poidsTot);
+        std::cout <<"Indice central " << 1/poidsTot;
         s->set_central_norm((m_sommets.size() - 1)/ poidsTot);
+        std::cout<<"indice central normal "<< (m_sommets.size() - 1)/ poidsTot << std::endl;
+        std::cout << "\n" << std::endl;
 
         reset();/// on reset les parametres de parcours des sommets
     }
