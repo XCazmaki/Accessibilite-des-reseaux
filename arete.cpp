@@ -17,3 +17,5 @@ Arete::Arete(int indice, Sommet* dep, Sommet* arr, int poid)
     m_poid=poid;
 }
 
+Arete::~Arete()
+{}

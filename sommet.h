@@ -12,7 +12,7 @@ private:
     std::string m_nom;  /// Nom du sommet
     int m_coordx;       /// Coordonnée en X du sommet
     int m_coordy;       /// Coordonnée en Y du sommet
-    int m_cantral;      /// Indice de centralité
+    int m_central;      /// Indice de centralité
 public:
 
     /// Constructeurs
