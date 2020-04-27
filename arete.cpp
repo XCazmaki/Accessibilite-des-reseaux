@@ -21,16 +21,7 @@ Arete::~Arete()
 {}
 
 
-void Arete::changerPond(const std::istream& is)
+void Arete::changerPond(const std::vector<float>& tab)
 {
-    std::string ligne;
-    std::getline(is, ligne);
-    std::istringstream iss(ligne);
-    int tempIndice;
-    float tempPond;
-
-    iss >> tempIndice >> tempPond;
-
-    if(m_indice == tempIndice)
-        m_poid = tempPond;
+    m_poid = tab[m_indice];
 }

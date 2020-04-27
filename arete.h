@@ -24,7 +24,7 @@ public:
     ~Arete();
 
 
-    void changerPond(const std::ifstream&);
+    void changerPond(const std::vector<float>&);
 
 };
 

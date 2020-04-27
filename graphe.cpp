@@ -20,15 +20,29 @@ Graphe::~Graphe()
 void Graphe::chargerPond(const std::string& nomfic)
 {
     std::ifstream ifs{nomfic};
+    int tempTaille = 0;
+    std::vector<float> tab;
 
     if(!ifs)
         throw std::runtime_error( "Impossible d'ouvrir en lecture " + nomfic );
 
+    ifs >> tempTaille;
     ifs.ignore();
 
-    for(auto a: m_arete)
+    for(int i = 0; i<tempTaille; ++i)
     {
-        a->changerPond(ifs);
+        std::string ligne;
+        std::getline(is, ligne);
+        std::istringstream iss(ligne);
+        int tempIndice;
+        float tempPond;
+
+        iss >> tempIndice >> tempPond;
+        tab.push_back(tempPond);
     }
 
+    for(auto a : m_arete)
+    {
+        a->changerPond(tab);
+    }
 }
