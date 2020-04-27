@@ -23,7 +23,7 @@ public:
     ~Arete();
 
 
-    void changerPond(const std::vector<float>&);
+    bool changerPond(const std::pair<int, float>&);
     void afficher() const;
 
 };

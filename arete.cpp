@@ -21,9 +21,15 @@ Arete::~Arete()
 {}
 
 
-void Arete::changerPond(const std::vector<float>& tab)
+bool Arete::changerPond(const std::pair<int, float>& values)
 {
-    m_poid = tab[m_indice];
+    if(m_indice == values.first)
+    {
+        m_poid = values.second;
+        return true;
+    }
+    else
+        return false;
 }
 void Arete::afficher() const
 {

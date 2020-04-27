@@ -72,7 +72,6 @@ void Graphe::chargerPond(const std::string& nomfic)
 {
     std::ifstream ifs{nomfic};
     int tempTaille = 0;
-    std::vector<float> tab;
 
     if(!ifs)
         throw std::runtime_error( "Impossible d'ouvrir en lecture " + nomfic );
@@ -85,17 +84,18 @@ void Graphe::chargerPond(const std::string& nomfic)
         std::string ligne;
         std::getline(ifs, ligne);
         std::istringstream iss(ligne);
-        int tempIndice;
-        float tempPond;
+        std::pair<int, float> values;
 
-        iss >> tempIndice >> tempPond;
-        tab.push_back(tempPond);
+        iss >> values.first >> values.second;
+
+        for(auto a : m_aretes)
+        {
+            if(a->changerPond(values))
+                break;
+        }
     }
 
-    for(auto a : m_aretes)
-    {
-        a->changerPond(tab);
-    }
+
 }
 
 
