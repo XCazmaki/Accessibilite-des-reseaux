@@ -6,10 +6,10 @@
 class Arete
 {
 private:
-    int m_indice;   /// Indice de l'arête
-    Sommet* m_dep;  /// Sommet de départ
-    Sommet* m_arr;  /// Sommet d'arrivée
-    int m_poid;       /// Poid (éventuel) de l'arête
+    int m_indice;       /// Indice de l'arête
+    Sommet* m_dep;      /// Sommet de départ
+    Sommet* m_arr;      /// Sommet d'arrivée
+    int m_poid;         /// Poid (éventuel) de l'arête
 
 public:
 
