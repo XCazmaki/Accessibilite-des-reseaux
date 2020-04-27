@@ -46,7 +46,7 @@ Graphe::Graphe()
         monFlux >> indice >> num1 >> num2;
         /// On cr�e la nouvelle ar�te
         m_aretes.push_back(new Arete(indice,m_sommets[num1],m_sommets[num2],1));
-        /// On relie les sommets � l'ar�te
+        /// On relie les sommets a l'arete
         m_sommets[num1]->ajouter_liaison(m_aretes[m_aretes.size()]);
         if(orient==0)
         {
