@@ -8,19 +8,21 @@
 
 int main()
 {
-    std::string choixpond;
     Graphe nouv;
 
     Svgfile svgout;
+    //nouv.afficher_console();
+
+    //nouv.chargerPond();
+
+    //nouv.afficher_console();
+
+    nouv.centralite_degre();
 
     nouv.afficher_console();
+
     nouv.afficher_Svgfile(svgout);
 
-    std::cout << "Nom du fichier de ponderation : ";
-    std::cin>> choixpond;
-    std::cout<<std::endl;
-    nouv.chargerPond(choixpond);
-    nouv.afficher_console();
 
     return 0;
 }

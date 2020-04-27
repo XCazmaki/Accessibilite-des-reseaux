@@ -54,7 +54,7 @@ public:
         return m_coordy;
     }
 
-    int get_degre() const
+    float get_degre() const
     {
         return m_liaison.size();
     }
@@ -66,13 +66,18 @@ public:
         m_central=central;
     }
 
+    void set_central_norm(float central)
+    {
+        m_central_norm=central;
+    }
+
     void ajouter_liaison(Arete* arc);
 
 
     /// Methodes
 
     void afficher_console() const;
-    void afficher_Svgfile(Svgfile &svgout);
+    void afficher_Svgfile(Svgfile &svgout, float indice);
 };
 
 #endif // SOMMET_H_INCLUDED

@@ -26,7 +26,7 @@ public:
     bool changerPond(const std::pair<int, float>&);
     void afficher() const;
     void afficher_console() const;
-    void afficher_Svgfile(Svgfile &svgout);
+    void afficher_Svgfile(Svgfile &svgout,float indice);
 
 };
 

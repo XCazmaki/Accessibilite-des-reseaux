@@ -68,8 +68,14 @@ Graphe::~Graphe()
 }
 
 
-void Graphe::chargerPond(const std::string& nomfic)
+void Graphe::chargerPond()
 {
+     std::string nomfic;
+
+    std::cout << "Nom du fichier de ponderation : ";
+    std::cin>> nomfic;
+    std::cout<<std::endl;
+
     std::ifstream ifs{nomfic};
     int tempTaille = 0;
 
@@ -115,15 +121,52 @@ void Graphe::afficher_console() const
 /// Affiche le graphe dans Svgfile
 void Graphe::afficher_Svgfile(Svgfile &svgout)
 {
+    float indice=this->calcul_indice();
+
     for(auto i: m_aretes)
     {
-        i->afficher_Svgfile(svgout);
+        i->afficher_Svgfile(svgout,indice);
     }
     for(auto i: m_sommets)
     {
-        i->afficher_Svgfile(svgout);
+        i->afficher_Svgfile(svgout,indice);
     }
 }
+/// Sous programme permettant de calculer l'indice d'ajustement de la taille du graphe lors de l'affichage
+float Graphe::calcul_indice()
+{
+    float indice=0;
+    float Xmax=0;
+    float Ymax=0;
+
+    /// On prend la coordonnée maximale en X et en Y
+    for(auto i: m_sommets)
+    {
+        if(i->get_coordx()>Xmax)
+        {
+            Xmax=i->get_coordx();
+        }
+        if(i->get_coordy()>Ymax)
+        {
+            Ymax=i->get_coordy();
+        }
+    }
+    /// On trouve l'indice en X et en Y
+    Xmax=950/Xmax;
+    Ymax=550/Ymax;
+
+    /// On séléctionne le plus petit pour qu'il devienne l'indice général
+    if(Xmax>Ymax)
+    {
+        indice=Ymax;
+    }
+    else
+    {
+        indice=Xmax;
+    }
+    return indice;
+}
+
 
 void Graphe::centralite_degre()
 {
@@ -131,6 +174,9 @@ void Graphe::centralite_degre()
     {
         /// l'indice de chaque sommet equivaux à son degrès
         i->set_central(i->get_degre());
+        std::cout << " test liaison " << i->get_degre() << std::endl;
+        i->set_central_norm(i->get_degre()/(m_sommets.size()-1));
+        std::cout << " test liaison 2 " << (i->get_degre())/4 << std::endl;
     }
 }
 

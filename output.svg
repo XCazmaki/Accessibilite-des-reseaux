@@ -1,15 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="1000" height="800">
 
-<line x1="200" y1="100" x2="200" y2="200" stroke="black" />
-<line x1="100" y1="200" x2="200" y2="200" stroke="black" />
-<line x1="200" y1="200" x2="300" y2="200" stroke="black" />
-<line x1="200" y1="200" x2="200" y2="300" stroke="black" />
-<circle cx="200" cy="100" r="10" fill="red" />
-<circle cx="100" cy="200" r="10" fill="red" />
-<circle cx="200" cy="200" r="10" fill="red" />
-<circle cx="300" cy="200" r="10" fill="red" />
-<circle cx="200" cy="300" r="10" fill="red" />
+<line x1="271.429" y1="135.714" x2="407.143" y2="271.429" stroke="black" />
+<line x1="814.286" y1="135.714" x2="678.571" y2="271.429" stroke="black" />
+<line x1="135.714" y1="271.429" x2="407.143" y2="271.429" stroke="black" />
+<line x1="407.143" y1="271.429" x2="542.857" y2="271.429" stroke="black" />
+<line x1="542.857" y1="271.429" x2="678.571" y2="271.429" stroke="black" />
+<line x1="678.571" y1="271.429" x2="950" y2="271.429" stroke="black" />
+<line x1="271.429" y1="407.143" x2="407.143" y2="271.429" stroke="black" />
+<line x1="814.286" y1="407.143" x2="678.571" y2="271.429" stroke="black" />
+<circle cx="271.429" cy="135.714" r="5" fill="purple" />
+<text x="271.429" y="125.714" fill="black" >A</text>
+<circle cx="814.286" cy="135.714" r="5" fill="purple" />
+<text x="814.286" y="125.714" fill="black" >B</text>
+<circle cx="135.714" cy="271.429" r="5" fill="purple" />
+<text x="135.714" y="261.429" fill="black" >C</text>
+<circle cx="407.143" cy="271.429" r="5" fill="yellow" />
+<text x="407.143" y="261.429" fill="black" >D</text>
+<circle cx="542.857" cy="271.429" r="5" fill="blue" />
+<text x="542.857" y="261.429" fill="black" >E</text>
+<circle cx="678.571" cy="271.429" r="5" fill="yellow" />
+<text x="678.571" y="261.429" fill="black" >5</text>
+<circle cx="950" cy="271.429" r="5" fill="purple" />
+<text x="950" y="261.429" fill="black" >G</text>
+<circle cx="271.429" cy="407.143" r="5" fill="purple" />
+<text x="271.429" y="397.143" fill="black" >H</text>
+<circle cx="814.286" cy="407.143" r="5" fill="purple" />
+<text x="814.286" y="397.143" fill="black" >I</text>
 
 
 </svg>

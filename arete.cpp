@@ -38,7 +38,7 @@ void Arete::afficher_console() const
     std::cout << m_arc.second->get_nom() << std::endl;
 }
 
-void Arete::afficher_Svgfile(Svgfile &svgout)
+void Arete::afficher_Svgfile(Svgfile &svgout,float indice)
 {
-    svgout.addLine(m_arc.first->get_coordx()*100,m_arc.first->get_coordy()*100,m_arc.second->get_coordx()*100,m_arc.second->get_coordy()*100,"black");
+    svgout.addLine(m_arc.first->get_coordx()*indice,m_arc.first->get_coordy()*indice,m_arc.second->get_coordx()*indice,m_arc.second->get_coordy()*indice,"black");
 }

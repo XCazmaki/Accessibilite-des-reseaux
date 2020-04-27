@@ -25,13 +25,15 @@ public:
     ~Graphe();
 
 
-    void chargerPond(const std::string&);
+    void chargerPond();
 
     void afficher_console() const;
     void afficher_Svgfile(Svgfile &svgout);
 
     void centralite_degre();
     void centralite_vecteur_propre();
+
+    float calcul_indice();
 };
 
 #endif // GRAPHE_H_INCLUDED
