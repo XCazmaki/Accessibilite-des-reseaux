@@ -32,7 +32,7 @@ void Graphe::chargerPond(const std::string& nomfic)
     for(int i = 0; i<tempTaille; ++i)
     {
         std::string ligne;
-        std::getline(is, ligne);
+        std::getline(ifs, ligne);
         std::istringstream iss(ligne);
         int tempIndice;
         float tempPond;

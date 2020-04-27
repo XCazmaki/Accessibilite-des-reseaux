@@ -78,19 +78,23 @@
 	<string>
 	<vector>
 
-1587975636 source:c:\users\romai\documents\github\accessibilite-des-reseaux\arete.cpp
+1587981097 source:c:\users\romai\documents\github\accessibilite-des-reseaux\arete.cpp
 	"arete.h"
 
-1587975636 c:\users\romai\documents\github\accessibilite-des-reseaux\arete.h
+1587981097 c:\users\romai\documents\github\accessibilite-des-reseaux\arete.h
 	"sommet.h"
 
-1587975636 c:\users\romai\documents\github\accessibilite-des-reseaux\sommet.h
+1587982491 c:\users\romai\documents\github\accessibilite-des-reseaux\sommet.h
 	<iostream>
+	<vector>
+	<sstream>
+	<fstream>
+	<string>
 
 1587975636 source:c:\users\romai\documents\github\accessibilite-des-reseaux\graphe.cpp
 	"graphe.h"
 
-1587975636 c:\users\romai\documents\github\accessibilite-des-reseaux\graphe.h
+1587979639 c:\users\romai\documents\github\accessibilite-des-reseaux\graphe.h
 	<iostream>
 	<vector>
 	"sommet.h"
