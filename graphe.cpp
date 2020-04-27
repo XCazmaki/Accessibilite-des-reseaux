@@ -46,7 +46,7 @@ Graphe::Graphe()
         monFlux >> indice >> num1 >> num2;
         /// On cr�e la nouvelle ar�te
         m_aretes.push_back(new Arete(indice,m_sommets[num1],m_sommets[num2],1));
-        /// On relie les sommets � l'ar�te
+        /// On relie les sommets a l'arete
         m_sommets[num1]->ajouter_liaison(m_aretes[m_aretes.size()]);
         if(orient==0)
         {
@@ -97,7 +97,7 @@ void Graphe::chargerPond(const std::string& nomfic)
 }
 
 
-
+/// Affiche le graphe dans la console
 void Graphe::afficher_console() const
 {
     for(auto i: m_sommets)
@@ -112,6 +112,7 @@ void Graphe::afficher_console() const
 
 }
 
+/// Affiche le graphe dans Svgfile
 void Graphe::afficher_Svgfile(Svgfile &svgout)
 {
     for(auto i: m_aretes)
@@ -122,5 +123,18 @@ void Graphe::afficher_Svgfile(Svgfile &svgout)
     {
         i->afficher_Svgfile(svgout);
     }
+}
 
+void Graphe::centralite_degre()
+{
+    for(auto i: m_sommets)
+    {
+        /// l'indice de chaque sommet equivaux à son degrès
+        i->set_central(i->get_degre());
+    }
+}
+
+void Graphe::centralite_vecteur_propre()
+{
+    ///
 }

@@ -13,11 +13,12 @@ class Arete;
 class Sommet
 {
 private:
-    int m_indice;       /// Indice du sommet
-    std::string m_nom;  /// Nom du sommet
-    int m_coordx;       /// Coordonnée en X du sommet
-    int m_coordy;       /// Coordonnée en Y du sommet
-    int m_central;      /// Indice de centralité
+    int m_indice;           /// Indice du sommet
+    std::string m_nom;      /// Nom du sommet
+    int m_coordx;           /// Coordonnée en X du sommet
+    int m_coordy;           /// Coordonnée en Y du sommet
+    float m_central;        /// Indice de centralité
+    float m_central_norm;
     std::vector<Arete*> m_liaison;
 
 public:
@@ -48,12 +49,22 @@ public:
         return m_coordx;
     }
 
-    int get_coordy()
+    int get_coordy() const
     {
         return m_coordy;
     }
 
+    int get_degre() const
+    {
+        return m_liaison.size();
+    }
+
     /// Setter
+
+    void set_central(float central)
+    {
+        m_central=central;
+    }
 
     void ajouter_liaison(Arete* arc);
 
