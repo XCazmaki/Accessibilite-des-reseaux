@@ -182,5 +182,22 @@ void Graphe::centralite_degre()
 
 void Graphe::centralite_vecteur_propre()
 {
-    ///
+    float lambda=0;
+    float valeur_max=2;     /// va permettre de sortir de la boucle while quand les valeurs seront normalisée
+
+    /// Initialisation (on met 1 à l'indice)
+    for (auto i: m_sommets)
+    {
+        i->set_central(1);
+        i->set_central_norm(1);
+    }
+    /// tant que lambda "varie trop"
+    do
+    {
+        for(auto i: m_sommets)
+        {
+
+        }
+    }
+    while(valeur_max>=1)
 }

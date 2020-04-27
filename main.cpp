@@ -11,11 +11,11 @@ int main()
     Graphe nouv;
 
     Svgfile svgout;
-    //nouv.afficher_console();
+    nouv.afficher_console();
 
     //nouv.chargerPond();
 
-    //nouv.afficher_console();
+    nouv.afficher_console();
 
     nouv.centralite_degre();
 

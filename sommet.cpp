@@ -33,7 +33,6 @@ void Sommet::afficher_console() const
 {
     std::cout << "Sommet numero : " << m_indice << " de nom " << m_nom << "" << m_coordx<< m_coordy << std::endl;
     std::cout << "Son indice est : " << m_central_norm << std::endl;
-    //std::cout << "Il est relie a : " << m_liaison.size() << std::endl;
 }
 
 void Sommet::afficher_Svgfile(Svgfile &svgout, float indice)

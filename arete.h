@@ -3,6 +3,8 @@
 
 #include "sommet.h"
 
+class Sommet;
+
 class Arete
 {
 private:
@@ -17,6 +19,11 @@ public:
 
     Arete();
     Arete(int indice, Sommet* dep, Sommet* arr, float poid);
+
+    int get_indice()
+    {
+        return m_indice;
+    }
 
     /// Destructeur
 
