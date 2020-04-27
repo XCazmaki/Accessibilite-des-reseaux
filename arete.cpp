@@ -51,7 +51,7 @@ void Sommet::getAdjacence(std::vector< std::pair<Sommet*, float>>& adjacents)
         std::cout<<"\t\t2.1.1"<<std::endl;
         Sommet* temp;// = a->getSommet(this);
         std::cout<<"\t\t2.1.2"<<std::endl;
-        float poids;// = a->getPoids();
+        float poids = a->getPoids();
         std::cout<<"\t\t2.1.3"<<std::endl;
         adjacents.push_back(std::make_pair(temp, poids));
         std::cout<<"\t\t2.1.4"<<std::endl;
