@@ -187,15 +187,20 @@ void Graphe::centralite_vecteur_propre()
 
 void Graphe::centralite_proximite()
 {
+    int i=0;
     for(auto s: m_sommets)
     {
+        std::cout<< "tour " << i <<std::endl;
         std::queue<Sommet*> F;
         F.push(s);
 
         do{
             std::vector<std::pair<Sommet*, float>> adjacents;
+            std::cout<<"\t 1" <<std::endl;
             F.front()->getAdjacence(adjacents);
+            std::cout<<"\t 2" <<std::endl;
             F.front()->traitementDij(F, adjacents);/// on applique le traitement de dijkstra au premier element de la file
+            std::cout<<"\t 3" <<std::endl;
         }while(F.size()>0);/// tant que la file n'est pas vide
 
         float poidsTot = 0;

@@ -31,10 +31,12 @@ public:
 
     Sommet* getSommet(const Sommet* depart)
     {
+        std::cout<<"\t\t\t2.1.1.1"<<std::endl;
         if(m_arc.first == depart)
             return m_arc.second;
         else
             return m_arc.first;
+        std::cout<<"\t\t\t2.1.1.2"<<std::endl;
     }
 
     ///methodes

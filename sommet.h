@@ -73,16 +73,11 @@ public:
 
     /// Setter
 
-    void set_central(float central)
+    void set_central(const float& central)
     {
         m_central=central;
     }
 
-<<<<<<< HEAD
-    void set_central_norm(float central)
-    {
-        m_central_norm=central;
-=======
     void set_central_norm(const float& central_norm)
     {
         m_central_norm = central_norm;
@@ -96,7 +91,6 @@ public:
     void setEtat(char e)
     {
         m_etat = e;
->>>>>>> Romain
     }
 
     void ajouter_liaison(Arete* arc);

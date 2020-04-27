@@ -32,13 +32,12 @@ public:
 
     void centralite_degre();
     void centralite_vecteur_propre();
-<<<<<<< HEAD
 
     float calcul_indice();
-=======
+
     void centralite_proximite();
     void reset();
->>>>>>> Romain
+
 };
 
 #endif // GRAPHE_H_INCLUDED

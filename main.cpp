@@ -13,11 +13,12 @@ int main()
     Svgfile svgout;
     //nouv.afficher_console();
 
-    //nouv.chargerPond();
+    nouv.chargerPond();
 
     //nouv.afficher_console();
-
-    nouv.centralite_degre();
+    std::cout<<"ok"<<std::endl;
+    nouv.centralite_proximite();
+    std::cout<<"okk"<<std::endl;
 
     nouv.afficher_console();
 
