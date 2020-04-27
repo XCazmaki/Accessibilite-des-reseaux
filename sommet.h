@@ -6,6 +6,9 @@
 #include <sstream>
 #include <fstream>
 #include <string>
+#include <queue>
+#include <stack>
+#include <algorithm>
 #include "svgfile.h"
 
 class Arete;
@@ -19,6 +22,10 @@ private:
     int m_coordy;           /// Coordonnée en Y du sommet
     float m_central;        /// Indice de centralité
     float m_central_norm;
+
+    float m_distance;
+    char m_etat;
+
     std::vector<Arete*> m_liaison;
 
 public:
@@ -59,6 +66,11 @@ public:
         return m_liaison.size();
     }
 
+    float getDist() const
+    {
+        return m_distance;
+    }
+
     /// Setter
 
     void set_central(float central)
@@ -66,10 +78,38 @@ public:
         m_central=central;
     }
 
+    void set_central_norm(const float& central_norm)
+    {
+        m_central_norm = central_norm;
+    }
+
+    void setDist(int d)
+    {
+        m_distance = d;
+    }
+
+    void setEtat(char e)
+    {
+        m_etat = e;
+    }
+
     void ajouter_liaison(Arete* arc);
 
+    /// comparator
+
+    struct SommetComparator{
+        bool operator()(Sommet* a, Sommet* b)
+        {
+            if(a->m_distance < b->m_distance)
+                return true;
+            else
+                return false;
+        }
+    };
 
     /// Methodes
+    void traitementDij(std::queue<Sommet*>&, std::vector<std::pair<Sommet*, float>>&);
+    void getAdjacence(std::vector<std::pair<Sommet*, float>>&);
 
     void afficher_console() const;
     void afficher_Svgfile(Svgfile &svgout);

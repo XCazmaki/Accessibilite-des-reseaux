@@ -138,3 +138,37 @@ void Graphe::centralite_vecteur_propre()
 {
     ///
 }
+
+void Graphe::centralite_proximite()
+{
+    for(auto s: m_sommets)
+    {
+        std::queue<Sommet*> F;
+        F.push(s);
+
+        do{
+            std::vector<std::pair<Sommet*, float>> adjacents;
+            F.front()->getAdjacence(adjacents);
+            F.front()->traitementDij(F, adjacents);/// on applique le traitement de dijkstra au premier element de la file
+        }while(F.size()>0);/// tant que la file n'est pas vide
+
+        float poidsTot = 0;
+        for(auto ss: m_sommets)
+        {
+            poidsTot += ss->getDist();
+        }
+        s->set_central(1/poidsTot);
+        s->set_central_norm((m_sommets.size() - 1)/ poidsTot);
+
+        reset();/// on reset les parametres de parcours des sommets
+    }
+}
+
+void Graphe::reset()
+{
+    for(auto s : m_sommets)
+    {
+        s->setEtat('B');
+        s->setDist(0);
+    }
+}

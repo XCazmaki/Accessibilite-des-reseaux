@@ -32,6 +32,8 @@ public:
 
     void centralite_degre();
     void centralite_vecteur_propre();
+    void centralite_proximite();
+    void reset();
 };
 
 #endif // GRAPHE_H_INCLUDED
