@@ -22,7 +22,8 @@ public:
 
     ~Arete();
 
-    void afficher() const;
+    void afficher_console() const;
+    void afficher_Svgfile(Svgfile &svgout);
 
 };
 

@@ -24,7 +24,8 @@ public:
 
     ~Graphe();
 
-    void Afficher() const;
+    void afficher_console() const;
+    void afficher_Svgfile(Svgfile &svgout);
 };
 
 #endif // GRAPHE_H_INCLUDED

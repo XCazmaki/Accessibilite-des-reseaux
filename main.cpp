@@ -10,7 +10,11 @@ int main()
 {
 
     Graphe nouv;
-    nouv.Afficher();
+
+    Svgfile svgout;
+
+    nouv.afficher_console();
+    nouv.afficher_Svgfile(svgout);
 
     std::cout << "Hello world!" << std::endl;
     return 0;
