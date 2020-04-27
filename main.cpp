@@ -9,6 +9,9 @@
 int main()
 {
 
+    Graphe nouv;
+    nouv.Afficher();
+
     std::cout << "Hello world!" << std::endl;
     return 0;
 }

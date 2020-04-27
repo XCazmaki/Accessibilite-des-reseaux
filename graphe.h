@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <vector>
+#include <fstream>
 
 #include "sommet.h"
 #include "arete.h"
@@ -10,8 +11,8 @@
 class Graphe
 {
 private:
-    std::vector<Sommet*> m_sommet;
-    std::vector<Arete*> m_arete;
+    std::vector<Sommet*> m_sommets;
+    std::vector<Arete*> m_aretes;
 
 public:
 
@@ -23,6 +24,7 @@ public:
 
     ~Graphe();
 
+    void Afficher() const;
 };
 
 #endif // GRAPHE_H_INCLUDED
