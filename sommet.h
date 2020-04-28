@@ -28,7 +28,8 @@ private:
     float m_distance;
     char m_etat;
 
-    std::vector<Arete*> m_liaison;
+    float m_degre;
+    //std::vector<Arete*> m_liaison;
 
 public:
 
@@ -65,9 +66,8 @@ public:
 
     float get_degre() const
     {
-        return m_liaison.size();
+        return m_degre;
     }
-
 
     float getDist() const
     {
@@ -84,6 +84,11 @@ public:
     }
 
     /// Setter
+
+    void set_degre(float x)
+    {
+        m_degre=x;
+    }
 
     void set_central(const float& central)
     {
@@ -120,6 +125,8 @@ public:
     };
 
     /// Methodes
+    void augmenter_degre();
+
     void traitementDij(std::queue<Sommet*>&, std::vector<std::pair<Sommet*, float>>&);
     //void getAdjacence(std::vector<std::pair<Sommet*, float>>&);
 

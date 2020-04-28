@@ -10,6 +10,7 @@ Sommet::Sommet()
     m_central_norm=0;
     m_distance = 0;
     m_etat = 'B';
+    m_degre=0;
 }
 
 Sommet::Sommet(int indice, std::string nom, int coordx, int coordy)
@@ -22,16 +23,11 @@ Sommet::Sommet(int indice, std::string nom, int coordx, int coordy)
     m_central_norm=0;
     m_distance = 0;
     m_etat = 'B';
+    m_degre=0;
 }
 
 Sommet::~Sommet()
 {}
-
-
-void Sommet::ajouter_liaison(Arete* arc)
-{
-    m_liaison.push_back(arc);
-}
 
 void Sommet::afficher_console() const
 {
