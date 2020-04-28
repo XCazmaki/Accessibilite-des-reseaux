@@ -21,8 +21,8 @@ void menu()
         std::cout << "1: Charger un fichier de pondération" << std::endl;
         std::cout << "2: Afficher l'indice de centralite de degre" << std::endl;
         std::cout << "3: Afficher l'indice de centralite de vecteur propre" << std::endl;
-        std::cout << "4: Afficher l'indice de centralite de proximité" << std::endl;
-        std::cout << "5: Afficher l'indice de centralite de d'intermédiarité" << std::endl;
+        std::cout << "4: Afficher l'indice de centralite de proximite" << std::endl;
+        std::cout << "5: Afficher l'indice de centralite de d'intermediarite" << std::endl;
         std::cout << "0: Quitter" << std::endl;
         std::cin >> choix;
 
@@ -63,7 +63,6 @@ void menu()
             std::cout << "Veuillez rentrer une reponse valide" << std::endl;
             break;
         }
-        printf("\033c");
     }
     while (choix!=0);
 
