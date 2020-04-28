@@ -13,7 +13,7 @@ int main()
     Svgfile svgout;
     //nouv.afficher_console();
 
-    nouv.chargerPond();
+    //nouv.chargerPond();
 
     //nouv.afficher_console();
 

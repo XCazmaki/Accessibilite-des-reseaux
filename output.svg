@@ -14,23 +14,23 @@
 <line x1="440" y1="440" x2="550" y2="550" stroke="black" />
 <line x1="220" y1="440" x2="110" y2="550" stroke="black" />
 <line x1="110" y1="550" x2="550" y2="550" stroke="black" />
-<circle cx="330" cy="110" r="5" fill="purple" />
+<circle cx="330" cy="110" r="5" fill="yellow" />
 <text x="330" y="100" fill="black" >A</text>
-<circle cx="220" cy="220" r="5" fill="purple" />
+<circle cx="220" cy="220" r="5" fill="yellow" />
 <text x="220" y="210" fill="black" >B</text>
-<circle cx="440" cy="220" r="5" fill="purple" />
+<circle cx="440" cy="220" r="5" fill="yellow" />
 <text x="440" y="210" fill="black" >C</text>
-<circle cx="330" cy="330" r="5" fill="purple" />
+<circle cx="330" cy="330" r="5" fill="orange" />
 <text x="330" y="320" fill="black" >D</text>
-<circle cx="220" cy="440" r="5" fill="purple" />
+<circle cx="220" cy="440" r="5" fill="yellow" />
 <text x="220" y="430" fill="black" >E</text>
-<circle cx="330" cy="440" r="5" fill="purple" />
+<circle cx="330" cy="440" r="5" fill="yellow" />
 <text x="330" y="430" fill="black" >F</text>
-<circle cx="440" cy="440" r="5" fill="purple" />
+<circle cx="440" cy="440" r="5" fill="yellow" />
 <text x="440" y="430" fill="black" >G</text>
-<circle cx="110" cy="550" r="5" fill="purple" />
+<circle cx="110" cy="550" r="5" fill="orange" />
 <text x="110" y="540" fill="black" >H</text>
-<circle cx="550" cy="550" r="5" fill="purple" />
+<circle cx="550" cy="550" r="5" fill="orange" />
 <text x="550" y="540" fill="black" >I</text>
 
 
