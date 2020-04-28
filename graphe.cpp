@@ -175,15 +175,61 @@ void Graphe::centralite_degre()
     {
         /// l'indice de chaque sommet equivaux à son degrès
         i->set_central(i->get_degre());
-        std::cout << " test liaison " << i->get_degre() << std::endl;
         i->set_central_norm(i->get_degre()/(m_sommets.size()-1));
-        std::cout << " test liaison 2 " << (i->get_degre())/4 << std::endl;
     }
 }
 
 void Graphe::centralite_vecteur_propre()
 {
-    ///
+    float lambda=0;
+    float ancien_lambda=0;
+
+    /// Initialisation (on met 1 à l'indice)
+    for (auto i: m_sommets)
+    {
+        i->set_central(0);
+        i->set_central_norm(1);
+    }
+    /// tant que lambda "varie trop"
+    do
+    {
+        for(auto i: m_sommets)
+        {
+            for(auto j: m_aretes)
+            {
+                if(j->get_arc1()->get_nom()==i->get_nom())
+                {
+                    i->set_central(i->get_central()+j->get_arc2()->get_central_norm());
+                }
+                else if(j->get_arc2()->get_nom()==i->get_nom())
+                {
+                    i->set_central(i->get_central()+j->get_arc1()->get_central_norm());
+                }
+            }
+        }
+        /// Mise à jour des valeurs
+        for(auto i: m_sommets)
+        {
+            i->set_central_norm(i->get_central());
+        }
+
+        ancien_lambda=lambda;
+        lambda=0;
+        /// Calcul lambda
+        for(auto i: m_sommets)
+        {
+            lambda=lambda+(i->get_central()*i->get_central());
+        }
+        lambda=sqrt(lambda);
+
+        /// On recalcule l'indice
+        for(auto i: m_sommets)
+        {
+            i->set_central(i->get_central()/lambda);
+            i->set_central_norm(i->get_central_norm()/lambda);
+        }
+
+    }while(ancien_lambda-lambda>=0.01||ancien_lambda-lambda<0);
 }
 
 void Graphe::centralite_proximite()

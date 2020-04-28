@@ -7,6 +7,7 @@
 
 #include "sommet.h"
 #include "arete.h"
+#include <math.h>
 
 class Graphe
 {
