@@ -292,7 +292,10 @@ void Graphe::centralite_intermediarite()
             for (int i = 0; i < (int)m_sommets.size(); i++)
                 visited[i] = false;
 
-            seekAllPaths(d->get_indice(), f->get_indice(), visited, path, path_index, adjacence);
+            float longueur = 0;
+
+            std::cout<<"pcc : "<< pcc<<std::endl;
+            seekAllPaths(d->get_indice(), f->get_indice(), visited, path, path_index, adjacence, pond, pcc, longueur);
 
             system("PAUSE");
 
@@ -329,24 +332,43 @@ std::list<int>* Graphe::defListeAdj(std::list<float>* pond)
     return adjacence;
 }
 
-void Graphe::seekAllPaths(int u, int d, bool visited[], int path[], int &path_index, std::list<int>* adj)
+void Graphe::seekAllPaths(int u, int d, bool visited[], int path[], int &path_index, std::list<int>* adj, std::list<float>* pond, const float& PCC, float& longueur)
 {
     visited[u] = true;
     path[path_index] = u;
+
     path_index++;
 
     if (u == d)
     {
         for (int i = 0; i<path_index; i++)
+        {
             std::cout << path[i] << " ";
-        std::cout << std::endl;
+        }
+
+        std::cout << " : " << longueur << std::endl;
+        longueur = 0;
     }
     else
     {
         std::list<int>::iterator i;
+        std::list<float>::iterator ii;
+        int cpt = 0;
+        std::vector<float> ponderation;
+
+        for(ii = pond[u].begin(); ii != pond[u].end(); ++ii)
+            ponderation.push_back(*ii);
+
         for (i = adj[u].begin(); i != adj[u].end(); ++i)
+        {
+
             if (!visited[*i])
-                seekAllPaths(*i, d, visited, path, path_index, adj);
+            {
+                longueur += ponderation[cpt];
+                seekAllPaths(*i, d, visited, path, path_index, adj, pond, PCC, longueur);
+            }
+            cpt++;
+        }
     }
 
     path_index--;

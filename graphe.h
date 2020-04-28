@@ -44,7 +44,7 @@ public:
 
     void centralite_intermediarite();
     std::list<int>* defListeAdj(std::list<float>*);
-    void seekAllPaths(int, int, bool[], int[], int&, std::list<int>*);
+    void seekAllPaths(int, int, bool[], int[], int&, std::list<int>*, std::list<float>*, const float&, float&);
     void freeMem(bool*, int*, std::list<int>*, std::list<float>*);
 };
 
