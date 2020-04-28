@@ -57,8 +57,11 @@ void menu()
         }
         break;
         case 5 :
+        {
+            Svgfile svgout;
+            nouv.centralite_intermediarite();
             break;
-
+        }
         default:
             std::cout << "Veuillez rentrer une reponse valide" << std::endl;
             break;
@@ -68,7 +71,6 @@ void menu()
     while (choix!=0);
 
 }
-
 
 
 

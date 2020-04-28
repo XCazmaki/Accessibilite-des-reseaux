@@ -38,9 +38,14 @@ public:
     float calcul_indice();
 
     void centralite_proximite();
+    void dijkstra(Sommet*);
     void rechercheAdj(Sommet*, std::vector<std::pair<Sommet*, float>>&);
     void reset();
 
+    void centralite_intermediarite();
+    std::list<int>* defListeAdj(std::list<float>*);
+    void seekAllPaths(int, int, bool[], int[], int&, std::list<int>*);
+    void freeMem(bool*, int*, std::list<int>*, std::list<float>*);
 };
 
 #endif // GRAPHE_H_INCLUDED

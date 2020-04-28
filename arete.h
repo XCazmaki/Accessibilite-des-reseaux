@@ -43,6 +43,12 @@ public:
         else
             return m_arc.first;
     }
+
+    std::pair<Sommet*, Sommet*> getPair()
+    {
+        return m_arc;
+    }
+
     /// Getters
 
     Sommet* get_arc1()

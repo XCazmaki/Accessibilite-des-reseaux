@@ -9,6 +9,8 @@
 
 #include <queue>
 #include <stack>
+#include <list>
+
 #include <algorithm>
 
 #include "svgfile.h"
