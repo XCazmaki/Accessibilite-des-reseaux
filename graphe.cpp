@@ -28,7 +28,7 @@ Graphe::Graphe()
     int coordx=0;
     int coordy=0;
 
-    for(int i=0;i<ordre;++i)
+    for(int i=0; i<ordre; ++i)
     {
         monFlux >> indice >> nom >> coordx >> coordy;
         m_sommets.push_back(new Sommet(indice,nom,coordx,coordy));
@@ -42,7 +42,7 @@ Graphe::Graphe()
     int num1=0;
     int num2=0;
 
-    for(int i=0;i<taille;++i)
+    for(int i=0; i<taille; ++i)
     {
         monFlux >> indice >> num1 >> num2;
         /// On cr�e la nouvelle ar�te
@@ -71,7 +71,7 @@ Graphe::~Graphe()
 
 void Graphe::chargerPond()
 {
-     std::string nomfic;
+    std::string nomfic;
 
     std::cout << "Nom du fichier de ponderation : ";
     std::cin>> nomfic;
@@ -191,10 +191,11 @@ void Graphe::centralite_vecteur_propre()
         i->set_central_norm(1);
     }
     /// tant que lambda "varie trop"
-    do
+    while(ancien_lambda-lambda>=0.01||ancien_lambda==0)
     {
         for(auto i: m_sommets)
         {
+            i->set_central(0);
             for(auto j: m_aretes)
             {
                 if(j->get_arc1()->get_nom()==i->get_nom())
@@ -221,7 +222,7 @@ void Graphe::centralite_vecteur_propre()
             lambda=lambda+(i->get_central()*i->get_central());
         }
         lambda=sqrt(lambda);
-
+        std::cout << " Lambda " << lambda << std::endl;
         /// On recalcule l'indice
         for(auto i: m_sommets)
         {
@@ -229,7 +230,7 @@ void Graphe::centralite_vecteur_propre()
             i->set_central_norm(i->get_central_norm()/lambda);
         }
 
-    }while(ancien_lambda-lambda>=0.01||ancien_lambda-lambda<0);
+    }
 }
 
 void Graphe::centralite_proximite()
@@ -243,11 +244,13 @@ void Graphe::centralite_proximite()
         std::queue<Sommet*> F;
         F.push(s);
 
-        do{
+        do
+        {
             std::vector<std::pair<Sommet*, float>> adjacents;
             rechercheAdj(F.front(), adjacents);
             F.front()->traitementDij(F, adjacents);/// on applique le traitement de dijkstra au premier element de la file
-        }while(F.size()>0);/// tant que la file n'est pas vide
+        }
+        while(F.size()>0); /// tant que la file n'est pas vide
 
         float poidsTot = 0;
         for(auto ss: m_sommets)
