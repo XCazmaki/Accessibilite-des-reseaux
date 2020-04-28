@@ -41,7 +41,7 @@ void Arete::afficher_console() const
 void Arete::afficher_Svgfile(Svgfile &svgout,float indice)
 {
     svgout.addLine(m_arc.first->get_coordx()*indice,m_arc.first->get_coordy()*indice,m_arc.second->get_coordx()*indice,m_arc.second->get_coordy()*indice,"black");
-
+    svgout.addText((m_arc.second->get_coordx()*indice)-(m_arc.first->get_coordx()*indice),(m_arc.second->get_coordy()*indice)-(m_arc.second->get_coordy()*indice), m_poids,"black");
     /*int x1 = m_arc.first->get_coordx();
     int y1 = m_arc.first->get_coordy();
     int x2 = m_arc.second->get_coordx();
