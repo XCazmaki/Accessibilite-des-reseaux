@@ -270,41 +270,7 @@ void Graphe::rechercheAdj(Sommet* depart, std::vector<std::pair<Sommet*, float>>
     }
 }
 
-void Graphe::centralite_intermediarite()
-{
-    for(auto d: m_sommets)
-    {
-        for(auto f: m_sommets)
-        {
-            dijkstra(d);
-            float pcc = f->getDist();
-            reset();
-
-            std::list<int>* adjacence;
-            std::list<float>* pond;
-            pond = new std::list<float>[m_sommets.size()];
-            adjacence = defListeAdj(pond);
-
-            bool* visited = new bool[m_sommets.size()];
-            int* path = new int[m_sommets.size()];
-            int path_index = 0;
-
-            for (int i = 0; i < (int)m_sommets.size(); i++)
-                visited[i] = false;
-
-            float longueur = 0;
-
-            std::cout<<"pcc : "<< pcc<<std::endl;
-            seekAllPaths(d->get_indice(), f->get_indice(), visited, path, path_index, adjacence, pond, pcc, longueur);
-
-            system("PAUSE");
-
-            freeMem(visited, path, adjacence, pond);
-        }
-    }
-}
-
-std::list<int>* Graphe::defListeAdj(std::list<float>* pond)
+std::list<int>* Graphe::defListeAdj(std::list<std::pair<int, float>>* pond)
 {
     std::list<int>* adjacence;
     adjacence = new std::list<int>[m_sommets.size()];
@@ -314,25 +280,98 @@ std::list<int>* Graphe::defListeAdj(std::list<float>* pond)
         for(auto a : m_aretes)
         {
             adjacence[((a->getPair()).first)->get_indice()].push_back(((a->getPair()).second)->get_indice());
-            pond[((a->getPair()).first)->get_indice()].push_back(a->getPoids());
+            pond[((a->getPair()).first)->get_indice()].push_back(std::make_pair(((a->getPair()).second)->get_indice(),a->getPoids()));
         }
     }
     else
     {
         for(auto a : m_aretes)
         {
+            //std::cout<< " ligne " << ((a->getPair()).first)->get_indice() << " : " << ((a->getPair()).second)->get_indice()<< " , " << a->getPoids();
             adjacence[((a->getPair()).first)->get_indice()].push_back(((a->getPair()).second)->get_indice());
-            pond[((a->getPair()).first)->get_indice()].push_back(a->getPoids());
+            pond[((a->getPair()).first)->get_indice()].push_back(std::make_pair(((a->getPair()).second)->get_indice(),a->getPoids()));
 
+            //std::cout<< "ligne "<< ((a->getPair()).second)->get_indice()<<" : "<< ((a->getPair()).first)->get_indice()<< " , " << a->getPoids()<< std::endl;
             adjacence[((a->getPair()).second)->get_indice()].push_back(((a->getPair()).first)->get_indice());
-            pond[((a->getPair()).second)->get_indice()].push_back(a->getPoids());
+            pond[((a->getPair()).second)->get_indice()].push_back(std::make_pair(((a->getPair()).first)->get_indice(),a->getPoids()));
         }
     }
 
     return adjacence;
 }
 
-void Graphe::seekAllPaths(int u, int d, bool visited[], int path[], int &path_index, std::list<int>* adj, std::list<float>* pond, const float& PCC, float& longueur)
+void Graphe::centralite_intermediarite()
+{
+    std::list<int>* adjacence;
+    std::list<std::pair<int, float>>* pond;
+    pond = new std::list<std::pair<int, float>>[m_sommets.size()];
+    adjacence = defListeAdj(pond);
+
+    for(auto d: m_sommets)
+    {
+        for(auto f: m_sommets)
+        {
+            ///recherche valeur plus court chemin entre d et f
+            dijkstra(d);
+            float pcc = f->getDist();
+            reset();
+
+            ///recherche de tous les chemins de d a f
+            bool* visited = new bool[m_sommets.size()];
+            int* path = new int[m_sommets.size()];
+            int path_index = 0;
+
+            for (int i = 0; i < (int)m_sommets.size(); i++)
+                visited[i] = false;
+
+            std::cout<<"pcc : "<< pcc<<std::endl;
+            int nCC = 0;
+            std::vector<int> tab;
+            seekAllPaths(d->get_indice(), f->get_indice(), visited, path, path_index, adjacence, pond, pcc, ncc, tab);
+
+
+            calculCentraliteInter(nCC, tab);
+            //system("PAUSE");
+
+            freeMem(visited, path, adjacence, pond);
+        }
+    }
+}
+
+void Graphe::calculCentraliteInter(const int& nCC, std::vector<int>& tab)
+{
+    std::sort(tab.begin(), tab.end(), IntComparator());
+    std::queue<std::pair<int, int>> temp;
+    int i = 0;
+    int ii = 0;
+    while(i< tab.size())
+    {
+        temp.push(std::make_pair(tab[i], 1));
+        if((i+1) < tab.size())
+        {
+            while(tab[i] == tab[i+1])
+            {
+                (temp.back()).second++;
+                i++;
+            }
+        }
+        ii++;
+        i++;
+    }
+
+    for(auto s: m_sommets)
+    {
+        for(int i = 0; i< temp.size(); ++i)
+        {
+            if(s->get_indice() == ((temp.front()).first))
+            {
+                s->
+            }
+        }
+    }
+}
+
+void Graphe::seekAllPaths(int u, int d, bool visited[], int path[], int &path_index, std::list<int>* adj, std::list<std::pair<int, float>>* pond, const float& PCC, int& nCC, std::vector<int>& tab)
 {
     visited[u] = true;
     path[path_index] = u;
@@ -341,33 +380,36 @@ void Graphe::seekAllPaths(int u, int d, bool visited[], int path[], int &path_in
 
     if (u == d)
     {
+        float longueur = 0;
         for (int i = 0; i<path_index; i++)
         {
-            std::cout << path[i] << " ";
-        }
 
+            std::cout << path[i] << " ";
+            std::list<std::pair<int,float>>::iterator ii;
+            for(ii = pond[path[i]].begin(); ii != pond[path[i]].end(); ++ii)
+            {
+                if((i+1)<path_index)
+                {
+                    if((*ii).first == path[i+1])
+                        longueur += (*ii).second;
+                }
+            }
+        }
         std::cout << " : " << longueur << std::endl;
-        longueur = 0;
+        if(longueur == PCC)
+        {
+            nCC++;
+            for(int i = 1; i< (path_index - 1); i++)
+                tab.push_back(path[i]);
+        }
     }
     else
     {
         std::list<int>::iterator i;
-        std::list<float>::iterator ii;
-        int cpt = 0;
-        std::vector<float> ponderation;
-
-        for(ii = pond[u].begin(); ii != pond[u].end(); ++ii)
-            ponderation.push_back(*ii);
-
         for (i = adj[u].begin(); i != adj[u].end(); ++i)
         {
-
             if (!visited[*i])
-            {
-                longueur += ponderation[cpt];
-                seekAllPaths(*i, d, visited, path, path_index, adj, pond, PCC, longueur);
-            }
-            cpt++;
+                seekAllPaths(*i, d, visited, path, path_index, adj, pond, PCC, nCC, tab);
         }
     }
 
@@ -384,7 +426,7 @@ void Graphe::reset()
     }
 }
 
-void Graphe::freeMem(bool* visited, int* path, std::list<int>* adj, std::list<float>* pond)
+void Graphe::freeMem(bool* visited, int* path, std::list<int>* adj, std::list<std::pair<int, float>>* pond)
 {
     free(visited);
     free(path);

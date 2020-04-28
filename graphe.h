@@ -26,6 +26,16 @@ public:
 
     ~Graphe();
 
+    struct IntComparator{
+        bool operator()(int a, int b)
+        {
+            if(a < b)
+                return true;
+            else
+                return false;
+        }
+    };
+
 
     void chargerPond();
 
@@ -43,9 +53,9 @@ public:
     void reset();
 
     void centralite_intermediarite();
-    std::list<int>* defListeAdj(std::list<float>*);
-    void seekAllPaths(int, int, bool[], int[], int&, std::list<int>*, std::list<float>*, const float&, float&);
-    void freeMem(bool*, int*, std::list<int>*, std::list<float>*);
+    std::list<int>* defListeAdj(std::list<std::pair<int, float>>*);
+    void seekAllPaths(int, int, bool[], int[], int&, std::list<int>*, std::list<std::pair<int, float>>*, const float&, int&, std::vector<int>&);
+    void freeMem(bool*, int*, std::list<int>*, std::list<std::pair<int, float>>*);
 };
 
 #endif // GRAPHE_H_INCLUDED
