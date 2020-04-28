@@ -43,8 +43,6 @@ public:
         else
             return m_arc.first;
     }
-
-    ///methodes
     /// Getters
 
     Sommet* get_arc1()

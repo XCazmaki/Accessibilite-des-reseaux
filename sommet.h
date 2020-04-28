@@ -6,9 +6,11 @@
 #include <sstream>
 #include <fstream>
 #include <string>
+
 #include <queue>
 #include <stack>
 #include <algorithm>
+
 #include "svgfile.h"
 
 class Arete;
@@ -66,9 +68,11 @@ public:
         return m_liaison.size();
     }
 
+
     float getDist() const
     {
         return m_distance;
+    }
     float get_central() const
     {
         return m_central;

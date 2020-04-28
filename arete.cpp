@@ -147,8 +147,8 @@ void Arete::afficher_Svgfile(Svgfile &svgout,float indice)
         y2F = ((pm * x2F) + ph);
 
         svgout.addTriangle(x2, y2, x2F, y2F, x1F, y1F,"black");
-        std::cout<<"mmmmmm"<<std::endl;*/
-    }
+        std::cout<<"mmmmmm"<<std::endl;
+    }*/
 }
 
 bool Arete::testAppartenance(const Sommet* depart, const int& orient)
