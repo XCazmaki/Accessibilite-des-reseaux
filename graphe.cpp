@@ -327,7 +327,7 @@ void Graphe::centralite_intermediarite()
             std::cout<<"pcc : "<< pcc<<std::endl;
             int nCC = 0;
             std::vector<int> tab;
-            seekAllPaths(d->get_indice(), f->get_indice(), visited, path, path_index, adjacence, pond, pcc, ncc, tab);
+            seekAllPaths(d->get_indice(), f->get_indice(), visited, path, path_index, adjacence, pond, pcc, nCC, tab);
 
 
             calculCentraliteInter(nCC, tab);
@@ -335,6 +335,10 @@ void Graphe::centralite_intermediarite()
 
             freeMem(visited, path, adjacence, pond);
         }
+    }
+    for(auto so : m_sommets)
+    {
+        so->DefcentralInterNorm(m_sommets.size());
     }
 }
 
@@ -344,10 +348,10 @@ void Graphe::calculCentraliteInter(const int& nCC, std::vector<int>& tab)
     std::queue<std::pair<int, int>> temp;
     int i = 0;
     int ii = 0;
-    while(i< tab.size())
+    while(i< (int)tab.size())
     {
         temp.push(std::make_pair(tab[i], 1));
-        if((i+1) < tab.size())
+        if((i+1) < (int)tab.size())
         {
             while(tab[i] == tab[i+1])
             {
@@ -359,15 +363,14 @@ void Graphe::calculCentraliteInter(const int& nCC, std::vector<int>& tab)
         i++;
     }
 
+    std::sort(m_sommets.begin(), m_sommets.end(), SommetComparatorIndice());
     for(auto s: m_sommets)
     {
-        for(int i = 0; i< temp.size(); ++i)
-        {
             if(s->get_indice() == ((temp.front()).first))
             {
-                s->
+                s->DefcentralInter(nCC, (temp.front()).second);
+                temp.pop();
             }
-        }
     }
 }
 

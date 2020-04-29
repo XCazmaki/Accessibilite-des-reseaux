@@ -60,7 +60,7 @@ void menu()
         {
             Svgfile svgout;
             nouv.centralite_intermediarite();
-            std::cout<<"ok"<<std::endl;
+            nouv.afficher_Svgfile(svgout);
             break;
         }
         default:

@@ -1,6 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="1000" height="800">
 
+<line x1="330" y1="110" x2="220" y2="220" stroke="black" />
+<text x="-110" y="0" fill="black" >6</text>
+<line x1="330" y1="110" x2="440" y2="220" stroke="black" />
+<text x="110" y="0" fill="black" >2.2</text>
+<line x1="220" y1="220" x2="330" y2="330" stroke="black" />
+<text x="110" y="0" fill="black" >4.1</text>
+<line x1="440" y1="220" x2="330" y2="330" stroke="black" />
+<text x="-110" y="0" fill="black" >8</text>
+<line x1="330" y1="330" x2="220" y2="440" stroke="black" />
+<text x="-110" y="0" fill="black" >10.9</text>
+<line x1="330" y1="330" x2="440" y2="440" stroke="black" />
+<text x="110" y="0" fill="black" >1</text>
+<line x1="220" y1="220" x2="110" y2="550" stroke="black" />
+<text x="-110" y="0" fill="black" >7</text>
+<line x1="440" y1="220" x2="550" y2="550" stroke="black" />
+<text x="110" y="0" fill="black" >5.5</text>
+<line x1="220" y1="440" x2="330" y2="440" stroke="black" />
+<text x="110" y="0" fill="black" >2.6</text>
+<line x1="330" y1="440" x2="440" y2="440" stroke="black" />
+<text x="110" y="0" fill="black" >11.4</text>
+<line x1="440" y1="440" x2="550" y2="550" stroke="black" />
+<text x="110" y="0" fill="black" >2</text>
+<line x1="220" y1="440" x2="110" y2="550" stroke="black" />
+<text x="-110" y="0" fill="black" >5</text>
+<line x1="110" y1="550" x2="550" y2="550" stroke="black" />
+<text x="440" y="0" fill="black" >9.7</text>
+<circle cx="330" cy="110" r="5" fill="purple" />
+<text x="330" y="100" fill="black" >A</text>
+<text x="330" y="120" fill="black" >0.0357143</text>
+<circle cx="220" cy="220" r="5" fill="purple" />
+<text x="220" y="210" fill="black" >B</text>
+<text x="220" y="230" fill="black" >0.178571</text>
+<circle cx="440" cy="220" r="5" fill="purple" />
+<text x="440" y="210" fill="black" >C</text>
+<text x="440" y="230" fill="black" >0.0714286</text>
+<circle cx="330" cy="330" r="5" fill="purple" />
+<text x="330" y="320" fill="black" >D</text>
+<text x="330" y="340" fill="black" >0.178571</text>
+<circle cx="220" cy="440" r="5" fill="purple" />
+<text x="220" y="430" fill="black" >E</text>
+<text x="220" y="450" fill="black" >0.107143</text>
+<circle cx="330" cy="440" r="5" fill="purple" />
+<text x="330" y="430" fill="black" >F</text>
+<text x="330" y="450" fill="black" >0</text>
+<circle cx="440" cy="440" r="5" fill="blue" />
+<text x="440" y="430" fill="black" >G</text>
+<text x="440" y="450" fill="black" >0.214286</text>
+<circle cx="110" cy="550" r="5" fill="purple" />
+<text x="110" y="540" fill="black" >H</text>
+<text x="110" y="560" fill="black" >0.142857</text>
+<circle cx="550" cy="550" r="5" fill="purple" />
+<text x="550" y="540" fill="black" >I</text>
+<text x="550" y="560" fill="black" >0.142857</text>
 
 
 </svg>
