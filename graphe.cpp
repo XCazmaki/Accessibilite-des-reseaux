@@ -608,7 +608,7 @@ void Graphe::parcours_DFS2(int indice,int selection1,int selection2,std::vector<
         }
     }
 }
-
+/*
 void Graphe::sauvagarde_aretes()
 {
     for(auto i: m_sommets)
@@ -626,6 +626,37 @@ void Graphe::restaurer_aretes()
     }
     m_aretes=m_aretes_originales;
 }
+*/
+
+
+void Graphe::sauvagarde_aretes()
+{
+    std::vector<float> degres_svg;
+
+    for(auto i: m_sommets)
+    {
+        degres_svg.push_back(i->get_degre());
+    }
+
+    m_degres_svg.push_back(degres_svg);
+    m_aretes_originales.push_back(m_aretes);
+}
+
+void Graphe::restaurer_aretes()
+{
+    std::vector<float> degres_svg=m_degres_svg[m_degres_svg.size()-1];
+    for(size_t i=0; i<m_sommets.size(); ++i)
+    {
+        m_sommets[i]->set_degre(degres_svg[i]);
+    }
+    m_aretes=m_aretes_originales[m_aretes_originales.size()-1];
+
+    m_degres_svg.pop_back();
+    m_aretes_originales.pop_back();
+}
+
+
+
 
 void Graphe::supprimer_aretes(int indice)
 {
@@ -662,3 +693,11 @@ void Graphe::freeMem(bool* visited, int* path, std::list<int>* adj, std::list<st
     free(adj);
     free(pond);
 }
+
+/*void Graphe::reinitialiser_centralite()
+{
+    for(auto i: m_sommets)
+    {
+
+    }
+}*/

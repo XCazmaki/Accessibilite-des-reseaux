@@ -27,7 +27,7 @@ void menu()
         std::cout << "5: Afficher l'indice de centralite de d'intermediarite" << std::endl;
         std::cout << "6: Teste la k-connexite du graphe" << std::endl;
         std::cout << "7: Supprimer une arete du graphe" << std::endl;
-        std::cout << "8: Restituer l'etat initial du graphe" << std::endl;
+        std::cout << "8: Restituer l'etat precedent du graphe" << std::endl;
         std::cout << "10: Lancer l'affichage en console" << std::endl;
         std::cout << "11: Sauvegarder dans un fichier" << std::endl;
         std::cout << "0: Quitter" << std::endl;
@@ -36,6 +36,11 @@ void menu()
 
         switch (choix)
         {
+        case 0 :
+        {
+            std::cout << "Fermeture du programme" << std::endl;
+        }
+        break;
         case 1 :
         {
             Svgfile svgout;
@@ -84,8 +89,10 @@ void menu()
             Svgfile svgout;
             std::cout << "Quelle arete voulez-vous supprimer ? " << std::endl;
             std::cin >> choix;
+            nouv.sauvagarde_aretes();
             nouv.supprimer_aretes(choix);
             nouv.afficher_Svgfile(svgout);
+            choix=7;
         }
         break;
         case 8 :
@@ -98,6 +105,10 @@ void menu()
         case 10 :
         {
             Svgfile svgout;
+            nouv.centralite_degre();
+            nouv.centralite_vecteur_propre();
+            nouv.centralite_proximite();
+            nouv.centralite_intermediarite();
             nouv.afficher_console();
             nouv.afficher_Svgfile(svgout);
         }
@@ -125,5 +136,6 @@ void menu()
 int main()
 {
     menu();
+    std::cout << "hello world !";
     return 0;
 }

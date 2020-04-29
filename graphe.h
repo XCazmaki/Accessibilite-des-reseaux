@@ -4,6 +4,7 @@
 #include <iostream>
 #include <vector>
 #include <fstream>
+#include <list>
 
 #include "sommet.h"
 #include "arete.h"
@@ -14,8 +15,10 @@ class Graphe
 private:
     std::vector<Sommet*> m_sommets;
     std::vector<Arete*> m_aretes;
-    std::vector<Arete*> m_aretes_originales;
-    std::vector<float> m_degres_svg;
+    std::vector<std::vector<Arete*>> m_aretes_originales;
+    std::vector<std::vector<float>> m_degres_svg;
+    //std::vector<Arete*> m_aretes_originales;
+    //std::vector<float> m_degres_svg;
     int m_orientation;
 
 public:

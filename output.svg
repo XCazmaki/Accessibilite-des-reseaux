@@ -7,40 +7,39 @@
 <line x1="440" y1="220" x2="330" y2="330" stroke="black" />
 <line x1="330" y1="330" x2="220" y2="440" stroke="black" />
 <line x1="330" y1="330" x2="440" y2="440" stroke="black" />
-<line x1="220" y1="220" x2="110" y2="550" stroke="black" />
 <line x1="440" y1="220" x2="550" y2="550" stroke="black" />
 <line x1="220" y1="440" x2="330" y2="440" stroke="black" />
 <line x1="330" y1="440" x2="440" y2="440" stroke="black" />
 <line x1="440" y1="440" x2="550" y2="550" stroke="black" />
 <line x1="220" y1="440" x2="110" y2="550" stroke="black" />
 <line x1="110" y1="550" x2="550" y2="550" stroke="black" />
-<circle cx="330" cy="110" r="5" fill="purple" />
+<circle cx="330" cy="110" r="5" fill="blue" />
 <text x="330" y="100" fill="black" >A</text>
-<text x="330" y="120" fill="black" >0</text>
-<circle cx="220" cy="220" r="5" fill="purple" />
+<text x="330" y="120" fill="black" >0.227273</text>
+<circle cx="220" cy="220" r="5" fill="blue" />
 <text x="220" y="210" fill="black" >B</text>
-<text x="220" y="230" fill="black" >0.0357143</text>
-<circle cx="440" cy="220" r="5" fill="purple" />
+<text x="220" y="230" fill="black" >0.363636</text>
+<circle cx="440" cy="220" r="5" fill="blue" />
 <text x="440" y="210" fill="black" >C</text>
-<text x="440" y="230" fill="black" >0.0357143</text>
-<circle cx="330" cy="330" r="5" fill="purple" />
+<text x="440" y="230" fill="black" >0.242424</text>
+<circle cx="330" cy="330" r="5" fill="yellow" />
 <text x="330" y="320" fill="black" >D</text>
-<text x="330" y="340" fill="black" >0.0714286</text>
-<circle cx="220" cy="440" r="5" fill="purple" />
+<text x="330" y="340" fill="black" >0.484848</text>
+<circle cx="220" cy="440" r="5" fill="blue" />
 <text x="220" y="430" fill="black" >E</text>
-<text x="220" y="450" fill="black" >0.0357143</text>
-<circle cx="330" cy="440" r="5" fill="purple" />
+<text x="220" y="450" fill="black" >0.378788</text>
+<circle cx="330" cy="440" r="5" fill="blue" />
 <text x="330" y="430" fill="black" >F</text>
-<text x="330" y="450" fill="black" >0</text>
-<circle cx="440" cy="440" r="5" fill="purple" />
+<text x="330" y="450" fill="black" >0.257576</text>
+<circle cx="440" cy="440" r="5" fill="blue" />
 <text x="440" y="430" fill="black" >G</text>
-<text x="440" y="450" fill="black" >0.0357143</text>
-<circle cx="110" cy="550" r="5" fill="purple" />
+<text x="440" y="450" fill="black" >0.348485</text>
+<circle cx="110" cy="550" r="5" fill="blue" />
 <text x="110" y="540" fill="black" >H</text>
-<text x="110" y="560" fill="black" >0.0714286</text>
-<circle cx="550" cy="550" r="5" fill="purple" />
+<text x="110" y="560" fill="black" >0.363636</text>
+<circle cx="550" cy="550" r="5" fill="blue" />
 <text x="550" y="540" fill="black" >I</text>
-<text x="550" y="560" fill="black" >0.0714286</text>
+<text x="550" y="560" fill="black" >0.242424</text>
 
 
 </svg>
