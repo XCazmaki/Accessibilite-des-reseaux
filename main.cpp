@@ -20,7 +20,7 @@ void menu()
     {
 
         std::cout << "Que voulez vous faire ?" << std::endl;
-        std::cout << "1: Charger un fichier de pondération" << std::endl;
+        std::cout << "1: Charger un fichier de ponderation" << std::endl;
         std::cout << "2: Afficher l'indice de centralite de degre" << std::endl;
         std::cout << "3: Afficher l'indice de centralite de vecteur propre" << std::endl;
         std::cout << "4: Afficher l'indice de centralite de proximite" << std::endl;
@@ -28,6 +28,8 @@ void menu()
         std::cout << "6: Teste la k-connexite du graphe" << std::endl;
         std::cout << "7: Supprimer une arete du graphe" << std::endl;
         std::cout << "8: Restituer l'etat initial du graphe" << std::endl;
+        std::cout << "10: Lancer l'affichage en console" << std::endl;
+        std::cout << "11: Sauvegarder dans un fichier" << std::endl;
         std::cout << "0: Quitter" << std::endl;
         std::cin >> choix;
 
@@ -92,11 +94,26 @@ void menu()
             nouv.afficher_Svgfile(svgout);
         }
         break;
+        case 10 :
+        {
+            Svgfile svgout;
+            nouv.afficher_console();
+            nouv.afficher_Svgfile(svgout);
+        }
+        break;
+        case 11 :
+        {
+            Svgfile svgout;
+            nouv.sauvegarde_fichier();
+            nouv.afficher_Svgfile(svgout);
+        }
+        break;
 
         default:
             std::cout << "Veuillez rentrer une reponse valide" << std::endl;
             break;
         }
+        system("pause");
         system("cls");
     }
     while (choix!=0);

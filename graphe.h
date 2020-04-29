@@ -39,6 +39,7 @@ public:
     /// Indices de centralité
 
     void centralite_degre();
+
     void centralite_vecteur_propre();
 
     float calcul_indice();
@@ -46,6 +47,11 @@ public:
     void centralite_proximite();
     void rechercheAdj(Sommet*, std::vector<std::pair<Sommet*, float>>&);
     void reset();
+
+    /// Sauvegarde
+
+    void sauvegarde_fichier();
+
 
     /// Vulnérabilité
 
@@ -57,6 +63,7 @@ public:
     void sauvagarde_aretes();
     void restaurer_aretes();
     void supprimer_aretes(int indice);
+
 
 };
 

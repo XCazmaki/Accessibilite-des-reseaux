@@ -49,12 +49,10 @@ Graphe::Graphe()
         m_aretes.push_back(new Arete(indice,m_sommets[num1],m_sommets[num2],1));
         /// On relie les sommets a l'arete
         m_sommets[num1]->set_degre(m_sommets[num1]->get_degre()+1);//ajouter_liaison(m_aretes[m_aretes.size()]);
-        std::cout << "On donne au sommet1 " << num1 << " le degre " << m_sommets[num1]->get_degre()<< std::endl;
         if(orient==0)
         {
             m_sommets[num2]->set_degre(m_sommets[num2]->get_degre()+1);//ajouter_liaison(m_aretes[m_aretes.size()]);
         }
-        std::cout << "On donne au sommet2 " << num2 << " le degre " << m_sommets[num2]->get_degre()<< std::endl;
     }
 }
 
@@ -114,10 +112,10 @@ void Graphe::afficher_console() const
         i->afficher_console();
     }
 
-    for(auto i: m_aretes)
+    /*for(auto i: m_aretes)
     {
         i->afficher_console();
-    }
+    }*/
 
 }
 
@@ -178,6 +176,7 @@ void Graphe::centralite_degre()
         /// l'indice de chaque sommet equivaux à son degrès
         i->set_central(i->get_degre());
         i->set_central_norm(i->get_degre()/(m_sommets.size()-1));
+        i->set_indice_central(0,i->get_central(),i->get_central_norm());
     }
 }
 
@@ -233,6 +232,10 @@ void Graphe::centralite_vecteur_propre()
         }
 
     }
+    for(auto i: m_sommets)
+    {
+        i->set_indice_central(1,i->get_central(),i->get_central_norm());
+    }
 }
 
 void Graphe::centralite_proximite()
@@ -268,6 +271,10 @@ void Graphe::centralite_proximite()
         std::cout << "\n" << std::endl;
 
         reset();/// on reset les parametres de parcours des sommets
+    }
+    for(auto i: m_sommets)
+    {
+        i->set_indice_central(2,i->get_central(),i->get_central_norm());
     }
 }
 
@@ -462,15 +469,29 @@ void Graphe::restaurer_aretes()
 
 void Graphe::supprimer_aretes(int indice)
 {
-    if(indice < m_aretes.size())
+    if(indice < static_cast<int>(m_aretes.size()))
     {
         m_aretes[indice]->get_arc1()->set_degre(m_aretes[indice]->get_arc1()->get_degre()-1);
         m_aretes[indice]->get_arc2()->set_degre(m_aretes[indice]->get_arc2()->get_degre()-1);
         m_aretes.erase(m_aretes.begin() + indice);
     }
+}
 
-
-    //m_aretes[indice]=nullptr;
-
-    std::cout << "test";
+void Graphe::sauvegarde_fichier()
+{
+    std::ofstream monFlux("sauvegarde.txt");
+    std::vector<std::pair<float,float>> temp;
+    if(monFlux)
+    {
+        for(auto i: m_sommets)
+        {
+            monFlux << i->get_indice() << " ";
+            temp=i->get_indice_central();
+            for(int i=0; i<4; ++i)
+            {
+                monFlux << temp[i].first << " " << temp[i].second << " ";
+            }
+            monFlux << std::endl;
+        }
+    }
 }
