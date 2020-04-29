@@ -751,8 +751,29 @@ void Graphe::parcours_DFS2(int indice,int selection1,int selection2,std::vector<
             }
             //std::cout << "TEST " << std::endl;
         }
-}
+        else
+        {
+            //std::cout << "Ca fonctionn pas la paire " << selection1 << "  " << selection2 << std::endl;
+        }
     }
+<<<<<<< HEAD
+}*/
+=======
+}
+/*
+void Graphe::BFS()
+{
+    /// Initialisation
+    std::vector<int> couleurs;
+
+    for(size_t i=0; i<m_sommets.size(); i++)
+    {
+        couleurs.push_back(0);
+    }
+>>>>>>> Mathias
+
+    parcours_DFS(0,couleurs);
+
 }*/
 
 void Graphe::parcours_DFS(int indice,std::vector<int> &couleurs)
