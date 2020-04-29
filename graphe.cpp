@@ -587,6 +587,11 @@ void Graphe::recursion(int* selection, int& tour, int curseur, bool& connexe)
                 {
                     connexe=false;
                 }
+                else
+                {
+                    //std::cout << "BON"<<std::endl;
+                }
+
                 couleurs[i]=0;
             }
             //std::cout<<std::endl;
@@ -616,6 +621,7 @@ void Graphe::parcours_DFSK(int indice,int* selection, std::vector<int> &couleurs
         /// On n'utilise pas l'arête supprimée
         if(testSel(selection, tour, i))
         {
+
             /// Si le sommet est l'une des extrémitées de l'arête
             if(i->get_arc1()->get_indice()==indice)
             {
@@ -646,7 +652,7 @@ bool Graphe::testSel(int* selection, int& tour, Arete* a)
     bool retour = true;
     int indice = a->get_indice();
 
-    for(int i=0; i< tour; ++i)
+    for(int i=0; i<tour; ++i)
     {
         if(selection[i] == indice)
             retour = false;
