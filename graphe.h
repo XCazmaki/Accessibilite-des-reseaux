@@ -4,6 +4,7 @@
 #include <iostream>
 #include <vector>
 #include <fstream>
+#include <list>
 
 #include "sommet.h"
 #include "arete.h"
@@ -14,8 +15,9 @@ class Graphe
 private:
     std::vector<Sommet*> m_sommets;
     std::vector<Arete*> m_aretes;
-    std::vector<Arete*> m_aretes_originales;
-    std::vector<float> m_degres_svg;
+    std::vector<std::vector<Arete*>> m_aretes_originales;
+    std::vector<std::vector<float>> m_degres_svg;
+    std::vector<std::vector<Sommet>> m_sommets_originaux;
     int m_orientation;
 
 public:
@@ -60,6 +62,8 @@ public:
 
     /// Indices de centralité
 
+    void calcul_centralite();/// Appel les autres sous programmes
+
     void centralite_degre();
 
     void centralite_vecteur_propre();
@@ -89,11 +93,21 @@ public:
     //void parcours_DFS1(int indice,int selection,std::vector<int> &couleurs);
     //void parcours_DFS2(int indice,int selection1,int selection2,std::vector<int> &couleurs);
 
+
+    void BFS();
+    void parcours_DFS(int indice, std::vector<int> &couleur);
+
     void sauvagarde_aretes();
     void restaurer_aretes();
     void supprimer_aretes(int indice);
 
+    void sauvegarde_sommets();
+    void restaurer_sommets();
 
+    void comparer_indices();
+
+
+    ///Centralité intermédiaire
 
     void centralite_intermediarite();
     std::list<int>* defListeAdj(std::list<std::pair<int, float>>*);

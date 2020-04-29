@@ -22,8 +22,8 @@ class Sommet
 private:
     int m_indice;           /// Indice du sommet
     std::string m_nom;      /// Nom du sommet
-    int m_coordx;           /// Coordonnée en X du sommet
-    int m_coordy;           /// Coordonnée en Y du sommet
+    float m_coordx;           /// Coordonnée en X du sommet
+    float m_coordy;           /// Coordonnée en Y du sommet
     float m_central;        /// Indice de centralité
     float m_central_norm;   /// Indice de centralité normalisé
 
@@ -41,7 +41,7 @@ public:
     /// Constructeurs
 
     Sommet();
-    Sommet(int indice, std::string nom, int coordx, int coordy);
+    Sommet(int indice, std::string nom, float coordx, float coordy);
 
     /// Destructeur
 
@@ -59,12 +59,12 @@ public:
         return m_nom;
     }
 
-    int get_coordx() const
+    float get_coordx() const
     {
         return m_coordx;
     }
 
-    int get_coordy() const
+    float get_coordy() const
     {
         return m_coordy;
     }
