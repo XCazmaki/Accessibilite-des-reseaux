@@ -627,7 +627,7 @@ void Graphe::parcours_DFS2(int indice,int selection1,int selection2,std::vector<
         }
     }
 }
-
+/*
 void Graphe::BFS()
 {
     /// Initialisation
@@ -640,7 +640,7 @@ void Graphe::BFS()
 
     parcours_DFS(0,couleurs);
 
-}
+}*/
 
 void Graphe::parcours_DFS(int indice,std::vector<int> &couleurs)
 {
@@ -771,7 +771,7 @@ void Graphe::comparer_indices()
         for(size_t j=0; j<m_sommets_originaux.size(); ++j)
         {
             std::cout << "Indices de centralites au temps t-" << j+1 <<" :" << std::endl;
-            //m_sommets_originaux[j][i]->afficher_console();
+            m_sommets_originaux[j][i].afficher_console();
         }
     }
 }

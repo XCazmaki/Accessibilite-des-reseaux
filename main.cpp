@@ -123,6 +123,7 @@ void menu()
         case 12 :
         {
             Svgfile svgout;
+            nouv.calcul_centralite();
             nouv.comparer_indices();
             nouv.afficher_Svgfile(svgout);
         }
@@ -130,7 +131,6 @@ void menu()
         case 13 :
         {
             Svgfile svgout;
-           nouv.BFS();
             nouv.afficher_Svgfile(svgout);
         }
         break;
