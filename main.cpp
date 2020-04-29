@@ -31,6 +31,7 @@ void menu()
         std::cout << "10: Lancer l'affichage en console" << std::endl;
         std::cout << "11: Sauvegarder dans un fichier" << std::endl;
         std::cout << "0: Quitter" << std::endl;
+        std::cout<< "Choix : ";
         std::cin >> choix;
 
 
@@ -125,5 +126,6 @@ void menu()
 int main()
 {
     menu();
+
     return 0;
 }

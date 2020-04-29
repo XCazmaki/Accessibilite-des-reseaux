@@ -52,6 +52,16 @@ public:
         }
     };
 
+    struct AreteComparatorIndice{
+        bool operator()(Arete* a, Arete* b)
+        {
+            if(a->get_indice() < b->get_indice())
+                return true;
+            else
+                return false;
+        }
+    };
+
 
     void chargerPond();
 
@@ -97,8 +107,10 @@ public:
 
     void centralite_intermediarite();
     std::list<int>* defListeAdj(std::list<std::pair<int, float>>*);
-    void seekAllPaths(int, int, bool[], int[], int&, std::list<int>*, std::list<std::pair<int, float>>*, const float&, int&, std::vector<int>&);
-    void calculCentraliteInter(const int&, std::vector<int>&);
+    void seekAllPaths(int, int, bool[], int[], int&, std::list<int>*, std::list<std::pair<int, float>>*, const float&, int&, std::vector<int>&, std::vector<Arete*>&);
+    void calculCentraliteInterSommet(const int&, std::vector<int>&);
+    void Graphe::calculCentraliteInterArete(const int&, std::vector<Arete*>&);
+    Arete* seekArete(int&, int&);
     void freeMem(bool*, int*, std::list<int>*, std::list<std::pair<int, float>>*);
 
 };

@@ -109,7 +109,7 @@ void Sommet::traitementDij(std::queue<Sommet*>& F, std::vector<std::pair<Sommet*
         F.push(s); /// on remplit a nouveau la file de telle sorte que le sommet avec la plus petite distance soit en front
 }
 
-void Sommet::DefcentralInter(const int& nCC, const int& occurence)
+void Sommet::DefcentralInterSommet(const int& nCC, const int& occurence)
 {
     m_central += (occurence / nCC);
 }

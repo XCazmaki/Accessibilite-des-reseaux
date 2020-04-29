@@ -328,6 +328,13 @@ void Graphe::centralite_intermediarite()
         i->set_central_norm(0);
     }
 
+    for(auto a: m_aretes)
+    {
+        a->set_centralA(0);
+        a->set_central_normA(0);
+    }
+
+
     std::list<int>* adjacence;
     std::list<std::pair<int, float>>* pond;
     pond = new std::list<std::pair<int, float>>[m_sommets.size()];
@@ -352,9 +359,11 @@ void Graphe::centralite_intermediarite()
 
             int nCC = 0;
             std::vector<int> tab;
-            seekAllPaths(d->get_indice(), f->get_indice(), visited, path, path_index, adjacence, pond, pcc, nCC, tab);
+            std::vector<Arete*> tab2;
+            seekAllPaths(d->get_indice(), f->get_indice(), visited, path, path_index, adjacence, pond, pcc, nCC, tab, tab2);
 
-            calculCentraliteInter(nCC, tab);
+            calculCentraliteInterSommet(nCC, tab);
+            calculCentraliteInterArete(nCC, tab2);
 
             freeMem(visited, path, adjacence, pond);
         }
@@ -364,13 +373,16 @@ void Graphe::centralite_intermediarite()
         so->DefcentralInterNorm(m_sommets.size());
     }
 
+    for(auto a: m_aretes)
+        a->DefcentralInterNormA(m_aretes.size());
+
     for(auto i: m_sommets)
     {
         i->set_indice_central(3,i->get_central(),i->get_central_norm());
     }
 }
 
-void Graphe::calculCentraliteInter(const int& nCC, std::vector<int>& tab)
+void Graphe::calculCentraliteInterSommet(const int& nCC, std::vector<int>& tab)
 {
     std::sort(tab.begin(), tab.end(), IntComparator());
     std::queue<std::pair<int, int>> temp;
@@ -394,15 +406,49 @@ void Graphe::calculCentraliteInter(const int& nCC, std::vector<int>& tab)
     std::sort(m_sommets.begin(), m_sommets.end(), SommetComparatorIndice());
     for(auto s: m_sommets)
     {
-            if(s->get_indice() == ((temp.front()).first))
-            {
-                s->DefcentralInter(nCC, (temp.front()).second);
-                temp.pop();
-            }
+
+        if(s->get_indice() == ((temp.front()).first))
+        {
+            s->DefcentralInterSommet(nCC, (temp.front()).second);
+            temp.pop();
+        }
     }
 }
 
-void Graphe::seekAllPaths(int u, int d, bool visited[], int path[], int &path_index, std::list<int>* adj, std::list<std::pair<int, float>>* pond, const float& PCC, int& nCC, std::vector<int>& tab)
+void Graphe::calculCentraliteInterArete(const int& nCC, std::vector<Arete*>& tab)
+{
+    std::sort(tab.begin(), tab.end(), AreteComparatorIndice());
+    std::queue<std::pair<Arete*, int>> temp;
+    int i = 0;
+    int ii = 0;
+    while(i< (int)tab.size())
+    {
+        temp.push(std::make_pair(tab[i], 1));
+        if((i+1) < (int)tab.size())
+        {
+            while(tab[i] == tab[i+1])
+            {
+                (temp.back()).second++;
+                i++;
+            }
+        }
+        ii++;
+        i++;
+    }
+
+    std::sort(m_aretes.begin(), tab.end(), AreteComparatorIndice());
+    for(auto a: m_aretes)
+    {
+        if(a == ((temp.front()).first))
+        {
+            a->DefcentralInterArete(nCC, (temp.front()).second);
+            temp.pop();
+        }
+    }
+}
+
+void Graphe::seekAllPaths(int u, int d, bool visited[], int path[], int &path_index, std::list<int>* adj, std::list<std::pair<int, float>>* pond,
+                           const float& PCC, int& nCC, std::vector<int>& tab, std::vector<Arete*>& tab2)
 {
     visited[u] = true;
     path[path_index] = u;
@@ -427,8 +473,15 @@ void Graphe::seekAllPaths(int u, int d, bool visited[], int path[], int &path_in
         if(longueur == PCC)
         {
             nCC++;
-            for(int i = 1; i< (path_index - 1); i++)
+            for(int i = 1; i< (path_index - 1); ++i)
+            {
                 tab.push_back(path[i]);
+                std::cout<<path[i]<<" ";
+            }
+            std::cout<<std::endl;
+
+            for(int i = 0; i< (path_index-1); ++i)
+                tab2.push_back(seekArete(path[i], path[i+1]));
         }
     }
     else
@@ -437,12 +490,29 @@ void Graphe::seekAllPaths(int u, int d, bool visited[], int path[], int &path_in
         for (i = adj[u].begin(); i != adj[u].end(); ++i)
         {
             if (!visited[*i])
-                seekAllPaths(*i, d, visited, path, path_index, adj, pond, PCC, nCC, tab);
+                seekAllPaths(*i, d, visited, path, path_index, adj, pond, PCC, nCC, tab, tab2);
         }
     }
 
     path_index--;
     visited[u] = false;
+}
+
+Arete* Graphe::seekArete(int& a, int& b)
+{
+    for(auto a : m_aretes)
+    {
+        Sommet* s1 = (Sommet*)a->get_arc1();
+        Sommet* s2 = (Sommet*)a->get_arc2();
+
+        int a1 = (int)s1->get_indice() ;
+        int a2 = (int)s2->get_indice();
+
+        if(((a1 == a)&&(a2 == b))||((a1 == b)&&( a2 == a)))
+            return a;
+
+    }
+    return nullptr;
 }
 
 void Graphe::reset()

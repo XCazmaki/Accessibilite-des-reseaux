@@ -145,7 +145,7 @@ public:
 
     void traitementDij(std::queue<Sommet*>&, std::vector<std::pair<Sommet*, float>>&);
 
-    void DefcentralInter(const int&, const int& occurence);
+    void DefcentralInterSommet(const int&, const int& occurence);
     void DefcentralInterNorm(const int&);
     void afficher_console() const;
     void afficher_Svgfile(Svgfile &svgout, float indice);
