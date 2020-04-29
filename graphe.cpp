@@ -631,8 +631,8 @@ void Graphe::parcours_DFSK(int indice,int* selection, std::vector<int> &couleurs
                 {
                     /// On le met en gris
                     couleurs[i->get_arc2()->get_indice()]=1;
-                    indice=i->get_arc2()->get_indice();
-                    parcours_DFSK(indice, selection, couleurs, tour);
+                    //indice=i->get_arc2()->get_indice();
+                    parcours_DFSK(i->get_arc2()->get_indice(), selection, couleurs, tour);
                 }
             }
             else if(i->get_arc2()->get_indice()==indice)
@@ -640,8 +640,8 @@ void Graphe::parcours_DFSK(int indice,int* selection, std::vector<int> &couleurs
                 if(couleurs[i->get_arc1()->get_indice()]!=2)
                 {
                     couleurs[i->get_arc1()->get_indice()]=1;
-                    indice=i->get_arc1()->get_indice();
-                    parcours_DFSK(indice, selection, couleurs, tour);
+                    //indice=i->get_arc1()->get_indice();
+                    parcours_DFSK(i->get_arc1()->get_indice(), selection, couleurs, tour);
                 }
             }
         }
