@@ -547,7 +547,7 @@ void Graphe::k_connexite()
 
 bool Graphe::k_connexite_test(int& tour)
 {
-    int* selection = (int*)malloc(tour * sizeof(int));
+    int* selection = (int*)malloc(tour+1 * sizeof(int));
 
     int curseur = 0;
     bool connexe = true;
@@ -586,12 +586,13 @@ void Graphe::recursion(int* selection, int& tour, int curseur, bool& connexe)
                 if(couleurs[i]!=2)
                 {
                     connexe=false;
+
                 }
                 else
                 {
                     //std::cout << "BON"<<std::endl;
                 }
-
+                std::cout << couleurs[i] << " ";
                 couleurs[i]=0;
             }
             //std::cout<<std::endl;
@@ -652,7 +653,7 @@ bool Graphe::testSel(int* selection, int& tour, Arete* a)
     bool retour = true;
     int indice = a->get_indice();
 
-    for(int i=0; i<tour; ++i)
+    for(int i=0; i<tour+1; ++i)
     {
         if(selection[i] == indice)
             retour = false;
