@@ -81,6 +81,7 @@ public:
     void sauvegarde_fichier();
 
 
+
     /// Vulnérabilité
 
     void k_connexite();
@@ -103,6 +104,8 @@ public:
 
     void sauvegarde_sommets();
     void restaurer_sommets();
+
+    void reinitialiser_centralite();
 
     void comparer_indices();
 

@@ -18,7 +18,12 @@ void menu()
     int choix=0;
     do
     {
-        //nouv.calcul_centralite();
+        {
+            Svgfile svgout;
+            nouv.calcul_centralite();
+            nouv.reinitialiser_centralite();
+            nouv.afficher_Svgfile(svgout);
+        }
 
         std::cout << "Que voulez vous faire ?" << std::endl;
         std::cout << "1: Charger un fichier de ponderation" << std::endl;
@@ -94,6 +99,7 @@ void menu()
             nouv.sauvegarde_sommets();
             nouv.sauvagarde_aretes();
             nouv.supprimer_aretes(choix);
+            nouv.calcul_indice();
             nouv.afficher_Svgfile(svgout);
             choix=7;
         }

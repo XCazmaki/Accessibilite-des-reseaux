@@ -720,10 +720,10 @@ void Graphe::parcours_DFS2(int indice,int selection1,int selection2,std::vector<
     /// Pour chaque adjacent du sommet actuel
     for (auto i: m_aretes)
     {
-        /*if(i->get_indice()==selection1||i->get_indice()==selection2)
+        if(i->get_indice()==selection1||i->get_indice()==selection2)
         {
 
-        }*/
+        }
 
         /// On n'utilise pas l'arête supprimée
         if(i->get_indice()!=selection1&&i->get_indice()!=selection2)
@@ -756,10 +756,8 @@ void Graphe::parcours_DFS2(int indice,int selection1,int selection2,std::vector<
             //std::cout << "Ca fonctionn pas la paire " << selection1 << "  " << selection2 << std::endl;
         }
     }
-<<<<<<< HEAD
 }*/
-=======
-}
+
 /*
 void Graphe::BFS()
 {
@@ -937,10 +935,11 @@ void Graphe::freeMem(bool* visited, int* path, std::list<int>* adj, std::list<st
     free(pond);
 }
 
-/*void Graphe::reinitialiser_centralite()
+void Graphe::reinitialiser_centralite()
 {
     for(auto i: m_sommets)
     {
-
+        i->set_central(0);
+        i->set_central_norm(0);
     }
-}*/
+}
