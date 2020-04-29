@@ -18,6 +18,7 @@ void menu()
     int choix=0;
     do
     {
+        //nouv.calcul_centralite();
 
         std::cout << "Que voulez vous faire ?" << std::endl;
         std::cout << "1: Charger un fichier de ponderation" << std::endl;
@@ -30,6 +31,7 @@ void menu()
         std::cout << "8: Restituer l'etat precedent du graphe" << std::endl;
         std::cout << "10: Lancer l'affichage en console" << std::endl;
         std::cout << "11: Sauvegarder dans un fichier" << std::endl;
+        std::cout << "12: Conparer indices" << std::endl;
         std::cout << "0: Quitter" << std::endl;
         std::cin >> choix;
 
@@ -89,6 +91,7 @@ void menu()
             Svgfile svgout;
             std::cout << "Quelle arete voulez-vous supprimer ? " << std::endl;
             std::cin >> choix;
+            nouv.sauvegarde_sommets();
             nouv.sauvagarde_aretes();
             nouv.supprimer_aretes(choix);
             nouv.afficher_Svgfile(svgout);
@@ -99,16 +102,13 @@ void menu()
         {
             Svgfile svgout;
             nouv.restaurer_aretes();
+            nouv.restaurer_sommets();
             nouv.afficher_Svgfile(svgout);
         }
         break;
         case 10 :
         {
             Svgfile svgout;
-            nouv.centralite_degre();
-            nouv.centralite_vecteur_propre();
-            nouv.centralite_proximite();
-            nouv.centralite_intermediarite();
             nouv.afficher_console();
             nouv.afficher_Svgfile(svgout);
         }
@@ -117,6 +117,13 @@ void menu()
         {
             Svgfile svgout;
             nouv.sauvegarde_fichier();
+            nouv.afficher_Svgfile(svgout);
+        }
+        break;
+        case 12 :
+        {
+            Svgfile svgout;
+            nouv.comparer_indices();
             nouv.afficher_Svgfile(svgout);
         }
         break;

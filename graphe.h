@@ -17,8 +17,7 @@ private:
     std::vector<Arete*> m_aretes;
     std::vector<std::vector<Arete*>> m_aretes_originales;
     std::vector<std::vector<float>> m_degres_svg;
-    //std::vector<Arete*> m_aretes_originales;
-    //std::vector<float> m_degres_svg;
+    std::vector<std::vector<Sommet>> m_sommets_originaux;
     int m_orientation;
 
 public:
@@ -63,6 +62,8 @@ public:
 
     /// Indices de centralité
 
+    void calcul_centralite();/// Appel les autres sous programmes
+
     void centralite_degre();
 
     void centralite_vecteur_propre();
@@ -91,7 +92,13 @@ public:
     void restaurer_aretes();
     void supprimer_aretes(int indice);
 
+    void sauvegarde_sommets();
+    void restaurer_sommets();
 
+    void comparer_indices();
+
+
+    ///Centralité intermédiaire
 
     void centralite_intermediarite();
     std::list<int>* defListeAdj(std::list<std::pair<int, float>>*);

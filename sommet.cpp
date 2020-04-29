@@ -17,7 +17,7 @@ Sommet::Sommet()
     }
 }
 
-Sommet::Sommet(int indice, std::string nom, int coordx, int coordy)
+Sommet::Sommet(int indice, std::string nom, float coordx, float coordy)
 {
     m_indice=indice;
     m_nom=nom;
@@ -44,7 +44,7 @@ void Sommet::afficher_console() const
     std::cout << "Ses indices sont : " << std::endl;
     for(int i=0; i<4; ++i)
     {
-        std::cout << m_indices_centralite[i].first << " " << m_indices_centralite[i].second << std::endl;
+        std::cout << "Indice n"<< i <<" : " << m_indices_centralite[i].first << " normalise " << m_indices_centralite[i].second << std::endl;
     }
 }
 
