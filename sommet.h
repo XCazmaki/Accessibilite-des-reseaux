@@ -23,12 +23,16 @@ private:
     int m_coordx;           /// Coordonnée en X du sommet
     int m_coordy;           /// Coordonnée en Y du sommet
     float m_central;        /// Indice de centralité
-    float m_central_norm;
+    float m_central_norm;   /// Indice de centralité normalisé
+
+    /// Vecteur qui va contenir l'ensemble des indice de centralité de chaque sommet
+    /// par exemple vector[0].second correspond à l'indice de centralité de degre normalisé
+    std::vector<std::pair<float,float>> m_indices_centralite;
 
     float m_distance;
     char m_etat;
 
-    std::vector<Arete*> m_liaison;
+    float m_degre;
 
 public:
 
@@ -65,9 +69,8 @@ public:
 
     float get_degre() const
     {
-        return m_liaison.size();
+        return m_degre;
     }
-
 
     float getDist() const
     {
@@ -83,7 +86,17 @@ public:
         return m_central_norm;
     }
 
+    std::vector<std::pair<float,float>> get_indice_central()
+    {
+        return m_indices_centralite;
+    }
+
     /// Setter
+
+    void set_degre(float x)
+    {
+        m_degre=x;
+    }
 
     void set_central(const float& central)
     {
@@ -105,11 +118,16 @@ public:
         m_etat = e;
     }
 
-    void ajouter_liaison(Arete* arc);
+    void set_indice_central(float num,float val1,float val2)
+    {
+        m_indices_centralite[num].first=val1;
+        m_indices_centralite[num].second=val2;
+    }
 
     /// comparator
 
-    struct SommetComparator{
+    struct SommetComparator
+    {
         bool operator()(Sommet* a, Sommet* b)
         {
             if(a->m_distance < b->m_distance)
@@ -120,6 +138,8 @@ public:
     };
 
     /// Methodes
+    void augmenter_degre();
+
     void traitementDij(std::queue<Sommet*>&, std::vector<std::pair<Sommet*, float>>&);
     //void getAdjacence(std::vector<std::pair<Sommet*, float>>&);
 

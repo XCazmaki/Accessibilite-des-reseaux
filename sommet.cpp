@@ -10,6 +10,11 @@ Sommet::Sommet()
     m_central_norm=0;
     m_distance = 0;
     m_etat = 'B';
+    m_degre=0;
+    for(int i=0;i<4;++i)
+    {
+        m_indices_centralite.push_back(std::make_pair(0,0));
+    }
 }
 
 Sommet::Sommet(int indice, std::string nom, int coordx, int coordy)
@@ -22,23 +27,28 @@ Sommet::Sommet(int indice, std::string nom, int coordx, int coordy)
     m_central_norm=0;
     m_distance = 0;
     m_etat = 'B';
+    m_degre=0;
+    for(int i=0;i<4;++i)
+    {
+        m_indices_centralite.push_back(std::make_pair(0,0));
+    }
 }
 
 Sommet::~Sommet()
 {}
 
-
-void Sommet::ajouter_liaison(Arete* arc)
-{
-    m_liaison.push_back(arc);
-}
-
+/// Affiche le numéro du sommet et ses indices dans la console
 void Sommet::afficher_console() const
 {
-    std::cout << "Sommet numero : " << m_indice << " de nom " << m_nom << "" << m_coordx<< " "<< m_coordy << std::endl;
-    std::cout << "Son indice est : " << m_central_norm << std::endl;
+    std::cout << "Indices du sommet numero " << m_indice << std::endl;
+    std::cout << "Ses indices sont : " << std::endl;
+    for(int i=0; i<4; ++i)
+    {
+        std::cout << m_indices_centralite[i].first << " " << m_indices_centralite[i].second << std::endl;
+    }
 }
 
+/// Affiche le sommet dans un Svgfile
 void Sommet::afficher_Svgfile(Svgfile &svgout, float indice)
 {
     std::string couleur="black";
@@ -67,7 +77,6 @@ void Sommet::afficher_Svgfile(Svgfile &svgout, float indice)
     svgout.addText(m_coordx*indice,m_coordy*indice-10,m_nom,"black");
     svgout.addText(m_coordx*indice,m_coordy*indice+10,m_central_norm,"black");
 }
-
 
 
 void Sommet::traitementDij(std::queue<Sommet*>& F, std::vector<std::pair<Sommet*, float>>& adjacents)
