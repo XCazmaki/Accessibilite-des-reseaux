@@ -14,8 +14,6 @@
 <line x1="440" y1="440" x2="550" y2="550" stroke="black" />
 <line x1="220" y1="440" x2="110" y2="550" stroke="black" />
 <line x1="110" y1="550" x2="550" y2="550" stroke="black" />
-<line x1="330" y1="110" x2="330" y2="330" stroke="black" />
-<line x1="330" y1="330" x2="330" y2="440" stroke="black" />
 <circle cx="330" cy="110" r="5" fill="purple" />
 <text x="330" y="100" fill="black" >A</text>
 <text x="330" y="120" fill="black" >0</text>
