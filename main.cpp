@@ -109,6 +109,10 @@ void menu()
         }
         break;
 
+            nouv.centralite_intermediarite();
+            nouv.afficher_Svgfile(svgout);
+            break;
+        }
         default:
             std::cout << "Veuillez rentrer une reponse valide" << std::endl;
             break;

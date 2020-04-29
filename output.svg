@@ -2,6 +2,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="1000" height="800">
 
 <line x1="366.667" y1="183.333" x2="366.667" y2="366.667" stroke="black" />
+<<<<<<< HEAD
 <line x1="183.333" y1="366.667" x2="366.667" y2="366.667" stroke="black" />
 <line x1="366.667" y1="366.667" x2="550" y2="366.667" stroke="black" />
 <line x1="366.667" y1="366.667" x2="366.667" y2="550" stroke="black" />
@@ -20,6 +21,30 @@
 <circle cx="366.667" cy="550" r="5" fill="yellow" />
 <text x="366.667" y="540" fill="black" >E</text>
 <text x="366.667" y="560" fill="black" >0.571429</text>
+=======
+<text x="0" y="0" fill="black" >4</text>
+<line x1="183.333" y1="366.667" x2="366.667" y2="366.667" stroke="black" />
+<text x="183.333" y="0" fill="black" >7.9</text>
+<line x1="366.667" y1="366.667" x2="550" y2="366.667" stroke="black" />
+<text x="183.333" y="0" fill="black" >2.3</text>
+<line x1="366.667" y1="366.667" x2="366.667" y2="550" stroke="black" />
+<text x="0" y="1.52588e-005" fill="black" >11</text>
+<circle cx="366.667" cy="183.333" r="5" fill="purple" />
+<text x="366.667" y="173.333" fill="black" >A</text>
+<text x="366.667" y="193.333" fill="black" >0.00224014</text>
+<circle cx="183.333" cy="366.667" r="5" fill="purple" />
+<text x="183.333" y="356.667" fill="black" >B</text>
+<text x="183.333" y="376.667" fill="black" >0.00170416</text>
+<circle cx="366.667" cy="366.667" r="5" fill="red" />
+<text x="366.667" y="356.667" fill="black" >C</text>
+<text x="366.667" y="376.667" fill="black" >1.00331</text>
+<circle cx="550" cy="366.667" r="5" fill="purple" />
+<text x="550" y="356.667" fill="black" >D</text>
+<text x="550" y="376.667" fill="black" >0.00259605</text>
+<circle cx="366.667" cy="550" r="5" fill="purple" />
+<text x="366.667" y="540" fill="black" >E</text>
+<text x="366.667" y="560" fill="black" >0.00143184</text>
+>>>>>>> Romain
 
 
 </svg>

@@ -109,12 +109,13 @@ void Sommet::traitementDij(std::queue<Sommet*>& F, std::vector<std::pair<Sommet*
         F.push(s); /// on remplit a nouveau la file de telle sorte que le sommet avec la plus petite distance soit en front
 }
 
-/*void Sommet::getAdjacence(std::vector< std::pair<Sommet*, float>>& adjacents)
+void Sommet::DefcentralInter(const int& nCC, const int& occurence)
 {
-    for(auto a : m_liaison)
-    {
-        Sommet* temp;// = a->getSommet(this);
-        float poids = a->getPoids();
-        adjacents.push_back(std::make_pair(temp, poids));
-    }
-}*/
+    m_central += (occurence / nCC);
+}
+
+void Sommet::DefcentralInterNorm(const int& n)
+{
+    m_central_norm = (m_central / ((n*n)-(3*n)+2));
+}
+
