@@ -456,7 +456,7 @@ void Graphe::reset()
     }
 }
 
-void Graphe::k_connexite()
+/*void Graphe::k_connexite()
 {
     int selection=0;        /// La première arête que l'on va ignorer
     int selection2=0;       /// La deuxième arête que l'on va ingorer
@@ -529,9 +529,132 @@ void Graphe::k_connexite()
         }
     }
 
+}*/
+
+void Graphe::k_connexite()
+{
+    for(int i = 0; i< (int)(m_sommets.size()); ++i)
+    {
+        if(!k_connexite_test(i))
+        {
+            std::cout<<" Le graphe est " << i+1 << "-connexe "<<std::endl;
+            break;
+        }
+        system("pause");
+    }
+
 }
 
-void Graphe::parcours_DFS1(int indice,int selection,std::vector<int> &couleurs)
+bool Graphe::k_connexite_test(int& tour)
+{
+    int* selection = (int*)malloc(tour * sizeof(int));
+
+    int curseur = 0;
+    bool connexe = true;
+
+    recursion(selection, tour,curseur, connexe);
+
+    free(selection);
+
+    return connexe;
+}
+
+void Graphe::recursion(int* selection, int& tour, int curseur, bool& connexe)
+{
+    if(curseur == tour)
+    {
+        for(auto a : m_aretes)
+        {
+            std::vector<int> couleurs;
+            for(size_t i=0; i<m_sommets.size(); i++)
+            {
+                couleurs.push_back(0);
+            }
+
+            selection[tour] = a->get_indice();
+            std::cout<<"selection : ";
+            for(int i=0; i<=tour;++i)
+                std::cout<<selection[i]<<" ";
+            std::cout<<"/"<<std::endl;
+
+            int depart = 0;
+            parcours_DFSK(depart,selection,couleurs, tour);
+
+            for(size_t i=0; i<couleurs.size(); i++)
+            {
+                //std::cout<<couleurs[i]<<" ";
+                if(couleurs[i]!=2)
+                {
+                    connexe=false;
+                }
+                couleurs[i]=0;
+            }
+            //std::cout<<std::endl;
+        }
+    }
+    else
+    {
+        for(auto a : m_aretes)
+        {
+            selection[curseur] = a->get_indice();
+            recursion(selection, tour, curseur +1, connexe);
+        }
+    }
+}
+
+void Graphe::parcours_DFSK(int indice,int* selection, std::vector<int> &couleurs, int& tour)
+{
+    /// marquer le sommet s
+    couleurs[indice]=2;
+
+    /// afficher(s)
+    //std::cout << "On parcours le sommet : " << m_sommets[indice]->get_indice()<< std::endl;
+
+    /// Pour chaque adjacent du sommet actuel
+    for (auto i: m_aretes)
+    {
+        /// On n'utilise pas l'arête supprimée
+        if(testSel(selection, tour, i))
+        {
+            /// Si le sommet est l'une des extrémitées de l'arête
+            if(i->get_arc1()->get_indice()==indice)
+            {
+                /// Si le sommet n'a pas déjà été observé (qu'il n'est pas noir)
+                if(couleurs[i->get_arc2()->get_indice()]!=2)
+                {
+                    /// On le met en gris
+                    couleurs[i->get_arc2()->get_indice()]=1;
+                    indice=i->get_arc2()->get_indice();
+                    parcours_DFSK(indice, selection, couleurs, tour);
+                }
+            }
+            else if(i->get_arc2()->get_indice()==indice)
+            {
+                if(couleurs[i->get_arc1()->get_indice()]!=2)
+                {
+                    couleurs[i->get_arc1()->get_indice()]=1;
+                    indice=i->get_arc1()->get_indice();
+                    parcours_DFSK(indice, selection, couleurs, tour);
+                }
+            }
+        }
+    }
+}
+
+bool Graphe::testSel(int* selection, int& tour, Arete* a)
+{
+    bool retour = true;
+    int indice = a->get_indice();
+
+    for(int i=0; i< tour; ++i)
+    {
+        if(selection[i] == indice)
+            retour = false;
+    }
+    return retour;
+}
+
+/*void Graphe::parcours_DFS1(int indice,int selection,std::vector<int> &couleurs)
 {
     /// marquer le sommet s
     couleurs[indice]=2;
@@ -607,7 +730,7 @@ void Graphe::parcours_DFS2(int indice,int selection1,int selection2,std::vector<
             }
         }
     }
-}
+}*/
 
 void Graphe::sauvagarde_aretes()
 {

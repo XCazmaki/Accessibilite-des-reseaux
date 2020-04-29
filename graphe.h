@@ -80,9 +80,14 @@ public:
     /// Vulnérabilité
 
     void k_connexite();
-    void DFS(int &indice,int selection,std::vector<int> &couleurs);
-    void parcours_DFS1(int indice,int selection,std::vector<int> &couleurs);
-    void parcours_DFS2(int indice,int selection1,int selection2,std::vector<int> &couleurs);
+    bool k_connexite_test(int&);
+    void recursion(int*, int&, int, bool&);
+    void parcours_DFSK(int, int*, std::vector<int>&, int&);
+    bool testSel(int*, int&, Arete*);
+
+    //void DFS(int &indice,int selection,std::vector<int> &couleurs);
+    //void parcours_DFS1(int indice,int selection,std::vector<int> &couleurs);
+    //void parcours_DFS2(int indice,int selection1,int selection2,std::vector<int> &couleurs);
 
     void sauvagarde_aretes();
     void restaurer_aretes();
