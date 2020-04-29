@@ -102,7 +102,7 @@ void menu()
         {
             Svgfile svgout;
             nouv.restaurer_aretes();
-            nouv.restaurer_sommets();
+            //nouv.restaurer_sommets();
             nouv.afficher_Svgfile(svgout);
         }
         break;
@@ -124,6 +124,13 @@ void menu()
         {
             Svgfile svgout;
             nouv.comparer_indices();
+            nouv.afficher_Svgfile(svgout);
+        }
+        break;
+        case 13 :
+        {
+            Svgfile svgout;
+           nouv.BFS();
             nouv.afficher_Svgfile(svgout);
         }
         break;
