@@ -242,6 +242,7 @@ void Graphe::centralite_proximite()
 {
     for(auto s: m_sommets)
     {
+
         std::queue<Sommet*> F;
         F.push(s);
 
@@ -252,6 +253,7 @@ void Graphe::centralite_proximite()
             F.front()->traitementDij(F, adjacents);/// on applique le traitement de dijkstra au premier element de la file
         }
         while(F.size()>0); /// tant que la file n'est pas vide
+
         dijkstra(s);
 
         float poidsTot = 0;
@@ -320,6 +322,14 @@ std::list<int>* Graphe::defListeAdj(std::list<std::pair<int, float>>* pond)
 
 void Graphe::centralite_intermediarite()
 {
+
+    for(auto i:m_sommets)
+    {
+        i->set_central(0);
+        i->set_central_norm(0);
+    }
+
+
     std::list<int>* adjacence;
     std::list<std::pair<int, float>>* pond;
     pond = new std::list<std::pair<int, float>>[m_sommets.size()];
@@ -354,6 +364,11 @@ void Graphe::centralite_intermediarite()
     for(auto so : m_sommets)
     {
         so->DefcentralInterNorm(m_sommets.size());
+    }
+
+    for(auto i: m_sommets)
+    {
+        i->set_indice_central(3,i->get_central(),i->get_central_norm());
     }
 }
 
@@ -639,6 +654,7 @@ void Graphe::sauvegarde_fichier()
             monFlux << std::endl;
         }
     }
+}
 void Graphe::freeMem(bool* visited, int* path, std::list<int>* adj, std::list<std::pair<int, float>>* pond)
 {
     free(visited);

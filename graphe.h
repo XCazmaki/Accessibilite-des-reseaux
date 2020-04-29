@@ -29,7 +29,9 @@ public:
 
     ~Graphe();
 
+
     /// Mise en place du graphe
+
     struct IntComparator{
         bool operator()(int a, int b)
         {
@@ -69,6 +71,7 @@ public:
     void rechercheAdj(Sommet*, std::vector<std::pair<Sommet*, float>>&);
     void reset();
 
+
     /// Sauvegarde
 
     void sauvegarde_fichier();
@@ -86,11 +89,13 @@ public:
     void supprimer_aretes(int indice);
 
 
+
     void centralite_intermediarite();
     std::list<int>* defListeAdj(std::list<std::pair<int, float>>*);
     void seekAllPaths(int, int, bool[], int[], int&, std::list<int>*, std::list<std::pair<int, float>>*, const float&, int&, std::vector<int>&);
     void calculCentraliteInter(const int&, std::vector<int>&);
     void freeMem(bool*, int*, std::list<int>*, std::list<std::pair<int, float>>*);
+
 };
 
 #endif // GRAPHE_H_INCLUDED
