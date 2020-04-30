@@ -127,7 +127,7 @@ void Graphe::afficher_Svgfile(Svgfile &svgout)
 
     for(auto i: m_aretes)
     {
-        i->afficher_Svgfile(svgout,indice);
+        i->afficher_Svgfile(svgout,indice, m_orientation);
     }
     for(auto i: m_sommets)
     {
