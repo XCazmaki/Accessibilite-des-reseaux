@@ -6,6 +6,8 @@ Arete::Arete()
     m_arc.first=nullptr;
     m_arc.second=nullptr;
     m_poids=0;
+    m_centralA = 0;
+    m_central_normA = 0;
 }
 
 
@@ -62,4 +64,14 @@ bool Arete::testAppartenance(const Sommet* depart, const int& orient)
         return true;
     else
         return false;
+}
+
+void Arete::DefcentralInterArete(const int& nCC, const int& occurence)
+{
+    m_centralA += (occurence / nCC);
+}
+
+void Arete::DefcentralInterNormA(const int& n)
+{
+    m_central_normA = (m_centralA / ((n*n)-(3*n)+2));
 }

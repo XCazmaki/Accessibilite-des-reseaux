@@ -38,6 +38,7 @@ void menu()
         std::cout << "11: Sauvegarder dans un fichier" << std::endl;
         std::cout << "12: Conparer indices" << std::endl;
         std::cout << "0: Quitter" << std::endl;
+        std::cout<< "Choix : ";
         std::cin >> choix;
 
 
@@ -156,6 +157,5 @@ void menu()
 int main()
 {
     menu();
-    std::cout << "hello world !";
     return 0;
 }

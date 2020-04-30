@@ -11,7 +11,8 @@ private:
     int m_indice;                       /// Indice de l'arête
     std::pair<Sommet*,Sommet*> m_arc;   /// Pair de pointeurs vers les deux sommets de l'arête
     float m_poids;                       /// Poid (éventuel) de l'arête (vaut 1 par default - en
-                                        /// cas de graphe non orienté
+    float m_centralA;                         /// Indice de centralité
+    float m_central_normA;                   /// cas de graphe non orienté
 
 public:
 
@@ -73,6 +74,15 @@ public:
         m_arc.second=nouv;
     }
 
+    void set_centralA(const float& central)
+    {
+        m_centralA=central;
+    }
+
+    void set_central_normA(const float& central_norm)
+    {
+        m_central_normA = central_norm;
+    }
 
     bool changerPond(const std::pair<int, float>&);
     void afficher() const;
@@ -80,6 +90,10 @@ public:
     void afficher_Svgfile(Svgfile &svgout,float indice);
 
     bool testAppartenance(const Sommet*, const int&);
+
+    void DefcentralInterArete(const int&, const int&);
+    void DefcentralInterNormA(const int&);
+
 };
 
 #endif // ARETE_H_INCLUDED
