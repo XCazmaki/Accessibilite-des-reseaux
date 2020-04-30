@@ -113,10 +113,10 @@ void Graphe::afficher_console() const
         i->afficher_console();
     }
 
-    /*for(auto i: m_aretes)
+    for(auto i: m_aretes)
     {
         i->afficher_console();
-    }*/
+    }
 
 }
 
@@ -173,10 +173,16 @@ float Graphe::calcul_indice()
 
 void Graphe::calcul_centralite()
 {
+    std::cout << "degre" << std::endl;
     centralite_degre();
+    std::cout << "vecteur" << std::endl;
     centralite_vecteur_propre();
+    std::cout << "proxy" << std::endl;
     centralite_proximite();
+    std::cout << "int" << std::endl;
+    afficher_console();
     centralite_intermediarite();
+    std::cout << "FIN" << std::endl;
 }
 
 void Graphe::centralite_degre()
@@ -333,11 +339,16 @@ std::list<int>* Graphe::defListeAdj(std::list<std::pair<int, float>>* pond)
 
 void Graphe::centralite_intermediarite()
 {
-
     for(auto i:m_sommets)
     {
         i->set_central(0);
         i->set_central_norm(0);
+    }
+
+    for(auto a: m_aretes)
+    {
+        a->set_centralA(0);
+        a->set_central_normA(0);
     }
 
 
@@ -363,11 +374,15 @@ void Graphe::centralite_intermediarite()
             for (int i = 0; i < (int)m_sommets.size(); i++)
                 visited[i] = false;
 
+
             int nCC = 0;
             std::vector<int> tab;
-            seekAllPaths(d->get_indice(), f->get_indice(), visited, path, path_index, adjacence, pond, pcc, nCC, tab);
+            std::vector<Arete*> tab2;
+            seekAllPaths(d->get_indice(), f->get_indice(), visited, path, path_index, adjacence, pond, pcc, nCC, tab, tab2);
 
-            calculCentraliteInter(nCC, tab);
+            calculCentraliteInterSommet(nCC, tab);
+
+            calculCentraliteInterArete(nCC, tab2);
 
             freeMem(visited, path, adjacence, pond);
         }
@@ -377,13 +392,16 @@ void Graphe::centralite_intermediarite()
         so->DefcentralInterNorm(m_sommets.size());
     }
 
+    for(auto a: m_aretes)
+        a->DefcentralInterNormA(m_aretes.size());
+
     for(auto i: m_sommets)
     {
         i->set_indice_central(3,i->get_central(),i->get_central_norm());
     }
 }
 
-void Graphe::calculCentraliteInter(const int& nCC, std::vector<int>& tab)
+void Graphe::calculCentraliteInterSommet(const int& nCC, std::vector<int>& tab)
 {
     std::sort(tab.begin(), tab.end(), IntComparator());
     std::queue<std::pair<int, int>> temp;
@@ -409,13 +427,46 @@ void Graphe::calculCentraliteInter(const int& nCC, std::vector<int>& tab)
     {
         if(s->get_indice() == ((temp.front()).first))
         {
-            s->DefcentralInter(nCC, (temp.front()).second);
+            s->DefcentralInterSommet(nCC, (temp.front()).second);
             temp.pop();
         }
     }
 }
 
-void Graphe::seekAllPaths(int u, int d, bool visited[], int path[], int &path_index, std::list<int>* adj, std::list<std::pair<int, float>>* pond, const float& PCC, int& nCC, std::vector<int>& tab)
+void Graphe::calculCentraliteInterArete(const int& nCC, std::vector<Arete*>& tab)
+{
+    std::sort(tab.begin(), tab.end(), AreteComparatorIndice());
+    std::queue<std::pair<Arete*, int>> temp;
+    int i = 0;
+    int ii = 0;
+    while(i< (int)tab.size())
+    {
+        temp.push(std::make_pair(tab[i], 1));
+        if((i+1) < (int)tab.size())
+        {
+            while(tab[i] == tab[i+1])
+            {
+                (temp.back()).second++;
+                i++;
+            }
+        }
+        ii++;
+        i++;
+    }
+
+    std::sort(m_aretes.begin(), m_aretes.end(), AreteComparatorIndice());
+    for(auto a: m_aretes)
+    {
+        if(a == ((temp.front()).first))
+        {
+            a->DefcentralInterArete(nCC, (temp.front()).second);
+            temp.pop();
+        }
+    }
+}
+
+void Graphe::seekAllPaths(int u, int d, bool visited[], int path[], int &path_index, std::list<int>* adj, std::list<std::pair<int, float>>* pond,
+                           const float& PCC, int& nCC, std::vector<int>& tab, std::vector<Arete*>& tab2)
 {
     visited[u] = true;
     path[path_index] = u;
@@ -440,8 +491,15 @@ void Graphe::seekAllPaths(int u, int d, bool visited[], int path[], int &path_in
         if(longueur == PCC)
         {
             nCC++;
-            for(int i = 1; i< (path_index - 1); i++)
+            for(int i = 1; i< (path_index - 1); ++i)
+            {
                 tab.push_back(path[i]);
+                //std::cout<<path[i]<<" ";
+            }
+            //std::cout<<std::endl;
+
+            for(int i = 0; i< (path_index-1); ++i)
+                tab2.push_back(seekArete(path[i], path[i+1]));
         }
     }
     else
@@ -450,12 +508,36 @@ void Graphe::seekAllPaths(int u, int d, bool visited[], int path[], int &path_in
         for (i = adj[u].begin(); i != adj[u].end(); ++i)
         {
             if (!visited[*i])
-                seekAllPaths(*i, d, visited, path, path_index, adj, pond, PCC, nCC, tab);
+                seekAllPaths(*i, d, visited, path, path_index, adj, pond, PCC, nCC, tab, tab2);
         }
     }
 
     path_index--;
     visited[u] = false;
+}
+
+Arete* Graphe::seekArete(int& a, int& b)
+{
+    for(auto ar : m_aretes)
+    {
+        Sommet* s1 = (Sommet*)ar->get_arc1();
+        Sommet* s2 = (Sommet*)ar->get_arc2();
+
+        int a1 = (int)s1->get_indice() ;
+        int a2 = (int)s2->get_indice();
+
+        if(m_orientation == 0)
+        {
+            if(((a1 == a)&&(a2 == b))||((a1 == b)&&(a2 == a)))
+                return ar;
+        }
+        else
+        {
+            if((a1 == a)&&(a2 == b))
+                return ar;
+        }
+    }
+    return nullptr;
 }
 
 void Graphe::reset()
@@ -515,7 +597,6 @@ void Graphe::recursion(int* selection, int& tour, int curseur, bool& connexe)
                 if(couleurs[i]!=2)
                 {
                     connexe=false;
-
                 }
                 couleurs[i]=0;
             }
@@ -648,7 +729,7 @@ void Graphe::parcours_DFSF(int indice, std::vector<int> &couleurs)
 }
 
 
-void Graphe::sauvagarde_aretes()
+void Graphe::sauvegarde_aretes()
 {
     std::vector<float> degres_svg;
 
@@ -690,12 +771,20 @@ void Graphe::supprimer_aretes(int indice)
             }
             compteur++;
         }
-<<<<<<< Updated upstream
-=======
     }
 }
 
 /*
+=======
+    }
+    for(size_t i=0;i<m_sommets.size();++i)
+    {
+        //i->set
+    }
+}
+
+
+>>>>>>> dev
 
 void Graphe::restaurer_sommets()
 {
@@ -708,6 +797,33 @@ void Graphe::supprimer_sommets(int indice)
 {
     m_sommets_originaux.push_back(m_sommets);
     sauvegarde_aretes();
+<<<<<<< HEAD
+=======
+
+    if(indice < (int)(m_sommets.size()+1))
+    {
+        //int compteur=0;
+        for(auto i:m_sommets)
+        {
+            if(i->get_indice()==indice)
+            {
+                for(auto j: m_aretes)
+                {
+                    if(j->get_arc1()->get_indice()==indice)
+                    {
+                        supprimer_aretes(j->get_indice());
+                    }
+                    else if(j->get_arc2()->get_indice()==indice)
+                    {
+                        supprimer_aretes(j->get_indice());
+                    }
+                }
+                std::cout << "SUPRESSION " << indice << std::endl;
+                m_sommets.erase(m_sommets.begin() + indice);
+            }
+            //compteur++;
+        }
+>>>>>>> dev
 
     if(indice < (int)(m_sommets.size()+1))
     {
@@ -743,14 +859,15 @@ void Graphe::supprimer_sommets(int indice)
 }
 <<<<<<< Updated upstream
 
-void Graphe::sauvegarde_sommets()
+void Graphe::sauvegarde_sommets_indices()
 {
+<<<<<<< HEAD
     afficher_console();
 =======
 */
 void Graphe::sauvegarde_sommets_indices()
 {
->>>>>>> Stashed changes
+    //afficher_console();
     std::vector<Sommet> svg;
 
     for(auto i: m_sommets)
@@ -758,7 +875,7 @@ void Graphe::sauvegarde_sommets_indices()
         svg.push_back(*i);
     }
 
-    m_sommets_originaux.push_back(svg);
+    m_sommets_svg.push_back(svg);
 }
 
 
@@ -799,10 +916,10 @@ void Graphe::comparer_indices()
         std::cout << "Indices de centralites actuels :" << std::endl;
         m_sommets[i]->afficher_console();
 
-        for(size_t j=0; j<m_sommets_originaux.size(); ++j)
+        for(size_t j=0; j<m_sommets_svg.size(); ++j)
         {
             std::cout << "Indices de centralites au temps t-" << j+1 <<" :" << std::endl;
-            m_sommets_originaux[j][i].afficher_console();
+            m_sommets_svg[j][i].afficher_console();
         }
     }
 }
@@ -826,6 +943,7 @@ void Graphe::sauvegarde_fichier()
         }
     }
 }
+
 void Graphe::freeMem(bool* visited, int* path, std::list<int>* adj, std::list<std::pair<int, float>>* pond)
 {
     free(visited);

@@ -9,15 +9,14 @@
 
 void menu()
 {
-<<<<<<< Updated upstream
-=======
+
     //int dernier=0;
->>>>>>> Stashed changes
+    //int dernier=0;
     Graphe nouv;
     {
         Svgfile svgout;
         nouv.afficher_Svgfile(svgout);
-        nouv.sauvagarde_aretes();
+        nouv.sauvegarde_aretes();
     }
     int choix=0;
     do
@@ -25,6 +24,7 @@ void menu()
         {
             Svgfile svgout;
             nouv.calcul_centralite();
+
             nouv.reinitialiser_centralite();
             nouv.afficher_Svgfile(svgout);
         }
@@ -37,11 +37,13 @@ void menu()
         std::cout << "5: Afficher l'indice de centralite de d'intermediarite" << std::endl;
         std::cout << "6: Etudier la connexite du graphe" << std::endl;
         std::cout << "7: Supprimer une arete du graphe" << std::endl;
-        std::cout << "8: Restituer l'etat precedent du graphe" << std::endl;
+        std::cout << "8: Supprimer un sommet du graphe" << std::endl;
+        std::cout << "9: Restituer l'etat precedent du graphe" << std::endl;
         std::cout << "10: Lancer l'affichage en console" << std::endl;
         std::cout << "11: Sauvegarder dans un fichier" << std::endl;
         std::cout << "12: Conparer indices" << std::endl;
         std::cout << "0: Quitter" << std::endl;
+        std::cout<< "Choix : ";
         std::cin >> choix;
 
 
@@ -107,21 +109,20 @@ void menu()
             Svgfile svgout;
             std::cout << "Quelle arete voulez-vous supprimer ? " << std::endl;
             std::cin >> choix;
-            nouv.sauvegarde_sommets();
-            nouv.sauvagarde_aretes();
+            nouv.sauvegarde_sommets_indices();
+            nouv.sauvegarde_aretes();
             nouv.supprimer_aretes(choix);
             nouv.calcul_indice();
             nouv.afficher_Svgfile(svgout);
             choix=7;
+            //dernier=0;
         }
         break;
         case 8 :
         {
             Svgfile svgout;
-<<<<<<< Updated upstream
             nouv.restaurer_aretes();
             //nouv.restaurer_sommets();
-=======
             std::cout << "Quelle sommet voulez-vous supprimer ? " << std::endl;
             std::cin >> choix;
             nouv.supprimer_sommet(choix);
@@ -133,10 +134,12 @@ void menu()
         case 9 :
         {
             Svgfile svgout;
-
+            //if(dernier==0)
             nouv.restaurer_aretes();
 
->>>>>>> Stashed changes
+            //if(dernier==1)
+            //nouv.restaurer_sommets();
+
             nouv.afficher_Svgfile(svgout);
         }
         break;
@@ -184,6 +187,5 @@ void menu()
 int main()
 {
     menu();
-    std::cout << "hello world !";
     return 0;
 }

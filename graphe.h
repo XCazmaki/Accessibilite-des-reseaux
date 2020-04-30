@@ -17,13 +17,13 @@ private:
     std::vector<Arete*> m_aretes;
     std::vector<std::vector<Arete*>> m_aretes_originales;
     std::vector<std::vector<float>> m_degres_svg;
-<<<<<<< Updated upstream
-    std::vector<std::vector<Sommet>> m_sommets_originaux;
-=======
-    std::vector<std::vector<Sommet>> m_sommets_svg;
+    //std::vector<std::vector<Sommet>> m_sommets_originaux;
+    //std::vector<std::vector<Sommet>> m_sommets_svg;
    // std::vector<std::vector<Sommet*>> m_sommets_originaux;
     std::vector<std::vector<bool>> m_sommet_affichage_svg;
->>>>>>> Stashed changes
+
+    std::vector<std::vector<Sommet>> m_sommets_svg;
+    std::vector<std::vector<Sommet*>> m_sommets_originaux;
     int m_orientation;
 
 public:
@@ -56,6 +56,16 @@ public:
 
     struct SommetComparatorIndice{
         bool operator()(Sommet* a, Sommet* b)
+        {
+            if(a->get_indice() < b->get_indice())
+                return true;
+            else
+                return false;
+        }
+    };
+
+    struct AreteComparatorIndice{
+        bool operator()(Arete* a, Arete* b)
         {
             if(a->get_indice() < b->get_indice())
                 return true;
@@ -111,21 +121,21 @@ public:
     //void BFS();
     //void parcours_DFS(int indice, std::vector<int> &couleur);
 
-    void sauvagarde_aretes();
+    void sauvegarde_aretes();
     void restaurer_aretes();
     void supprimer_aretes(int indice);
-
-<<<<<<< Updated upstream
     void sauvegarde_sommets();
-=======
     void supprimer_sommet(int indice);
     void restaurer_sommets();
 /*
     void restaurer_sommets();
     void supprimer_sommets(int indice);*/
 
+    //void sauvegarde_sommets_indices();
+//    void restaurer_sommets();
+  //  void supprimer_sommets(int indice);
+
     void sauvegarde_sommets_indices();
->>>>>>> Stashed changes
     //void restaurer_sommets();
 
     void reinitialiser_centralite();
@@ -137,8 +147,10 @@ public:
 
     void centralite_intermediarite();
     std::list<int>* defListeAdj(std::list<std::pair<int, float>>*);
-    void seekAllPaths(int, int, bool[], int[], int&, std::list<int>*, std::list<std::pair<int, float>>*, const float&, int&, std::vector<int>&);
-    void calculCentraliteInter(const int&, std::vector<int>&);
+    void seekAllPaths(int, int, bool[], int[], int&, std::list<int>*, std::list<std::pair<int, float>>*, const float&, int&, std::vector<int>&, std::vector<Arete*>&);
+    void calculCentraliteInterSommet(const int&, std::vector<int>&);
+    void calculCentraliteInterArete(const int&, std::vector<Arete*>&);
+    Arete* seekArete(int&, int&);
     void freeMem(bool*, int*, std::list<int>*, std::list<std::pair<int, float>>*);
 
 };
