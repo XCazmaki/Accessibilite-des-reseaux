@@ -10,7 +10,7 @@ Graphe::Graphe()
 
     /// On teste si le fichier s'est bien ouvert:
     if(!monFlux)
-        std::cout << "ERREUR: Impossible d'ouvrir le fichier." << std::endl;
+        throw std::runtime_error( "Impossible d'ouvrir en lecture " + nom_fichier );
 
     /// On reccupere l'orientation
     int orient=0;
@@ -905,5 +905,10 @@ void Graphe::reinitialiser_centralite()
     {
         i->set_central(0);
         i->set_central_norm(0);
+    }
+    for(auto a : m_aretes)
+    {
+        a->set_centralA(0);
+        a->set_central_normA(0);
     }
 }
