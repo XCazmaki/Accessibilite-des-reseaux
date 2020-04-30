@@ -12,7 +12,8 @@ Sommet::Sommet()
     m_distance = 0;
     m_etat = 'B';
     m_degre=0;
-    for(int i=0;i<4;++i)
+    m_afficher=true;
+    for(int i=0; i<4; ++i)
     {
         m_indices_centralite.push_back(std::make_pair(0,0));
     }
@@ -30,7 +31,8 @@ Sommet::Sommet(int indice, std::string nom, float coordx, float coordy)
     m_distance = 0;
     m_etat = 'B';
     m_degre=0;
-    for(int i=0;i<4;++i)
+    m_afficher=true;
+    for(int i=0; i<4; ++i)
     {
         m_indices_centralite.push_back(std::make_pair(0,0));
     }
@@ -44,11 +46,14 @@ Sommet::~Sommet()
 /// Affiche le numéro du sommet et ses indices
 void Sommet::afficher_console() const
 {
-    std::cout << "Indices du sommet numero " << m_indice << std::endl;
-    std::cout << "Ses indices sont : " << std::endl;
-    for(int i=0; i<4; ++i)
+    if(m_afficher==true)
     {
-        std::cout << "Indice n"<< i <<" : " << m_indices_centralite[i].first << " normalise " << m_indices_centralite[i].second << std::endl;
+        std::cout << "Indices du sommet numero " << m_indice << std::endl;
+        std::cout << "Ses indices sont : " << std::endl;
+        for(int i=0; i<4; ++i)
+        {
+            std::cout << "Indice n"<< i <<" : " << m_indices_centralite[i].first << " normalise " << m_indices_centralite[i].second << std::endl;
+        }
     }
 }
 
@@ -57,32 +62,37 @@ void Sommet::afficher_console() const
 /// Le Sommet sera affiché de différentes couleurs en fonction de son indices
 void Sommet::afficher_Svgfile(Svgfile &svgout, float indice)
 {
-    std::string couleur="black";
-    if(m_central_norm>0.80)
-    {
-        couleur="red";
-    }
-    else if(m_central_norm>0.60)
-    {
-        couleur="orange";
-    }
-    else if(m_central_norm>0.40)
-    {
-        couleur="yellow";
-    }
-    else if(m_central_norm>0.20)
-    {
-        couleur="blue";
-    }
-    else if(m_central_norm<=0.20)
-    {
-        couleur="purple";
-    }
 
-    svgout.addDisk(m_coordx*indice,m_coordy*indice,5,couleur);
-    svgout.addText(m_coordx*indice,m_coordy*indice-10,m_nom,"black");
-    svgout.addText(m_coordx*indice,m_coordy*indice+10,m_central_norm,"black");
-    svgout.addText(m_coordx*indice,m_coordy*indice-20,m_indice,"black");
+
+    if(m_afficher==true)
+    {
+        std::string couleur="black";
+        if(m_central_norm>0.80)
+        {
+            couleur="red";
+        }
+        else if(m_central_norm>0.60)
+        {
+            couleur="orange";
+        }
+        else if(m_central_norm>0.40)
+        {
+            couleur="yellow";
+        }
+        else if(m_central_norm>0.20)
+        {
+            couleur="blue";
+        }
+        else if(m_central_norm<=0.20)
+        {
+            couleur="purple";
+        }
+
+        svgout.addDisk(m_coordx*indice,m_coordy*indice,5,couleur);
+        svgout.addText(m_coordx*indice,m_coordy*indice-10,m_nom,"black");
+        svgout.addText(m_coordx*indice,m_coordy*indice+10,m_central_norm,"black");
+        svgout.addText(m_coordx*indice-10,m_coordy*indice-10,m_indice,"black");
+    }
 }
 
 

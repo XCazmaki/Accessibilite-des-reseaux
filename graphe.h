@@ -17,6 +17,11 @@ private:
     std::vector<Arete*> m_aretes;
     std::vector<std::vector<Arete*>> m_aretes_originales;
     std::vector<std::vector<float>> m_degres_svg;
+    //std::vector<std::vector<Sommet>> m_sommets_originaux;
+    //std::vector<std::vector<Sommet>> m_sommets_svg;
+   // std::vector<std::vector<Sommet*>> m_sommets_originaux;
+    std::vector<std::vector<bool>> m_sommet_affichage_svg;
+
     std::vector<std::vector<Sommet>> m_sommets_svg;
     std::vector<std::vector<Sommet*>> m_sommets_originaux;
     int m_orientation;
@@ -108,23 +113,21 @@ public:
     void forte_connexite();
     void parcours_DFSF(int indice, std::vector<int> &couleurs);
 
-    //void DFS(int &indice,int selection,std::vector<int> &couleurs);
-    //void parcours_DFS1(int indice,int selection,std::vector<int> &couleurs);
-    //void parcours_DFS2(int indice,int selection1,int selection2,std::vector<int> &couleurs);
-
 
     //void BFS();
     void parcours_DFS(int indice, std::vector<int> &couleur);
+    /// Suppression arete/sommet
 
     void sauvegarde_aretes();
     void restaurer_aretes();
     void supprimer_aretes(int indice);
+    void reinitialiser_indice_aretes();
 
+    void sauvegarde_sommets();
     void restaurer_sommets();
-    void supprimer_sommets(int indice);
+    void supprimer_sommet(int indice);
 
     void sauvegarde_sommets_indices();
-    //void restaurer_sommets();
 
     void reinitialiser_centralite();
 

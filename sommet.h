@@ -38,6 +38,9 @@ private:
     /// Stocke le degré du sommet
     float m_degre;
 
+    /// Selection si on doit afficher le sommet ou pas
+    bool m_afficher;
+
 public:
 
     /// Constructeurs
@@ -95,7 +98,17 @@ public:
         return m_indices_centralite;
     }
 
+    bool get_afficher()
+    {
+        return m_afficher;
+    }
+
     /// Setter
+
+    void set_indice(int x)
+    {
+        m_indice=x;
+    }
 
     void set_degre(float x)
     {
@@ -126,6 +139,11 @@ public:
     {
         m_indices_centralite[num].first=val1;
         m_indices_centralite[num].second=val2;
+    }
+
+    void set_afficher(bool x)
+    {
+        m_afficher=x;
     }
 
     /// comparator

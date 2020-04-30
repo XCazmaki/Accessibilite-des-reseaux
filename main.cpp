@@ -9,7 +9,7 @@
 
 void menu()
 {
-    int dernier=0;
+    //int dernier=0;
     Graphe nouv;
     {
         Svgfile svgout;
@@ -23,7 +23,6 @@ void menu()
         {
             Svgfile svgout;
             nouv.calcul_centralite();
-
             nouv.reinitialiser_centralite();
             nouv.afficher_Svgfile(svgout);
         }
@@ -37,7 +36,7 @@ void menu()
         std::cout << "6: Etudier la connexite du graphe" << std::endl;
         std::cout << "7: Supprimer une arete du graphe" << std::endl;
         std::cout << "8: Supprimer un sommet du graphe" << std::endl;
-        std::cout << "9: Restituer l'etat precedent du graphe" << std::endl;
+        std::cout << "9: Restituer l'etat precedent des aretes" << std::endl;
         std::cout << "10: Lancer l'affichage en console" << std::endl;
         std::cout << "11: Sauvegarder dans un fichier" << std::endl;
         std::cout << "12: Conparer indices" << std::endl;
@@ -114,29 +113,23 @@ void menu()
             nouv.calcul_indice();
             nouv.afficher_Svgfile(svgout);
             choix=7;
-            dernier=0;
         }
         break;
         case 8 :
         {
             Svgfile svgout;
-            std::cout << "Quelle arete voulez-vous supprimer ? " << std::endl;
+            std::cout << "Quelle sommet voulez-vous supprimer ? " << std::endl;
             std::cin >> choix;
-            nouv.supprimer_sommets(choix);
+            nouv.supprimer_sommet(choix);
             nouv.calcul_indice();
             nouv.afficher_Svgfile(svgout);
-            dernier=1;
+            choix=8;
         }
         break;
         case 9 :
         {
             Svgfile svgout;
-            if(dernier==0)
             nouv.restaurer_aretes();
-
-            if(dernier==1)
-            nouv.restaurer_sommets();
-
             nouv.afficher_Svgfile(svgout);
         }
         break;
@@ -165,6 +158,7 @@ void menu()
         case 13 :
         {
             Svgfile svgout;
+            nouv.restaurer_sommets();
             nouv.afficher_Svgfile(svgout);
         }
         break;

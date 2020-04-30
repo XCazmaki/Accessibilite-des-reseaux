@@ -55,27 +55,29 @@ void Arete::afficher_Svgfile(Svgfile &svgout,float indice, const int& orient)
     x=(m_arc.first->get_coordx()+m_arc.second->get_coordx())/2;
     y=(m_arc.first->get_coordy()+m_arc.second->get_coordy())/2;
 
+
     std::string couleur="black";
-    if(m_central_normA>0.80)
+    if(m_central_normA>0.080)
     {
         couleur="red";
     }
-    else if(m_central_normA>0.60)
+    else if(m_central_normA>0.060)
     {
         couleur="orange";
     }
-    else if(m_central_normA>0.40)
+    else if(m_central_normA>0.040)
     {
         couleur="yellow";
     }
-    else if(m_central_normA>0.20)
+    else if(m_central_normA>0.020)
     {
         couleur="blue";
     }
-    else if(m_central_normA<=0.20)
+    else if(m_central_normA<=0.020)
     {
-        couleur="purple";
+        couleur="black";
     }
+
     svgout.addLine(m_arc.first->get_coordx()*indice,m_arc.first->get_coordy()*indice,m_arc.second->get_coordx()*indice,m_arc.second->get_coordy()*indice,couleur);
     if(orient == 1)
         dessinerTriangle(m_arc.first->get_coordx()*indice,m_arc.first->get_coordy()*indice,m_arc.second->get_coordx()*indice,m_arc.second->get_coordy()*indice,couleur, svgout);
