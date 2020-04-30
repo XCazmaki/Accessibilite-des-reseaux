@@ -166,7 +166,7 @@ public:
 
     void traitementDij(std::queue<Sommet*>&, std::vector<std::pair<Sommet*, float>>&);
 
-    void DefcentralInter(const int&, const int& occurence);
+    void DefcentralInterSommet(const int&, const int& occurence);
     void DefcentralInterNorm(const int&);
 
     /// Methodes d'affichage
