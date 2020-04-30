@@ -17,7 +17,8 @@ private:
     std::vector<Arete*> m_aretes;
     std::vector<std::vector<Arete*>> m_aretes_originales;
     std::vector<std::vector<float>> m_degres_svg;
-    std::vector<std::vector<Sommet>> m_sommets_originaux;
+    std::vector<std::vector<Sommet>> m_sommets_svg;
+    std::vector<std::vector<Sommet*>> m_sommets_originaux;
     int m_orientation;
 
 public:
@@ -115,11 +116,14 @@ public:
     //void BFS();
     //void parcours_DFS(int indice, std::vector<int> &couleur);
 
-    void sauvagarde_aretes();
+    void sauvegarde_aretes();
     void restaurer_aretes();
     void supprimer_aretes(int indice);
 
-    void sauvegarde_sommets();
+    void restaurer_sommets();
+    void supprimer_sommets(int indice);
+
+    void sauvegarde_sommets_indices();
     //void restaurer_sommets();
 
     void reinitialiser_centralite();

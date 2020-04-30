@@ -114,9 +114,10 @@ void Graphe::afficher_console() const
     }
 
     /*for(auto i: m_aretes)
+    for(auto i: m_aretes)
     {
         i->afficher_console();
-    }*/
+    }
 
 }
 
@@ -173,10 +174,15 @@ float Graphe::calcul_indice()
 
 void Graphe::calcul_centralite()
 {
+    std::cout << "degre" << std::endl;
     centralite_degre();
+    std::cout << "vecteur" << std::endl;
     centralite_vecteur_propre();
     centralite_proximite();
+    std::cout << "int" << std::endl;
+    afficher_console();
     centralite_intermediarite();
+    std::cout << "FIN" << std::endl;
 }
 
 void Graphe::centralite_degre()
@@ -368,6 +374,7 @@ void Graphe::centralite_intermediarite()
             for (int i = 0; i < (int)m_sommets.size(); i++)
                 visited[i] = false;
 
+
             int nCC = 0;
             std::vector<int> tab;
             std::vector<Arete*> tab2;
@@ -487,9 +494,9 @@ void Graphe::seekAllPaths(int u, int d, bool visited[], int path[], int &path_in
             for(int i = 1; i< (path_index - 1); ++i)
             {
                 tab.push_back(path[i]);
-                std::cout<<path[i]<<" ";
+                //std::cout<<path[i]<<" ";
             }
-            std::cout<<std::endl;
+            //std::cout<<std::endl;
 
             for(int i = 0; i< (path_index-1); ++i)
                 tab2.push_back(seekArete(path[i], path[i+1]));
@@ -719,33 +726,10 @@ void Graphe::parcours_DFSF(int indice, std::vector<int> &couleurs)
             }
         }
     }
-
-    parcours_DFS(0,couleurs);
-
-}*/
-
-void Graphe::parcours_DFS(int indice,std::vector<int> &couleurs)
-{
-    couleurs[indice]=2;
-    std::cout << "On passe au sommet " << indice << std::endl;
-    for(auto i: m_aretes)
-    {
-        if(i->get_arc1()->get_indice()==indice&&couleurs[i->get_arc2()->get_indice()]!=2)
-        {
-            std::cout << "il a pour adjacent le sommet " << indice << std::endl;
-            parcours_DFS(i->get_arc2()->get_indice(),couleurs);
-        }
-        if(i->get_arc2()->get_indice()==indice&&couleurs[i->get_arc1()->get_indice()]!=2)
-        {
-            std::cout << "il a pour adjacent le sommet " << indice << std::endl;
-            parcours_DFS(i->get_arc1()->get_indice(),couleurs);
-        }
-    }
-    std::cout << "on termine le sommet " << indice << std::endl;
 }
 
 
-void Graphe::sauvagarde_aretes()
+void Graphe::sauvegarde_aretes()
 {
     std::vector<float> degres_svg;
 
@@ -786,14 +770,58 @@ void Graphe::supprimer_aretes(int indice)
             }
             compteur++;
         }
+    }
+    for(size_t i=0;i<m_sommets.size();++i)
+    {
+        //i->set
+    }
+}
+
+
+
+void Graphe::restaurer_sommets()
+{
+    m_sommets=m_sommets_originaux[m_sommets_originaux.size()-1];
+    m_sommets_originaux.pop_back();
+    restaurer_aretes();
+}
+
+void Graphe::supprimer_sommets(int indice)
+{
+    m_sommets_originaux.push_back(m_sommets);
+    sauvegarde_aretes();
+
+    if(indice < (int)(m_sommets.size()+1))
+    {
+        //int compteur=0;
+        for(auto i:m_sommets)
+        {
+            if(i->get_indice()==indice)
+            {
+                for(auto j: m_aretes)
+                {
+                    if(j->get_arc1()->get_indice()==indice)
+                    {
+                        supprimer_aretes(j->get_indice());
+                    }
+                    else if(j->get_arc2()->get_indice()==indice)
+                    {
+                        supprimer_aretes(j->get_indice());
+                    }
+                }
+                std::cout << "SUPRESSION " << indice << std::endl;
+                m_sommets.erase(m_sommets.begin() + indice);
+            }
+            //compteur++;
+        }
 
     }
 
 }
 
-void Graphe::sauvegarde_sommets()
+void Graphe::sauvegarde_sommets_indices()
 {
-    afficher_console();
+    //afficher_console();
     std::vector<Sommet> svg;
 
     for(auto i: m_sommets)
@@ -801,7 +829,7 @@ void Graphe::sauvegarde_sommets()
         svg.push_back(*i);
     }
 
-    m_sommets_originaux.push_back(svg);
+    m_sommets_svg.push_back(svg);
 }
 
 
@@ -832,10 +860,10 @@ void Graphe::comparer_indices()
         std::cout << "Indices de centralites actuels :" << std::endl;
         m_sommets[i]->afficher_console();
 
-        for(size_t j=0; j<m_sommets_originaux.size(); ++j)
+        for(size_t j=0; j<m_sommets_svg.size(); ++j)
         {
             std::cout << "Indices de centralites au temps t-" << j+1 <<" :" << std::endl;
-            m_sommets_originaux[j][i].afficher_console();
+            m_sommets_svg[j][i].afficher_console();
         }
     }
 }
