@@ -775,6 +775,9 @@ void Graphe::restaurer_aretes()
 
     m_degres_svg.pop_back();
     m_aretes_originales.pop_back();
+
+    for(int i = 0; i< (int)m_aretes.size(); ++i)
+        m_aretes[i]->set_indiceA(i);
 }
 
 void Graphe::supprimer_aretes(int indice)
@@ -793,10 +796,9 @@ void Graphe::supprimer_aretes(int indice)
             compteur++;
         }
     }
-    for(size_t i=0;i<m_sommets.size();++i)
-    {
-        //i->set
-    }
+
+    for(int i = 0; i< (int)m_aretes.size(); ++i)
+        m_aretes[i]->set_indiceA(i);
 }
 
 //void Graphe::supprimer_aretes(int indice)
@@ -806,6 +808,10 @@ void Graphe::restaurer_sommets()
 {
     m_sommets=m_sommets_originaux[m_sommets_originaux.size()-1];
     m_sommets_originaux.pop_back();
+
+    for(int i = 0; i<(int)m_sommets.size();++i)
+        m_sommets[i]->set_indiceS(i);
+
     restaurer_aretes();
 }
 
@@ -839,6 +845,8 @@ void Graphe::supprimer_sommets(int indice)
         }
 
     }
+    for(int i = 0; i<(int)m_sommets.size();++i)
+        m_sommets[i]->set_indiceS(i);
 
 }
 

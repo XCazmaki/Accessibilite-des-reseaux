@@ -61,6 +61,10 @@ public:
     }
 
     /// Setter
+    void set_indiceA(const int& i)
+    {
+        m_indice = i;
+    }
 
     void set_arc1(Sommet* nouv)
     {
