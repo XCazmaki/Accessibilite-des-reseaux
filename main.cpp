@@ -187,6 +187,12 @@ void menu()
 
 int main()
 {
-    menu();
+    //menu();
+
+    Graphe nouv;
+
+    nouv.intermediarite();
+
+    std::cout << "hello";
     return 0;
 }

@@ -478,7 +478,7 @@ void Graphe::calculCentraliteInterArete(const int& nCC, std::vector<Arete*>& tab
 }
 
 void Graphe::seekAllPaths(int u, int d, bool visited[], int path[], int &path_index, std::list<int>* adj, std::list<std::pair<int, float>>* pond,
-                           const float& PCC, int& nCC, std::vector<int>& tab, std::vector<Arete*>& tab2)
+                          const float& PCC, int& nCC, std::vector<int>& tab, std::vector<Arete*>& tab2)
 {
     visited[u] = true;
     path[path_index] = u;
@@ -817,25 +817,25 @@ void Graphe::restaurer_aretes()
 {
     if(m_aretes_originales.size()>0)
     {
-    std::vector<float> degres_svg=m_degres_svg[m_degres_svg.size()-1];
-    for(size_t i=0; i<m_sommets.size(); ++i)
-    {
-        m_sommets[i]->set_degre(degres_svg[i]);
-    }
-    m_aretes=m_aretes_originales[m_aretes_originales.size()-1];
+        std::vector<float> degres_svg=m_degres_svg[m_degres_svg.size()-1];
+        for(size_t i=0; i<m_sommets.size(); ++i)
+        {
+            m_sommets[i]->set_degre(degres_svg[i]);
+        }
+        m_aretes=m_aretes_originales[m_aretes_originales.size()-1];
 
-    m_degres_svg.pop_back();
-    m_aretes_originales.pop_back();
+        m_degres_svg.pop_back();
+        m_aretes_originales.pop_back();
 
-    for(int i = 0; i< (int)m_aretes.size(); ++i)
-    {
-        m_aretes[i]->set_indiceA(i);
-    }
-    for(auto i: m_aretes)
-    {
-        i->get_arc1()->set_afficher(true);
-        i->get_arc2()->set_afficher(true);
-    }
+        for(int i = 0; i< (int)m_aretes.size(); ++i)
+        {
+            m_aretes[i]->set_indiceA(i);
+        }
+        for(auto i: m_aretes)
+        {
+            i->get_arc1()->set_afficher(true);
+            i->get_arc2()->set_afficher(true);
+        }
     }
 }
 
@@ -1034,7 +1034,7 @@ void Graphe::restaurer_sommets()
     std::vector<bool> svg=m_sommet_affichage_svg[m_sommet_affichage_svg.size()-1];
     m_sommet_affichage_svg.pop_back();
 
-    for(size_t i; i<m_sommets.size();++i)
+    for(size_t i; i<m_sommets.size(); ++i)
     {
         m_sommets[i]->set_afficher(svg[i]);
     }
@@ -1122,5 +1122,102 @@ void Graphe::reinitialiser_centralite()
     {
         a->set_centralA(0);
         a->set_central_normA(0);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+void Graphe::intermediarite()
+{
+    std::vector<int> marquage;
+    std::vector<int> preds;
+
+
+    for(auto i:m_sommets)
+    {
+        marquage.push_back(0);
+        preds.push_back(-1);
+    }
+    for(size_t i=0; i<m_sommets.size(); i++)
+    {
+        for(size_t j=0; j<m_sommets.size(); j++)
+        {
+            intermediarite_parcour(marquage,preds,i,j,i);
+            for(size_t t=0; t<m_sommets.size(); t++)
+            {
+                marquage[t]=0;
+                preds[t]=-1;
+            }
+        }
+    }
+}
+
+void Graphe::intermediarite_parcour(std::vector<int> &marquage,std::vector<int> &preds,int num_sommet, int sfinal,int depart)
+{
+    /// On part du nœud initial, on le marque.
+    marquage[num_sommet]=1;
+    /// On regarde les successeurs non marqués
+    for(auto i:m_aretes)
+    {
+        /// Test successeur
+        if(i->get_arc1()->get_indice()==num_sommet)
+        {
+            /// Test marquage
+            if(marquage[i->get_arc2()->get_indice()]==0)
+            {
+                /// On test si c'est le sommet d'arivée
+                if(i->get_arc2()->get_indice()==sfinal)
+                {
+                    /// SAUVEGARDE PARCOURS
+                    affichage_parcours(preds,depart,sfinal);
+                }
+                else /// Sinon on le parcours
+                {
+                    preds[i->get_arc2()->get_indice()]=num_sommet;
+                    intermediarite_parcour(marquage,preds,i->get_arc2()->get_indice(),sfinal,depart);
+                }
+            }
+        }
+        else if(i->get_arc2()->get_indice()==num_sommet)
+        {
+            /// Test marquage
+            if(marquage[i->get_arc1()->get_indice()]==0)
+            {
+                /// On test si c'est le sommet d'arivée
+                if(i->get_arc1()->get_indice()==sfinal)
+                {
+                    /// SAUVEGARDE PARCOURS
+                    affichage_parcours(preds,depart,sfinal);
+                }
+                else /// Sinon on le parcours
+                {
+                    preds[i->get_arc1()->get_indice()]=num_sommet;
+                    intermediarite_parcour(marquage,preds,i->get_arc1()->get_indice(),sfinal,depart);
+                }
+            }
+        }
+    }
+    marquage[num_sommet]=0;
+}
+
+void Graphe::affichage_parcours(std::vector<int> preds,int num_sommet, int sfinal)
+{
+    int actuel=preds[sfinal];
+    std::cout << "On part de "<< sfinal << std::endl;
+    while(actuel!=num_sommet)
+    {
+        std::cout << "num = " << actuel << std::endl;
+        actuel=preds[actuel];
     }
 }

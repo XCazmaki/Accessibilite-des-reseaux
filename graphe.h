@@ -156,6 +156,11 @@ public:
     Arete* seekArete(int&, int&);
     void freeMem(bool*, int*, std::list<int>*, std::list<std::pair<int, float>>*);
 
+
+
+    void intermediarite();
+    void intermediarite_parcour(std::vector<int> &marquage,std::vector<int> &preds, int num_sommet, int sfinal,int depart);
+    void affichage_parcours(std::vector<int> preds,int num_sommet, int sfinal);
 };
 
 #endif // GRAPHE_H_INCLUDED
