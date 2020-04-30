@@ -351,7 +351,6 @@ void Graphe::centralite_intermediarite()
         a->set_central_normA(0);
     }
 
-
     std::list<int>* adjacence;
     std::list<std::pair<int, float>>* pond;
     pond = new std::list<std::pair<int, float>>[m_sommets.size()];
@@ -378,22 +377,24 @@ void Graphe::centralite_intermediarite()
             int nCC = 0;
             std::vector<int> tab;
             std::vector<Arete*> tab2;
+
             seekAllPaths(d->get_indice(), f->get_indice(), visited, path, path_index, adjacence, pond, pcc, nCC, tab, tab2);
 
             calculCentraliteInterSommet(nCC, tab);
 
-            calculCentraliteInterArete(nCC, tab2);
+            //calculCentraliteInterArete(nCC, tab2);
 
             freeMem(visited, path, adjacence, pond);
         }
     }
+
     for(auto so : m_sommets)
     {
         so->DefcentralInterNorm(m_sommets.size());
     }
 
-    for(auto a: m_aretes)
-        a->DefcentralInterNormA(m_aretes.size());
+    //for(auto a: m_aretes)
+        //a->DefcentralInterNormA(m_aretes.size());
 
     for(auto i: m_sommets)
     {
@@ -407,6 +408,7 @@ void Graphe::calculCentraliteInterSommet(const int& nCC, std::vector<int>& tab)
     std::queue<std::pair<int, int>> temp;
     int i = 0;
     int ii = 0;
+
     while(i< (int)tab.size())
     {
         temp.push(std::make_pair(tab[i], 1));
@@ -498,8 +500,8 @@ void Graphe::seekAllPaths(int u, int d, bool visited[], int path[], int &path_in
             }
             //std::cout<<std::endl;
 
-            for(int i = 0; i< (path_index-1); ++i)
-                tab2.push_back(seekArete(path[i], path[i+1]));
+            /*for(int i = 0; i< (path_index-1); ++i)
+                tab2.push_back(seekArete(path[i], path[i+1]));*/
         }
     }
     else
@@ -683,9 +685,6 @@ void Graphe::parcours_DFS(int indice,std::vector<int> &couleurs)
     std::cout << "on termine le sommet " << indice << std::endl;
 }
 
-//void Graphe::sauvagarde_aretes()
-//=======
-
 void Graphe::forte_connexite()
 {
     bool connexe=true;
@@ -791,17 +790,16 @@ void Graphe::supprimer_aretes(int indice)
             {
                 i->get_arc1()->set_degre(i->get_arc1()->get_degre()-1);
                 i->get_arc2()->set_degre(i->get_arc2()->get_degre()-1);
+                std::cout<<m_aretes.size()<<std::endl;
                 m_aretes.erase(m_aretes.begin() + compteur);
+                std::cout<<m_aretes.size()<<std::endl;
             }
             compteur++;
         }
+        for(int i = 0; i< (int)m_aretes.size(); ++i)
+            m_aretes[i]->set_indiceA(i);
     }
-
-    for(int i = 0; i< (int)m_aretes.size(); ++i)
-        m_aretes[i]->set_indiceA(i);
 }
-
-//void Graphe::supprimer_aretes(int indice)
 
 
 void Graphe::restaurer_sommets()

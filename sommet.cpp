@@ -118,7 +118,8 @@ void Sommet::traitementDij(std::queue<Sommet*>& F, std::vector<std::pair<Sommet*
 
 void Sommet::DefcentralInterSommet(const int& nCC, const int& occurence)
 {
-    m_central += (occurence / nCC);
+    if(nCC !=0)
+        m_central += (occurence / nCC);
 }
 
 void Sommet::DefcentralInterNorm(const int& n)
