@@ -10,18 +10,16 @@
 void menu()
 {
     Graphe nouv;
-    {
-        Svgfile svgout;
-        nouv.afficher_Svgfile(svgout);
-        nouv.calcul_centralite();
-        nouv.sauvegarde_aretes();
-    }
+    //nouv.calcul_centralite();
+    nouv.sauvegarde_aretes();
     int choix=0;
 
     do
     {
         {
+            /// Affiche le graphe chargée
             Svgfile svgout;
+            nouv.reinitialiser_centralite();
             nouv.afficher_Svgfile(svgout);
         }
 
@@ -30,7 +28,7 @@ void menu()
         std::cout << "2: Afficher l'indice de centralite de degre" << std::endl;
         std::cout << "3: Afficher l'indice de centralite de vecteur propre" << std::endl;
         std::cout << "4: Afficher l'indice de centralite de proximite" << std::endl;
-        std::cout << "5: Afficher l'indice de centralite de d'intermediarite" << std::endl;
+        std::cout << "5: Afficher l'indice de centralite d'intermediarite" << std::endl;
         std::cout << "6: Etudier la connexite du graphe" << std::endl;
         std::cout << "7: Supprimer une arete du graphe" << std::endl;
         std::cout << "8: Supprimer un sommet du graphe" << std::endl;
@@ -165,6 +163,7 @@ void menu()
             std::cout << "Veuillez rentrer une reponse valide" << std::endl;
             break;
         }
+        nouv.reinitialiser_indice_aretes();
         nouv.reinitialiser_centralite();
         system("pause");
         system("cls");

@@ -18,6 +18,8 @@ Arete::Arete(int indice, Sommet* dep, Sommet* arr, float poids)
     m_arc.first=dep;
     m_arc.second=arr;
     m_poids=poids;
+    m_centralA = 0;
+    m_central_normA = 0;
 }
 
 Arete::~Arete()

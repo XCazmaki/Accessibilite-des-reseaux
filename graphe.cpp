@@ -813,7 +813,7 @@ void Graphe::supprimer_sommet(int indice)
 void Graphe::restaurer_sommets()
 {
     /// On stocke le numéro du sommet reccupéré
-    int num=0;
+    //int num=0;
 
     std::vector<bool> svg=m_sommet_affichage_svg[m_sommet_affichage_svg.size()-1];
     m_sommet_affichage_svg.pop_back();
@@ -821,7 +821,7 @@ void Graphe::restaurer_sommets()
     for(size_t i=0; i<m_sommets.size(); i++)
     {
         if(m_sommets[i]->get_afficher()==false)
-            num=i;
+            //num=i;
 
         m_sommets[i]->set_afficher(svg[i]);
     }
