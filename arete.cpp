@@ -74,28 +74,10 @@ void Arete::afficher_Svgfile(Svgfile &svgout,float indice)
         couleur="blue";
     }
     else if(m_central_normA<=0.020)
-    std::string couleur="black";
+    {
+        couleur="black";
+    }
 
-    if(m_central_normA>0.80)
-    {
-        couleur="red";
-    }
-    else if(m_central_normA>0.60)
-    {
-        couleur="orange";
-    }
-    else if(m_central_normA>0.40)
-    {
-        couleur="yellow";
-    }
-    else if(m_central_normA>0.20)
-    {
-        couleur="blue";
-    }
-    else if(m_central_normA<=0.20)
-    {
-        couleur="purple";
-    }
     svgout.addLine(m_arc.first->get_coordx()*indice,m_arc.first->get_coordy()*indice,m_arc.second->get_coordx()*indice,m_arc.second->get_coordy()*indice,couleur);
 
     svgout.addText(x*indice-25, y*indice-10, "N" ,"black");
