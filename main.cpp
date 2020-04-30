@@ -122,20 +122,22 @@ void menu()
             Svgfile svgout;
             std::cout << "Quelle arete voulez-vous supprimer ? " << std::endl;
             std::cin >> choix;
-            nouv.supprimer_sommets(choix);
+            //nouv.supprimer_sommets(choix);
+            nouv.supprimer_sommet_test(choix);
             nouv.calcul_indice();
             nouv.afficher_Svgfile(svgout);
+            choix=8;
             dernier=1;
         }
         break;
         case 9 :
         {
             Svgfile svgout;
-            if(dernier==0)
+            //if(dernier==0)
             nouv.restaurer_aretes();
 
-            if(dernier==1)
-            nouv.restaurer_sommets();
+            //if(dernier==1)
+            //nouv.restaurer_sommets();
 
             nouv.afficher_Svgfile(svgout);
         }
@@ -158,6 +160,7 @@ void menu()
         {
             Svgfile svgout;
             nouv.calcul_centralite();
+            nouv.calcul_indice();
             nouv.comparer_indices();
             nouv.afficher_Svgfile(svgout);
         }

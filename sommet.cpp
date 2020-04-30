@@ -12,6 +12,7 @@ Sommet::Sommet()
     m_distance = 0;
     m_etat = 'B';
     m_degre=0;
+    m_afficher=true;
     for(int i=0;i<4;++i)
     {
         m_indices_centralite.push_back(std::make_pair(0,0));
@@ -30,6 +31,7 @@ Sommet::Sommet(int indice, std::string nom, float coordx, float coordy)
     m_distance = 0;
     m_etat = 'B';
     m_degre=0;
+    m_afficher=true;
     for(int i=0;i<4;++i)
     {
         m_indices_centralite.push_back(std::make_pair(0,0));
@@ -57,6 +59,8 @@ void Sommet::afficher_console() const
 /// Le Sommet sera affiché de différentes couleurs en fonction de son indices
 void Sommet::afficher_Svgfile(Svgfile &svgout, float indice)
 {
+    if(m_afficher==true)
+    {
     std::string couleur="black";
     if(m_central_norm>0.80)
     {
@@ -83,6 +87,7 @@ void Sommet::afficher_Svgfile(Svgfile &svgout, float indice)
     svgout.addText(m_coordx*indice,m_coordy*indice-10,m_nom,"black");
     svgout.addText(m_coordx*indice,m_coordy*indice+10,m_central_norm,"black");
     svgout.addText(m_coordx*indice,m_coordy*indice-20,m_indice,"black");
+    }
 }
 
 

@@ -124,6 +124,8 @@ public:
     void restaurer_sommets();
     void supprimer_sommets(int indice);
 
+    void supprimer_sommet_test(int indice);
+
     void sauvegarde_sommets_indices();
     //void restaurer_sommets();
 
