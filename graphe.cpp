@@ -902,7 +902,11 @@ void Graphe::comparer_indices()
         for(size_t j=0; j<m_sommets_originaux.size(); ++j)
         {
             std::cout << "Indices de centralites au temps t-" << j+1 <<" :" << std::endl;
+<<<<<<< Updated upstream
             m_sommets_originaux[j][i].afficher_console();
+=======
+            //m_sommets_originaux[j][i]->afficher_console();
+>>>>>>> Stashed changes
         }
     }
 }
