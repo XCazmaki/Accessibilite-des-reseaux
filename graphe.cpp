@@ -733,6 +733,11 @@ void Graphe::sauvegarde_aretes()
 
     m_degres_svg.push_back(degres_svg);
     m_aretes_originales.push_back(m_aretes);
+
+    for(size_t i=0;i<m_aretes.size();i++)
+    {
+        m_aretes[i]->set_indice(i);
+    }
 }
 
 void Graphe::restaurer_aretes()
@@ -759,59 +764,27 @@ void Graphe::supprimer_aretes(int indice)
     if(indice < (int)(m_aretes.size()+1))
     {
         int compteur=0;
-        //for(auto i:m_aretes)
         for(size_t i=0; i<m_aretes.size(); ++i)
         {
-            //std::cout << "test arete : " << i << std::endl;
-            //std::cout << "Entre " <<  m_aretes[i]->get_arc1()->get_indice() << " et " << m_aretes[i]->get_arc2()->get_indice() << std::endl;
-
             if(m_aretes[i]->get_indice()==indice)
             {
-                //std::cout << "SUPRESSION arete :" << compteur<< " "<< i << std::endl;
-                //std::cout << "Entre " <<  m_aretes[i]->get_arc1()->get_indice() << " et " << m_aretes[i]->get_arc2()->get_indice() << std::endl;
                 m_aretes[i]->get_arc1()->set_degre(m_aretes[i]->get_arc1()->get_degre()-1);
                 m_aretes[i]->get_arc2()->set_degre(m_aretes[i]->get_arc2()->get_degre()-1);
                 m_aretes.erase(m_aretes.begin() + compteur);
-                //std::cout << "SUPRESSION arete :" << compteur << std::endl;
                 i--;
             }
             compteur++;
         }
     }
-    for(size_t i=0;i<m_sommets.size();++i)
-    {
-        m_sommets[i]->set_indice(i);
-    }
-}
-
-//void Graphe::supprimer_aretes(int indice)
-
-/*
-void Graphe::restaurer_sommets()
-{
-    m_sommets=m_sommets_originaux[m_sommets_originaux.size()-1];
-    m_sommets_originaux.pop_back();
-    restaurer_aretes();
-}*/
-/*
-void Graphe::supprimer_sommets(int indice)
-{
-    m_sommets_originaux.push_back(m_sommets);
-    sauvegarde_aretes();
-
-    if(indice < (int)(m_sommets.size()+1))
-=======
-    for(size_t i=0;i<m_aretes.size();i++)
->>>>>>> Mathias
+    for(size_t i=0;i<m_aretes.size();++i)
     {
         m_aretes[i]->set_indice(i);
     }
 }
-*/
+
 
 void Graphe::sauvegarde_sommets_indices()
 {
-    //afficher_console();
     std::vector<Sommet> svg;
 
     for(auto i: m_sommets)
@@ -835,20 +808,6 @@ void Graphe::supprimer_sommet(int indice)
 
     m_sommet_affichage_svg.push_back(svg);
     m_sommets[indice]->set_afficher(false);
-
-
-    /*for(auto i: m_aretes)
-    {
-        if((i->get_arc1()->get_indice()==indice)||(i->get_arc2()->get_indice()==indice))
-        {
-            sauvegarde_sommets_indices();
-            sauvegarde_aretes();
-            supprimer_aretes(i->get_indice());
-            reinitialiser_indice_aretes();
-        }
-    }*/
-
-
 }
 
 void Graphe::restaurer_sommets()
