@@ -41,7 +41,7 @@ void menu()
         std::cout << "9: Restituer l'etat precedent du graphe" << std::endl;
         std::cout << "10: Lancer l'affichage en console" << std::endl;
         std::cout << "11: Sauvegarder dans un fichier" << std::endl;
-        std::cout << "12: Conparer indices" << std::endl;
+        std::cout << "12: Comparer indices" << std::endl;
         std::cout << "0: Quitter" << std::endl;
         std::cout<< "Choix : ";
         std::cin >> choix;

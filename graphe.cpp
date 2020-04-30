@@ -753,6 +753,12 @@ void Graphe::restaurer_aretes()
 
     m_degres_svg.pop_back();
     m_aretes_originales.pop_back();
+
+    for(int i = 0; i< (int)m_aretes.size(); ++i)
+    {
+         m_aretes[i]->set_indiceA(i);
+    }
+
 }
 
 void Graphe::supprimer_aretes(int indice)
