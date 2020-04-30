@@ -91,7 +91,7 @@ public:
 
     bool testAppartenance(const Sommet*, const int&);
 
-    void DefcentralInterArete(const int&, const int& occurence);
+    void DefcentralInterArete(const int&, const int&);
     void DefcentralInterNormA(const int&);
 
 };

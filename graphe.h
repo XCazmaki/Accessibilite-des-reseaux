@@ -109,7 +109,7 @@ public:
     std::list<int>* defListeAdj(std::list<std::pair<int, float>>*);
     void seekAllPaths(int, int, bool[], int[], int&, std::list<int>*, std::list<std::pair<int, float>>*, const float&, int&, std::vector<int>&, std::vector<Arete*>&);
     void calculCentraliteInterSommet(const int&, std::vector<int>&);
-    void Graphe::calculCentraliteInterArete(const int&, std::vector<Arete*>&);
+    void calculCentraliteInterArete(const int&, std::vector<Arete*>&);
     Arete* seekArete(int&, int&);
     void freeMem(bool*, int*, std::list<int>*, std::list<std::pair<int, float>>*);
 

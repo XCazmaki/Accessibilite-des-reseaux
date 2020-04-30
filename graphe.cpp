@@ -363,6 +363,7 @@ void Graphe::centralite_intermediarite()
             seekAllPaths(d->get_indice(), f->get_indice(), visited, path, path_index, adjacence, pond, pcc, nCC, tab, tab2);
 
             calculCentraliteInterSommet(nCC, tab);
+
             calculCentraliteInterArete(nCC, tab2);
 
             freeMem(visited, path, adjacence, pond);
@@ -406,7 +407,6 @@ void Graphe::calculCentraliteInterSommet(const int& nCC, std::vector<int>& tab)
     std::sort(m_sommets.begin(), m_sommets.end(), SommetComparatorIndice());
     for(auto s: m_sommets)
     {
-
         if(s->get_indice() == ((temp.front()).first))
         {
             s->DefcentralInterSommet(nCC, (temp.front()).second);
@@ -436,7 +436,7 @@ void Graphe::calculCentraliteInterArete(const int& nCC, std::vector<Arete*>& tab
         i++;
     }
 
-    std::sort(m_aretes.begin(), tab.end(), AreteComparatorIndice());
+    std::sort(m_aretes.begin(), m_aretes.end(), AreteComparatorIndice());
     for(auto a: m_aretes)
     {
         if(a == ((temp.front()).first))
@@ -500,17 +500,24 @@ void Graphe::seekAllPaths(int u, int d, bool visited[], int path[], int &path_in
 
 Arete* Graphe::seekArete(int& a, int& b)
 {
-    for(auto a : m_aretes)
+    for(auto ar : m_aretes)
     {
-        Sommet* s1 = (Sommet*)a->get_arc1();
-        Sommet* s2 = (Sommet*)a->get_arc2();
+        Sommet* s1 = (Sommet*)ar->get_arc1();
+        Sommet* s2 = (Sommet*)ar->get_arc2();
 
         int a1 = (int)s1->get_indice() ;
         int a2 = (int)s2->get_indice();
 
-        if(((a1 == a)&&(a2 == b))||((a1 == b)&&( a2 == a)))
-            return a;
-
+        if(m_orientation == 0)
+        {
+            if(((a1 == a)&&(a2 == b))||((a1 == b)&&(a2 == a)))
+                return ar;
+        }
+        else
+        {
+            if((a1 == a)&&(a2 == b))
+                return ar;
+        }
     }
     return nullptr;
 }
