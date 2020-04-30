@@ -3,14 +3,21 @@
 Graphe::Graphe()
 {
     /// On ouvre un fichier:
+
     std::string nom_fichier="";
     std::cout << "Entrez le nom du fichier de topologie : ";
     std::cin >> nom_fichier;
     std::ifstream monFlux(nom_fichier);
 
-    /// On teste si le fichier s'est bien ouvert:
     if(!monFlux)
-        throw std::runtime_error( "Impossible d'ouvrir en lecture " + nom_fichier );
+    {
+        std::cout<<"Fichier non trouvé, reessayez svp !\n"<<std::endl;
+        return;
+    }
+
+
+    /// On teste si le fichier s'est bien ouvert:
+
 
     /// On reccupere l'orientation
     int orient=0;
@@ -81,7 +88,10 @@ void Graphe::chargerPond()
     int tempTaille = 0;
 
     if(!ifs)
-        throw std::runtime_error( "Impossible d'ouvrir en lecture " + nomfic );
+    {
+        std::cout<<"Impossible d'ouvrir en lecture " + nomfic<<std::endl;
+        return;
+    }
 
     ifs >> tempTaille;
     ifs.ignore();
