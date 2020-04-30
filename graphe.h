@@ -17,7 +17,13 @@ private:
     std::vector<Arete*> m_aretes;
     std::vector<std::vector<Arete*>> m_aretes_originales;
     std::vector<std::vector<float>> m_degres_svg;
+<<<<<<< Updated upstream
     std::vector<std::vector<Sommet>> m_sommets_originaux;
+=======
+    std::vector<std::vector<Sommet>> m_sommets_svg;
+   // std::vector<std::vector<Sommet*>> m_sommets_originaux;
+    std::vector<std::vector<bool>> m_sommet_affichage_svg;
+>>>>>>> Stashed changes
     int m_orientation;
 
 public:
@@ -109,7 +115,17 @@ public:
     void restaurer_aretes();
     void supprimer_aretes(int indice);
 
+<<<<<<< Updated upstream
     void sauvegarde_sommets();
+=======
+    void supprimer_sommet(int indice);
+    void restaurer_sommets();
+/*
+    void restaurer_sommets();
+    void supprimer_sommets(int indice);*/
+
+    void sauvegarde_sommets_indices();
+>>>>>>> Stashed changes
     //void restaurer_sommets();
 
     void reinitialiser_centralite();

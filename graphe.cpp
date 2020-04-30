@@ -686,17 +686,71 @@ void Graphe::supprimer_aretes(int indice)
                 i->get_arc1()->set_degre(i->get_arc1()->get_degre()-1);
                 i->get_arc2()->set_degre(i->get_arc2()->get_degre()-1);
                 m_aretes.erase(m_aretes.begin() + compteur);
+                std::cout << "SUPRESSION " << compteur << std::endl;
             }
             compteur++;
         }
+<<<<<<< Updated upstream
+=======
+    }
+}
 
+/*
+
+void Graphe::restaurer_sommets()
+{
+    m_sommets=m_sommets_originaux[m_sommets_originaux.size()-1];
+    m_sommets_originaux.pop_back();
+    restaurer_aretes();
+}
+
+void Graphe::supprimer_sommets(int indice)
+{
+    m_sommets_originaux.push_back(m_sommets);
+    sauvegarde_aretes();
+
+    if(indice < (int)(m_sommets.size()+1))
+    {
+        //int compteur=0;
+        for(auto i:m_sommets)
+        {
+            if(i->get_indice()==indice)
+            {
+                for(auto j: m_aretes)
+                {
+                    if(j->get_arc1()->get_indice()==indice)
+                    {
+                        supprimer_aretes(j->get_indice());
+                    }
+                    else if(j->get_arc2()->get_indice()==indice)
+                    {
+                        supprimer_aretes(j->get_indice());
+                    }
+                }
+                std::cout << "SUPRESSION " << indice << std::endl;
+                m_sommets.erase(m_sommets.begin() + indice);
+            }
+            //compteur++;
+        }
+>>>>>>> Stashed changes
+
+    }
+    for(size_t i=0;i<m_sommets.size();++i)
+    {
+        m_sommets[i]->set_indice(i);
     }
 
 }
+<<<<<<< Updated upstream
 
 void Graphe::sauvegarde_sommets()
 {
     afficher_console();
+=======
+*/
+void Graphe::sauvegarde_sommets_indices()
+{
+>>>>>>> Stashed changes
     std::vector<Sommet> svg;
 
     for(auto i: m_sommets)
@@ -708,23 +762,33 @@ void Graphe::sauvegarde_sommets()
 }
 
 
-/*
+
 void Graphe::supprimer_sommet(int indice)
 {
-    for(auto i: m_aretes)
+    std::vector<bool> svg;
+
+    for(auto i:m_sommets)
     {
-        if(i->get_arc1()->get_id())
-        {
-
-        }
+        svg.push_back(i->get_afficher());
     }
-}*/
 
-/*void Graphe::restaurer_sommets()
+    m_sommet_affichage_svg.push_back(svg);
+
+
+    m_sommets[indice]->set_afficher(false);
+}
+
+void Graphe::restaurer_sommets()
 {
-    m_sommets=m_sommets_originaux[m_sommets_originaux.size()-1];
-    m_sommets_originaux.pop_back();
-}*/
+    std::vector<bool> svg=m_sommet_affichage_svg[m_sommet_affichage_svg.size()-1];
+    m_sommet_affichage_svg.pop_back();
+
+    for(size_t i; i<m_sommets.size();++i)
+    {
+        m_sommets[i]->set_afficher(svg[i]);
+    }
+
+}
 
 
 

@@ -9,6 +9,10 @@
 
 void menu()
 {
+<<<<<<< Updated upstream
+=======
+    //int dernier=0;
+>>>>>>> Stashed changes
     Graphe nouv;
     {
         Svgfile svgout;
@@ -114,8 +118,25 @@ void menu()
         case 8 :
         {
             Svgfile svgout;
+<<<<<<< Updated upstream
             nouv.restaurer_aretes();
             //nouv.restaurer_sommets();
+=======
+            std::cout << "Quelle sommet voulez-vous supprimer ? " << std::endl;
+            std::cin >> choix;
+            nouv.supprimer_sommet(choix);
+            nouv.calcul_indice();
+            nouv.afficher_Svgfile(svgout);
+            choix=8;
+        }
+        break;
+        case 9 :
+        {
+            Svgfile svgout;
+
+            nouv.restaurer_aretes();
+
+>>>>>>> Stashed changes
             nouv.afficher_Svgfile(svgout);
         }
         break;

@@ -53,6 +53,32 @@ void Arete::afficher_Svgfile(Svgfile &svgout,float indice)
     x=(m_arc.first->get_coordx()+m_arc.second->get_coordx())/2;
     y=(m_arc.first->get_coordy()+m_arc.second->get_coordy())/2;
 
+<<<<<<< Updated upstream
+=======
+    std::string couleur="black";
+    if(m_central_normA>0.080)
+    {
+        couleur="red";
+    }
+    else if(m_central_normA>0.060)
+    {
+        couleur="orange";
+    }
+    else if(m_central_normA>0.040)
+    {
+        couleur="yellow";
+    }
+    else if(m_central_normA>0.020)
+    {
+        couleur="blue";
+    }
+    else if(m_central_normA<=0.020)
+    {
+        couleur="purple";
+    }
+    svgout.addLine(m_arc.first->get_coordx()*indice,m_arc.first->get_coordy()*indice,m_arc.second->get_coordx()*indice,m_arc.second->get_coordy()*indice,couleur);
+
+>>>>>>> Stashed changes
     svgout.addText(x*indice-25, y*indice-10, "N" ,"black");
     svgout.addText(x*indice-10, y*indice-10, m_indice,"black");
     svgout.addText(x*indice+10, y*indice-10, m_poids,"black");
