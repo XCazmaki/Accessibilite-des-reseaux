@@ -30,7 +30,7 @@ public:
 
     ~Arete();
 
-    /// Getter
+    /// Getters
 
     float getPoids()
     {
@@ -49,8 +49,6 @@ public:
     {
         return m_arc;
     }
-
-    /// Getters
 
     Sommet* get_arc1()
     {
@@ -83,9 +81,10 @@ public:
     {
         m_central_normA = central_norm;
     }
+    /// Methodes
 
     bool changerPond(const std::pair<int, float>&);
-    void afficher() const;
+    //void afficher() const;
     void afficher_console() const;
     void afficher_Svgfile(Svgfile &svgout,float indice);
 

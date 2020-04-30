@@ -12,17 +12,17 @@ Graphe::Graphe()
     if(!monFlux)
         std::cout << "ERREUR: Impossible d'ouvrir le fichier." << std::endl;
 
-    /// On reccup�re l'orientation
+    /// On reccupere l'orientation
     int orient=0;
-    /// 0=non orient�
+    /// 0=non oriente
     monFlux >> orient;
     m_orientation = orient;
 
-    /// On reccup�re l'ordre
+    /// On reccupere l'ordre
     int ordre=0;
     monFlux >> ordre;
 
-    /// On cr�e le bon nombre de sommet
+    /// On cree le bon nombre de sommet
     int indice=-1;
     std::string nom="";
     float coordx=0;
@@ -103,6 +103,7 @@ void Graphe::chargerPond()
     }
 }
 
+/// AFFICHAGE
 
 /// Affiche le graphe dans la console
 void Graphe::afficher_console() const
@@ -112,10 +113,10 @@ void Graphe::afficher_console() const
         i->afficher_console();
     }
 
-    /*for(auto i: m_aretes)
+    for(auto i: m_aretes)
     {
         i->afficher_console();
-    }*/
+    }
 
 }
 
@@ -168,12 +169,20 @@ float Graphe::calcul_indice()
     return indice;
 }
 
+/// CALCUL INDICES DE CENTRALITE
+
 void Graphe::calcul_centralite()
 {
+    std::cout << "degre" << std::endl;
     centralite_degre();
+    std::cout << "vecteur" << std::endl;
     centralite_vecteur_propre();
+    std::cout << "proxy" << std::endl;
     centralite_proximite();
+    std::cout << "int" << std::endl;
+    afficher_console();
     centralite_intermediarite();
+    std::cout << "FIN" << std::endl;
 }
 
 void Graphe::centralite_degre()
@@ -365,6 +374,7 @@ void Graphe::centralite_intermediarite()
             for (int i = 0; i < (int)m_sommets.size(); i++)
                 visited[i] = false;
 
+
             int nCC = 0;
             std::vector<int> tab;
             std::vector<Arete*> tab2;
@@ -484,9 +494,9 @@ void Graphe::seekAllPaths(int u, int d, bool visited[], int path[], int &path_in
             for(int i = 1; i< (path_index - 1); ++i)
             {
                 tab.push_back(path[i]);
-                std::cout<<path[i]<<" ";
+                //std::cout<<path[i]<<" ";
             }
-            std::cout<<std::endl;
+            //std::cout<<std::endl;
 
             for(int i = 0; i< (path_index-1); ++i)
                 tab2.push_back(seekArete(path[i], path[i+1]));
@@ -549,7 +559,6 @@ void Graphe::k_connexite()
             break;
         }
     }
-
 }
 
 bool Graphe::k_connexite_test(int& tour)
@@ -626,16 +635,14 @@ void Graphe::parcours_DFSK(int indice,int* selection, std::vector<int> &couleurs
                 {
                     /// On le met en gris
                     couleurs[i->get_arc2()->get_indice()]=1;
-                    //indice=i->get_arc2()->get_indice();
                     parcours_DFSK(i->get_arc2()->get_indice(), selection, couleurs, tour);
                 }
             }
-            else if(i->get_arc2()->get_indice()==indice)
+            else if(i->get_arc2()->get_indice()==indice)//&&m_orientation==1)
             {
                 if(couleurs[i->get_arc1()->get_indice()]!=2)
                 {
                     couleurs[i->get_arc1()->get_indice()]=1;
-                    //indice=i->get_arc1()->get_indice();
                     parcours_DFSK(i->get_arc1()->get_indice(), selection, couleurs, tour);
                 }
             }
@@ -676,7 +683,75 @@ void Graphe::parcours_DFS(int indice,std::vector<int> &couleurs)
     std::cout << "on termine le sommet " << indice << std::endl;
 }
 
-void Graphe::sauvagarde_aretes()
+//void Graphe::sauvagarde_aretes()
+//=======
+
+void Graphe::forte_connexite()
+{
+    bool connexe=true;
+    std::vector<int> couleurs;
+    for(size_t i=0; i<m_sommets.size(); i++)
+    {
+        couleurs.push_back(0);
+    }
+    for(auto a : m_sommets)
+    {
+        for(size_t i=0; i<couleurs.size(); i++)
+        {
+            couleurs[i]=0;
+        }
+
+        int depart = a->get_indice();
+        parcours_DFSF(depart,couleurs);
+
+        for(size_t i=0; i<couleurs.size(); i++)
+        {
+            if(couleurs[i]!=2)
+            {
+                connexe=false;
+            }
+            couleurs[i]=0;
+        }
+    }
+    if(connexe==false)
+    {
+        std::cout << "Le graphe n'est pas fortement connexe" << std::endl;
+    }
+    else if (connexe==true)
+    {
+        std::cout << "Le graphe est fortement connexe" << std::endl;
+    }
+
+}
+
+
+void Graphe::parcours_DFSF(int indice, std::vector<int> &couleurs)
+{
+    /// marquer le sommet s
+    couleurs[indice]=2;
+
+    /// afficher(s)
+    //std::cout << "On parcours le sommet : " << m_sommets[indice]->get_indice()<< std::endl;
+
+    /// Pour chaque adjacent du sommet actuel
+    for (auto i: m_aretes)
+    {
+        /// Si le sommet est l'une des extrémitées de l'arête
+        if(i->get_arc1()->get_indice()==indice)
+        {
+            /// Si le sommet n'a pas déjà été observé (qu'il n'est pas noir)
+            if(couleurs[i->get_arc2()->get_indice()]!=2)
+            {
+                /// On le met en gris
+                couleurs[i->get_arc2()->get_indice()]=1;
+                parcours_DFSF(i->get_arc2()->get_indice(), couleurs);
+            }
+        }
+    }
+}
+
+
+void Graphe::sauvegarde_aretes()
 {
     std::vector<float> degres_svg;
 
@@ -702,22 +777,9 @@ void Graphe::restaurer_aretes()
     m_aretes_originales.pop_back();
 }
 
-void Graphe::sauvegarde_sommets()
-{
-    afficher_console();
-    std::vector<Sommet> svg;
-
-    for(auto i: m_sommets)
-    {
-        svg.push_back(*i);
-    }
-
-    m_sommets_originaux.push_back(svg);
-}
-
 void Graphe::supprimer_aretes(int indice)
 {
-    if(indice < /*static_cast<int>*/(int)(m_aretes.size()+1))
+    if(indice < (int)(m_aretes.size()+1))
     {
         int compteur=0;
         for(auto i:m_aretes)
@@ -730,9 +792,68 @@ void Graphe::supprimer_aretes(int indice)
             }
             compteur++;
         }
+    }
+    for(size_t i=0;i<m_sommets.size();++i)
+    {
+        //i->set
+    }
+}
+
+//void Graphe::supprimer_aretes(int indice)
+
+
+void Graphe::restaurer_sommets()
+{
+    m_sommets=m_sommets_originaux[m_sommets_originaux.size()-1];
+    m_sommets_originaux.pop_back();
+    restaurer_aretes();
+}
+
+void Graphe::supprimer_sommets(int indice)
+{
+    m_sommets_originaux.push_back(m_sommets);
+    sauvegarde_aretes();
+
+    if(indice < (int)(m_sommets.size()+1))
+    {
+        //int compteur=0;
+        for(auto i:m_sommets)
+        {
+            if(i->get_indice()==indice)
+            {
+                for(auto j: m_aretes)
+                {
+                    if(j->get_arc1()->get_indice()==indice)
+                    {
+                        supprimer_aretes(j->get_indice());
+                    }
+                    else if(j->get_arc2()->get_indice()==indice)
+                    {
+                        supprimer_aretes(j->get_indice());
+                    }
+                }
+                std::cout << "SUPRESSION " << indice << std::endl;
+                m_sommets.erase(m_sommets.begin() + indice);
+            }
+            //compteur++;
+        }
 
     }
 
+}
+
+
+void Graphe::sauvegarde_sommets_indices()
+{
+    //afficher_console();
+    std::vector<Sommet> svg;
+
+    for(auto i: m_sommets)
+    {
+        svg.push_back(*i);
+    }
+
+    m_sommets_svg.push_back(svg);
 }
 
 void Graphe::comparer_indices()
@@ -742,10 +863,10 @@ void Graphe::comparer_indices()
         std::cout << "Indices de centralites actuels :" << std::endl;
         m_sommets[i]->afficher_console();
 
-        for(size_t j=0; j<m_sommets_originaux.size(); ++j)
+        for(size_t j=0; j<m_sommets_svg.size(); ++j)
         {
             std::cout << "Indices de centralites au temps t-" << j+1 <<" :" << std::endl;
-            m_sommets_originaux[j][i].afficher_console();
+            m_sommets_svg[j][i].afficher_console();
         }
     }
 }
