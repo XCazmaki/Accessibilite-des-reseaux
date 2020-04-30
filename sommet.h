@@ -128,6 +128,10 @@ public:
         m_indices_centralite[num].second=val2;
     }
 
+    void set_indiceS(const int& i)
+    {
+        m_indice = i;
+    }
     /// comparator
 
     struct SommetComparator

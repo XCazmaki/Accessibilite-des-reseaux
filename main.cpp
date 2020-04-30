@@ -22,7 +22,7 @@ void menu()
     {
         {
             Svgfile svgout;
-            nouv.calcul_centralite();
+            //nouv.calcul_centralite();
 
             nouv.reinitialiser_centralite();
             nouv.afficher_Svgfile(svgout);
