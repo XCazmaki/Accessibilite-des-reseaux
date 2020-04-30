@@ -828,19 +828,14 @@ void Graphe::restaurer_aretes()
     m_aretes_originales.pop_back();
 
     for(int i = 0; i< (int)m_aretes.size(); ++i)
-<<<<<<< HEAD
     {
-         m_aretes[i]->set_indiceA(i);
-=======
         m_aretes[i]->set_indiceA(i);
-
-
+    }
     for(auto i: m_aretes)
     {
         i->get_arc1()->set_afficher(true);
         i->get_arc2()->set_afficher(true);
     }
->>>>>>> Romain
     }
 }
 
@@ -857,18 +852,12 @@ void Graphe::supprimer_aretes(int indice)
                 i->get_arc2()->set_degre(i->get_arc2()->get_degre()-1);
 
                 m_aretes.erase(m_aretes.begin() + compteur);
-<<<<<<< HEAD
-                std::cout << "SUPRESSION " << compteur << std::endl;
-=======
-
->>>>>>> Romain
             }
             compteur++;
         }
         for(int i = 0; i< (int)m_aretes.size(); ++i)
             m_aretes[i]->set_indiceA(i);
     }
-<<<<<<< HEAD
 }
 
 /*
@@ -974,7 +963,7 @@ void Graphe::supprimer_sommets(int indice)
 
 }
 <<<<<<< Updated upstream
-
+*/
 
 void Graphe::supprimer_sommet_test(int indice)
 {
@@ -1006,7 +995,7 @@ void Graphe::supprimer_sommet_test(int indice)
 }
 
 
-
+/*
 void Graphe::sauvegarde_sommets_indices()
 {
 <<<<<<< HEAD
@@ -1025,8 +1014,6 @@ void Graphe::sauvegarde_sommets_indices()
 
     m_sommets_svg.push_back(svg);
 }
-<<<<<<< HEAD
-
 void Graphe::supprimer_sommet(int indice)
 {
     std::vector<bool> svg;
@@ -1054,7 +1041,6 @@ void Graphe::restaurer_sommets()
 
 }
 
-=======
 /*
 >>>>>>> Romain
 void Graphe::comparer_indices()

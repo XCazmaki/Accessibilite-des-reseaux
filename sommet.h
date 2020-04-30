@@ -26,7 +26,6 @@ private:
     float m_coordy;           /// Coordonnée en Y du sommet
     float m_central;        /// Indice de centralité
     float m_central_norm;   /// Indice de centralité normalisé
-    bool m_afficher;
 
     /// Vecteur qui va contenir l'ensemble des indice de centralité de chaque sommet
     /// par exemple vector[0].second correspond à l'indice de centralité de degre normalisé
@@ -153,10 +152,10 @@ public:
         m_indice = i;
     }
 
-    void set_afficher(bool x)
-    {
-        m_afficher=x;
-    }
+//    void set_afficher(bool x)
+//    {
+//        m_afficher=x;
+//    }
 
     /// comparator
 

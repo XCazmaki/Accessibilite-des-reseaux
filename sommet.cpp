@@ -13,11 +13,8 @@ Sommet::Sommet()
     m_etat = 'B';
     m_degre=0;
     m_afficher=true;
-<<<<<<< HEAD
+
     for(int i=0; i<4; ++i)
-=======
-    for(int i=0;i<4;++i)
->>>>>>> Romain
     {
         m_indices_centralite.push_back(std::make_pair(0,0));
     }
@@ -36,11 +33,8 @@ Sommet::Sommet(int indice, std::string nom, float coordx, float coordy)
     m_etat = 'B';
     m_degre=0;
     m_afficher=true;
-<<<<<<< HEAD
+
     for(int i=0; i<4; ++i)
-=======
-    for(int i=0;i<4;++i)
->>>>>>> Romain
     {
         m_indices_centralite.push_back(std::make_pair(0,0));
     }
@@ -70,32 +64,8 @@ void Sommet::afficher_console() const
 /// Le Sommet sera affiché de différentes couleurs en fonction de son indices
 void Sommet::afficher_Svgfile(Svgfile &svgout, float indice)
 {
-<<<<<<< HEAD
-
 
     if(m_afficher==true)
-=======
-    if(m_afficher==true)
-    {
-    std::string couleur="black";
-    if(m_central_norm>0.80)
-    {
-        couleur="red";
-    }
-    else if(m_central_norm>0.60)
-    {
-        couleur="orange";
-    }
-    else if(m_central_norm>0.40)
-    {
-        couleur="yellow";
-    }
-    else if(m_central_norm>0.20)
-    {
-        couleur="blue";
-    }
-    else if(m_central_norm<=0.20)
->>>>>>> Romain
     {
         std::string couleur="black";
         if(m_central_norm>0.80)
@@ -119,17 +89,10 @@ void Sommet::afficher_Svgfile(Svgfile &svgout, float indice)
             couleur="purple";
         }
 
-<<<<<<< HEAD
-        svgout.addDisk(m_coordx*indice,m_coordy*indice,5,couleur);
+            svgout.addDisk(m_coordx*indice,m_coordy*indice,5,couleur);
         svgout.addText(m_coordx*indice,m_coordy*indice-10,m_nom,"black");
         svgout.addText(m_coordx*indice,m_coordy*indice+10,m_central_norm,"black");
         svgout.addText(m_coordx*indice,m_coordy*indice-20,m_indice,"black");
-=======
-    svgout.addDisk(m_coordx*indice,m_coordy*indice,5,couleur);
-    svgout.addText(m_coordx*indice,m_coordy*indice-10,m_nom,"black");
-    svgout.addText(m_coordx*indice,m_coordy*indice+10,m_central_norm,"black");
-    svgout.addText(m_coordx*indice,m_coordy*indice-20,m_indice,"black");
->>>>>>> Romain
     }
 }
 
