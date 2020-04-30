@@ -113,7 +113,7 @@ public:
 
     void forte_connexite();
     void parcours_DFSF(int indice, std::vector<int> &couleurs);
-
+    void parcours_DFS(int indice, std::vector<int> &couleur);
 
     /// Suppression arete/sommet
 
@@ -124,7 +124,7 @@ public:
 
     void sauvegarde_sommets();
     void restaurer_sommets();
-    void supprimer_sommet(int indice);
+    void supprimer_sommets(int indice);
 
     void sauvegarde_sommets_indices();
 

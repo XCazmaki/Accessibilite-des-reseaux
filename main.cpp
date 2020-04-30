@@ -122,7 +122,7 @@ void menu()
             Svgfile svgout;
             std::cout << "Quelle sommet voulez-vous supprimer ? " << std::endl;
             std::cin >> choix;
-            nouv.supprimer_sommet(choix);
+            nouv.supprimer_sommets(choix);
             nouv.calcul_indice();
             nouv.afficher_Svgfile(svgout);
             choix=8;
