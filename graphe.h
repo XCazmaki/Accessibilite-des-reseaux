@@ -31,6 +31,10 @@ public:
 
     ~Graphe();
 
+    int get_orientation()
+    {
+        return m_orientation;
+    }
 
     /// Mise en place du graphe
 
@@ -90,20 +94,23 @@ public:
     void parcours_DFSK(int, int*, std::vector<int>&, int&);
     bool testSel(int*, int&, Arete*);
 
+    void forte_connexite();
+    void parcours_DFSF(int indice, std::vector<int> &couleurs);
+
     //void DFS(int &indice,int selection,std::vector<int> &couleurs);
     //void parcours_DFS1(int indice,int selection,std::vector<int> &couleurs);
     //void parcours_DFS2(int indice,int selection1,int selection2,std::vector<int> &couleurs);
 
 
-    void BFS();
-    void parcours_DFS(int indice, std::vector<int> &couleur);
+    //void BFS();
+    //void parcours_DFS(int indice, std::vector<int> &couleur);
 
     void sauvagarde_aretes();
     void restaurer_aretes();
     void supprimer_aretes(int indice);
 
     void sauvegarde_sommets();
-    void restaurer_sommets();
+    //void restaurer_sommets();
 
     void reinitialiser_centralite();
 

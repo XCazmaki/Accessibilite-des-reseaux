@@ -31,7 +31,7 @@ void menu()
         std::cout << "3: Afficher l'indice de centralite de vecteur propre" << std::endl;
         std::cout << "4: Afficher l'indice de centralite de proximite" << std::endl;
         std::cout << "5: Afficher l'indice de centralite de d'intermediarite" << std::endl;
-        std::cout << "6: Teste la k-connexite du graphe" << std::endl;
+        std::cout << "6: Etudier la connexite du graphe" << std::endl;
         std::cout << "7: Supprimer une arete du graphe" << std::endl;
         std::cout << "8: Restituer l'etat precedent du graphe" << std::endl;
         std::cout << "10: Lancer l'affichage en console" << std::endl;
@@ -87,7 +87,14 @@ void menu()
         case 6 :
         {
             Svgfile svgout;
-            nouv.k_connexite();
+            if(nouv.get_orientation()==1)
+            {
+                nouv.forte_connexite();
+            }
+            else if(nouv.get_orientation()==0)
+            {
+                nouv.k_connexite();
+            }
             nouv.afficher_Svgfile(svgout);
         }
         break;

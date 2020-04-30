@@ -31,9 +31,11 @@ private:
     /// par exemple vector[0].second correspond à l'indice de centralité de degre normalisé
     std::vector<std::pair<float,float>> m_indices_centralite;
 
+    /// Varibales utilisés pour différents Algo de parcours
     float m_distance;
     char m_etat;
 
+    /// Stocke le degré du sommet
     float m_degre;
 
 public:
@@ -141,12 +143,15 @@ public:
 
 
     /// Methodes
+
     void augmenter_degre();
 
     void traitementDij(std::queue<Sommet*>&, std::vector<std::pair<Sommet*, float>>&);
 
     void DefcentralInter(const int&, const int& occurence);
     void DefcentralInterNorm(const int&);
+
+    /// Methodes d'affichage
     void afficher_console() const;
     void afficher_Svgfile(Svgfile &svgout, float indice);
 };

@@ -41,7 +41,7 @@ Sommet::~Sommet()
 {}
 
 /// Affichache de Sommet dans la console
-/// Affiche le numéro du sommet et ses indices dans la console
+/// Affiche le numéro du sommet et ses indices
 void Sommet::afficher_console() const
 {
     std::cout << "Indices du sommet numero " << m_indice << std::endl;

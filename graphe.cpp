@@ -12,17 +12,17 @@ Graphe::Graphe()
     if(!monFlux)
         std::cout << "ERREUR: Impossible d'ouvrir le fichier." << std::endl;
 
-    /// On reccup�re l'orientation
+    /// On reccupere l'orientation
     int orient=0;
-    /// 0=non orient�
+    /// 0=non oriente
     monFlux >> orient;
     m_orientation = orient;
 
-    /// On reccup�re l'ordre
+    /// On reccupere l'ordre
     int ordre=0;
     monFlux >> ordre;
 
-    /// On cr�e le bon nombre de sommet
+    /// On cree le bon nombre de sommet
     int indice=-1;
     std::string nom="";
     float coordx=0;
@@ -103,6 +103,7 @@ void Graphe::chargerPond()
     }
 }
 
+/// AFFICHAGE
 
 /// Affiche le graphe dans la console
 void Graphe::afficher_console() const
@@ -167,6 +168,8 @@ float Graphe::calcul_indice()
     }
     return indice;
 }
+
+/// CALCUL INDICES DE CENTRALITE
 
 void Graphe::calcul_centralite()
 {
@@ -464,81 +467,6 @@ void Graphe::reset()
     }
 }
 
-/*void Graphe::k_connexite()
-{
-    int selection=0;        /// La première arête que l'on va ignorer
-    int selection2=0;       /// La deuxième arête que l'on va ingorer
-    int depart=0;
-    bool connexe=true;
-    /// On crée un vecteur pour stocker les couleurs de chaque sommet
-    std::vector<int> couleurs;
-    for(size_t i=0; i<m_sommets.size(); i++)
-    {
-        couleurs.push_back(0);
-    }
-
-    /// 1 CONNEXITE
-
-    /// On va selectionne l'arete que l'on va "enlever"
-    for(auto i: m_aretes)
-    {
-        selection=i->get_indice();
-        /// On va lancer un parcours DFS en ignorant l'arete selectionnée
-        //std::cout << std::endl << " Parcours DFS sans l'arete "<< selection << std::endl << std::endl;
-        parcours_DFS1(depart,selection,couleurs);
-
-        for(size_t i=0; i<couleurs.size(); i++)
-        {
-            if(couleurs[i]!=2)
-            {
-                connexe=false;
-            }
-            //std::cout << couleurs.size() << i << " -> " << couleurs[i]<< std::endl;
-            couleurs[i]=0;
-        }
-    }
-    if(connexe==false)
-    {
-        std::cout << "Le graphe est 1-arete-connexe" << std::endl;
-    }
-    if(connexe==true)
-    {
-        /// 2 CONNEXITE
-        std::cout << "Le graphe est au moin 2-arete-connexe" << std::endl;
-
-        for(auto i: m_aretes)
-        {
-            for(auto j: m_aretes)
-            {
-                selection=i->get_indice();
-                selection2=j->get_indice();
-                /// On va lancer un parcours DFS en ignorant l'arete selectionnée
-                //std::cout << std::endl << " Parcours DFS sans l'arete "<< selection << "et " << selection2 << std::endl << std::endl;
-                parcours_DFS2(depart,selection,selection2,couleurs);
-
-                for(size_t i=0; i<couleurs.size(); i++)
-                {
-                    if(couleurs[i]!=2)
-                    {
-                        connexe=false;
-                    }
-                    //std::cout << couleurs.size() << i << " -> " << couleurs[i]<< std::endl;
-                    couleurs[i]=0;
-                }
-            }
-        }
-        if(connexe==true)
-        {
-            std::cout << "Le graphe est au moin 3-arete-connexe" << std::endl;
-        }
-        else
-        {
-            std::cout << "Le graphe est 2-arete-connexe" << std::endl;
-        }
-    }
-
-}*/
-
 void Graphe::k_connexite()
 {
     for(int i = 0; i< (int)(m_sommets.size()); ++i)
@@ -548,9 +476,7 @@ void Graphe::k_connexite()
             std::cout<<" Le graphe est " << i+1 << "-connexe "<<std::endl;
             break;
         }
-        system("pause");
     }
-
 }
 
 bool Graphe::k_connexite_test(int& tour)
@@ -580,30 +506,19 @@ void Graphe::recursion(int* selection, int& tour, int curseur, bool& connexe)
             }
 
             selection[tour] = a->get_indice();
-            std::cout<<"selection : ";
-            for(int i=0; i<=tour;++i)
-                std::cout<<selection[i]<<" ";
-            std::cout<<"/"<<std::endl;
 
             int depart = 0;
             parcours_DFSK(depart,selection,couleurs, tour);
 
             for(size_t i=0; i<couleurs.size(); i++)
             {
-                //std::cout<<couleurs[i]<<" ";
                 if(couleurs[i]!=2)
                 {
                     connexe=false;
 
                 }
-                else
-                {
-                    //std::cout << "BON"<<std::endl;
-                }
-                std::cout << couleurs[i] << " ";
                 couleurs[i]=0;
             }
-            //std::cout<<std::endl;
         }
     }
     else
@@ -639,16 +554,14 @@ void Graphe::parcours_DFSK(int indice,int* selection, std::vector<int> &couleurs
                 {
                     /// On le met en gris
                     couleurs[i->get_arc2()->get_indice()]=1;
-                    //indice=i->get_arc2()->get_indice();
                     parcours_DFSK(i->get_arc2()->get_indice(), selection, couleurs, tour);
                 }
             }
-            else if(i->get_arc2()->get_indice()==indice)
+            else if(i->get_arc2()->get_indice()==indice)//&&m_orientation==1)
             {
                 if(couleurs[i->get_arc1()->get_indice()]!=2)
                 {
                     couleurs[i->get_arc1()->get_indice()]=1;
-                    //indice=i->get_arc1()->get_indice();
                     parcours_DFSK(i->get_arc1()->get_indice(), selection, couleurs, tour);
                 }
             }
@@ -669,150 +582,70 @@ bool Graphe::testSel(int* selection, int& tour, Arete* a)
     return retour;
 }
 
-/*void Graphe::parcours_DFS1(int indice,int selection,std::vector<int> &couleurs)
+
+void Graphe::forte_connexite()
 {
-    /// marquer le sommet s
-    couleurs[indice]=2;
-
-    /// afficher(s)
-    //std::cout << "On parcours le sommet : " << m_sommets[indice]->get_indice()<< std::endl;
-
-    /// Pour chaque adjacent du sommet actuel
-    for (auto i: m_aretes)
-    {
-        /// On n'utilise pas l'arête supprimée
-        if(i->get_indice()!=selection)
-        {
-            /// Si le sommet est l'une des extrémitées de l'arête
-            if(i->get_arc1()->get_indice()==indice)
-            {
-                /// Si le sommet n'a pas déjà été observé (qu'il n'est pas noir)
-                if(couleurs[i->get_arc2()->get_indice()]!=2)
-                {
-                    /// On le met en gris
-                    couleurs[i->get_arc2()->get_indice()]=1;
-                    indice=i->get_arc2()->get_indice();
-                    parcours_DFS1(indice,selection,couleurs);
-                }
-            }
-            else if(i->get_arc2()->get_indice()==indice)
-            {
-                if(couleurs[i->get_arc1()->get_indice()]!=2)
-                {
-                    couleurs[i->get_arc1()->get_indice()]=1;
-                    indice=i->get_arc1()->get_indice();
-                    parcours_DFS1(indice,selection,couleurs);
-                }
-            }
-        }
-    }
-}
-
-void Graphe::parcours_DFS2(int indice,int selection1,int selection2,std::vector<int> &couleurs)
-{
-    /// marquer le sommet s
-    couleurs[indice]=2;
-
-    /// afficher(s)
-    //std::cout << "On parcours le sommet : " << m_sommets[indice]->get_indice()<< std::endl;
-
-    /// Pour chaque adjacent du sommet actuel
-    for (auto i: m_aretes)
-    {
-        if(i->get_indice()==selection1||i->get_indice()==selection2)
-        {
-
-        }
-
-        /// On n'utilise pas l'arête supprimée
-        if(i->get_indice()!=selection1&&i->get_indice()!=selection2)
-        {
-            /// Si le sommet est l'une des extrémitées de l'arête
-            if(i->get_arc1()->get_indice()==indice)
-            {
-                /// Si le sommet n'a pas déjà été observé (qu'il n'est pas noir)
-                if(couleurs[i->get_arc2()->get_indice()]!=2)
-                {
-                    /// On le met en gris
-                    couleurs[i->get_arc2()->get_indice()]=1;
-                    indice=i->get_arc2()->get_indice();
-                    parcours_DFS2(indice,selection1,selection2,couleurs);
-                }
-            }
-            else if(i->get_arc2()->get_indice()==indice)
-            {
-                if(couleurs[i->get_arc1()->get_indice()]!=2)
-                {
-                    couleurs[i->get_arc1()->get_indice()]=1;
-                    indice=i->get_arc1()->get_indice();
-                    parcours_DFS2(indice,selection1,selection2,couleurs);
-                }
-            }
-            //std::cout << "TEST " << std::endl;
-        }
-        else
-        {
-            //std::cout << "Ca fonctionn pas la paire " << selection1 << "  " << selection2 << std::endl;
-        }
-    }
-}*/
-
-/*
-void Graphe::BFS()
-{
-    /// Initialisation
+    bool connexe=true;
     std::vector<int> couleurs;
-
     for(size_t i=0; i<m_sommets.size(); i++)
     {
         couleurs.push_back(0);
     }
->>>>>>> Mathias
+    for(auto a : m_sommets)
+    {
+        for(size_t i=0; i<couleurs.size(); i++)
+        {
+            couleurs[i]=0;
+        }
 
-    parcours_DFS(0,couleurs);
+        int depart = a->get_indice();
+        parcours_DFSF(depart,couleurs);
 
-}*/
+        for(size_t i=0; i<couleurs.size(); i++)
+        {
+            if(couleurs[i]!=2)
+            {
+                connexe=false;
+            }
+            couleurs[i]=0;
+        }
+    }
+    if(connexe==false)
+    {
+        std::cout << "Le graphe n'est pas fortement connexe" << std::endl;
+    }
+    else if (connexe==true)
+    {
+        std::cout << "Le graphe est fortement connexe" << std::endl;
+    }
 
-void Graphe::parcours_DFS(int indice,std::vector<int> &couleurs)
+}
+
+
+void Graphe::parcours_DFSF(int indice, std::vector<int> &couleurs)
 {
+    /// marquer le sommet s
     couleurs[indice]=2;
-    std::cout << "On passe au sommet " << indice << std::endl;
-    for(auto i: m_aretes)
+
+    /// afficher(s)
+    //std::cout << "On parcours le sommet : " << m_sommets[indice]->get_indice()<< std::endl;
+
+    /// Pour chaque adjacent du sommet actuel
+    for (auto i: m_aretes)
     {
-        if(i->get_arc1()->get_indice()==indice&&couleurs[i->get_arc2()->get_indice()]!=2)
+        /// Si le sommet est l'une des extrémitées de l'arête
+        if(i->get_arc1()->get_indice()==indice)
         {
-            std::cout << "il a pour adjacent le sommet " << indice << std::endl;
-            parcours_DFS(i->get_arc2()->get_indice(),couleurs);
+            /// Si le sommet n'a pas déjà été observé (qu'il n'est pas noir)
+            if(couleurs[i->get_arc2()->get_indice()]!=2)
+            {
+                /// On le met en gris
+                couleurs[i->get_arc2()->get_indice()]=1;
+                parcours_DFSF(i->get_arc2()->get_indice(), couleurs);
+            }
         }
-        if(i->get_arc2()->get_indice()==indice&&couleurs[i->get_arc1()->get_indice()]!=2)
-        {
-            std::cout << "il a pour adjacent le sommet " << indice << std::endl;
-            parcours_DFS(i->get_arc1()->get_indice(),couleurs);
-        }
     }
-    std::cout << "on termine le sommet " << indice << std::endl;
 }
-
-
-/*
-void Graphe::sauvagarde_aretes()
-{
-    for(auto i: m_sommets)
-    {
-        m_degres_svg.push_back(i->get_degre());
-    }
-    m_aretes_originales=m_aretes;
-}
-
-void Graphe::restaurer_aretes()
-{
-    for(size_t i=0; i<m_sommets.size(); ++i)
-    {
-        m_sommets[i]->set_degre(m_degres_svg[i]);
-    }
-    m_aretes=m_aretes_originales;
-}
-*/
 
 
 void Graphe::sauvagarde_aretes()
@@ -841,29 +674,9 @@ void Graphe::restaurer_aretes()
     m_aretes_originales.pop_back();
 }
 
-void Graphe::sauvegarde_sommets()
-{
-    afficher_console();
-    std::vector<Sommet> svg;
-
-    for(auto i: m_sommets)
-    {
-        svg.push_back(*i);
-    }
-
-    m_sommets_originaux.push_back(svg);
-}
-
-/*void Graphe::restaurer_sommets()
-{
-    m_sommets=m_sommets_originaux[m_sommets_originaux.size()-1];
-    m_sommets_originaux.pop_back();
-}*/
-
-
 void Graphe::supprimer_aretes(int indice)
 {
-    if(indice < /*static_cast<int>*/(int)(m_aretes.size()+1))
+    if(indice < (int)(m_aretes.size()+1))
     {
         int compteur=0;
         for(auto i:m_aretes)
@@ -880,6 +693,21 @@ void Graphe::supprimer_aretes(int indice)
     }
 
 }
+
+void Graphe::sauvegarde_sommets()
+{
+    afficher_console();
+    std::vector<Sommet> svg;
+
+    for(auto i: m_sommets)
+    {
+        svg.push_back(*i);
+    }
+
+    m_sommets_originaux.push_back(svg);
+}
+
+
 /*
 void Graphe::supprimer_sommet(int indice)
 {
@@ -892,6 +720,14 @@ void Graphe::supprimer_sommet(int indice)
     }
 }*/
 
+/*void Graphe::restaurer_sommets()
+{
+    m_sommets=m_sommets_originaux[m_sommets_originaux.size()-1];
+    m_sommets_originaux.pop_back();
+}*/
+
+
+
 void Graphe::comparer_indices()
 {
     for(size_t i=0; i<m_sommets.size(); ++i)
@@ -902,11 +738,7 @@ void Graphe::comparer_indices()
         for(size_t j=0; j<m_sommets_originaux.size(); ++j)
         {
             std::cout << "Indices de centralites au temps t-" << j+1 <<" :" << std::endl;
-<<<<<<< Updated upstream
             m_sommets_originaux[j][i].afficher_console();
-=======
-            //m_sommets_originaux[j][i]->afficher_console();
->>>>>>> Stashed changes
         }
     }
 }

@@ -1,5 +1,6 @@
 #include "arete.h"
 
+/// Constructeur par défaut d'Arête
 Arete::Arete()
 {
     m_indice=-1;
@@ -8,7 +9,7 @@ Arete::Arete()
     m_poids=0;
 }
 
-
+/// Constructeur d'Arête avec paramètres
 Arete::Arete(int indice, Sommet* dep, Sommet* arr, float poids)
 {
     m_indice=indice;
@@ -32,12 +33,16 @@ bool Arete::changerPond(const std::pair<int, float>& values)
         return false;
 }
 
+/// Affichache de l'Arête dans la console
+/// Affiche le numéro de l'Arête, son poid et le numéro des 2 Sommets qu'elle relit
 void Arete::afficher_console() const
 {
     std::cout << "Arete numero : " << m_indice << " de poid " << m_poids << " reliant " << m_arc.first->get_nom();
     std::cout << m_arc.second->get_nom() << std::endl;
 }
 
+/// Affiche l'Arete dans Svgfile
+/// Affiche l'Arete, son numéro et son poid
 void Arete::afficher_Svgfile(Svgfile &svgout,float indice)
 {
     svgout.addLine(m_arc.first->get_coordx()*indice,m_arc.first->get_coordy()*indice,m_arc.second->get_coordx()*indice,m_arc.second->get_coordy()*indice,"black");
