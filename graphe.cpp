@@ -382,7 +382,7 @@ void Graphe::centralite_intermediarite()
 
             calculCentraliteInterSommet(nCC, tab);
 
-            //calculCentraliteInterArete(nCC, tab2);
+            calculCentraliteInterArete(nCC, tab2);
 
             freeMem(visited, path, adjacence, pond);
         }
@@ -393,8 +393,8 @@ void Graphe::centralite_intermediarite()
         so->DefcentralInterNorm(m_sommets.size());
     }
 
-    //for(auto a: m_aretes)
-        //a->DefcentralInterNormA(m_aretes.size());
+    for(auto a: m_aretes)
+        a->DefcentralInterNormA(m_aretes.size());
 
     for(auto i: m_sommets)
     {
@@ -500,8 +500,8 @@ void Graphe::seekAllPaths(int u, int d, bool visited[], int path[], int &path_in
             }
             //std::cout<<std::endl;
 
-            /*for(int i = 0; i< (path_index-1); ++i)
-                tab2.push_back(seekArete(path[i], path[i+1]));*/
+            for(int i = 0; i< (path_index-1); ++i)
+                tab2.push_back(seekArete(path[i], path[i+1]));
         }
     }
     else
