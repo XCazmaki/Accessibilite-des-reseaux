@@ -1,122 +1,117 @@
 <?xml version="1.0" encoding="utf-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="1000" height="800">
 
-<line x1="271.429" y1="135.714" x2="407.143" y2="271.429" stroke="black" />
-<polygon points=" 403.606,267.892 397.24,267.188 402.902,261.526" style="fill:black" />
-<text x="314.286" y="193.571" fill="black" >N</text>
-<text x="329.286" y="193.571" fill="black" >0</text>
-<text x="349.286" y="193.571" fill="black" >1</text>
-<line x1="814.286" y1="135.714" x2="678.571" y2="271.429" stroke="black" />
-<polygon points=" 682.105,267.895 682.811,261.529 688.471,267.189" style="fill:black" />
-<text x="721.429" y="193.571" fill="black" >N</text>
-<text x="736.429" y="193.571" fill="black" >1</text>
-<text x="756.429" y="193.571" fill="black" >1</text>
-<line x1="135.714" y1="271.429" x2="407.143" y2="271.429" stroke="black" />
-<polygon points=" 402.143,271.429 397.143,267.428 397.143,275.429" style="fill:black" />
-<text x="246.429" y="261.429" fill="black" >N</text>
-<text x="261.429" y="261.429" fill="black" >2</text>
-<text x="281.429" y="261.429" fill="black" >1</text>
-<line x1="407.143" y1="271.429" x2="542.857" y2="271.429" stroke="black" />
-<polygon points=" 537.857,271.429 532.857,267.428 532.857,275.429" style="fill:black" />
-<text x="450" y="261.429" fill="black" >N</text>
-<text x="465" y="261.429" fill="black" >3</text>
-<text x="485" y="261.429" fill="black" >1</text>
-<line x1="542.857" y1="271.429" x2="678.571" y2="271.429" stroke="black" />
-<polygon points=" 673.571,271.429 668.571,267.428 668.571,275.429" style="fill:black" />
-<text x="585.714" y="261.429" fill="black" >N</text>
-<text x="600.714" y="261.429" fill="black" >4</text>
-<text x="620.714" y="261.429" fill="black" >1</text>
-<line x1="678.571" y1="271.429" x2="950" y2="271.429" stroke="black" />
-<polygon points=" 944.999,271.429 940,267.428 940,275.429" style="fill:black" />
-<text x="789.286" y="261.429" fill="black" >N</text>
-<text x="804.286" y="261.429" fill="black" >5</text>
-<text x="824.286" y="261.429" fill="black" >1</text>
-<line x1="271.429" y1="407.143" x2="407.143" y2="271.429" stroke="black" />
-<polygon points=" 403.61,274.961 397.244,275.67 402.902,281.327" style="fill:black" />
-<text x="314.286" y="329.286" fill="black" >N</text>
-<text x="329.286" y="329.286" fill="black" >6</text>
-<text x="349.286" y="329.286" fill="black" >1</text>
-<line x1="814.286" y1="407.143" x2="678.571" y2="271.429" stroke="black" />
-<polygon points=" 682.114,274.971 682.825,281.324 688.467,275.682" style="fill:black" />
-<text x="721.429" y="329.286" fill="black" >N</text>
-<text x="736.429" y="329.286" fill="black" >7</text>
-<text x="756.429" y="329.286" fill="black" >1</text>
-<line x1="407.143" y1="271.429" x2="271.429" y2="135.714" stroke="black" />
-<polygon points=" 274.964,139.25 275.671,145.614 281.329,139.956" style="fill:black" />
-<text x="314.286" y="193.571" fill="black" >N</text>
-<text x="329.286" y="193.571" fill="black" >8</text>
-<text x="349.286" y="193.571" fill="black" >1</text>
-<line x1="678.571" y1="271.429" x2="814.286" y2="135.714" stroke="black" />
-<polygon points=" 810.742,139.258 804.391,139.97 810.03,145.609" style="fill:black" />
-<text x="721.429" y="193.571" fill="black" >N</text>
-<text x="736.429" y="193.571" fill="black" >9</text>
-<text x="756.429" y="193.571" fill="black" >1</text>
-<line x1="407.143" y1="271.429" x2="135.714" y2="271.429" stroke="black" />
-<polygon points=" 140.714,271.429 145.714,267.428 145.714,275.429" style="fill:black" />
-<text x="246.429" y="261.429" fill="black" >N</text>
-<text x="261.429" y="261.429" fill="black" >10</text>
-<text x="281.429" y="261.429" fill="black" >1</text>
-<line x1="542.857" y1="271.429" x2="407.143" y2="271.429" stroke="black" />
-<polygon points=" 412.142,271.429 417.143,267.428 417.143,275.429" style="fill:black" />
-<text x="450" y="261.429" fill="black" >N</text>
-<text x="465" y="261.429" fill="black" >11</text>
-<text x="485" y="261.429" fill="black" >1</text>
-<line x1="678.571" y1="271.429" x2="542.857" y2="271.429" stroke="black" />
-<polygon points=" 547.858,271.429 552.857,267.428 552.857,275.429" style="fill:black" />
-<text x="585.714" y="261.429" fill="black" >N</text>
-<text x="600.714" y="261.429" fill="black" >12</text>
-<text x="620.714" y="261.429" fill="black" >1</text>
-<line x1="950" y1="271.429" x2="678.571" y2="271.429" stroke="black" />
-<polygon points=" 683.572,271.429 688.572,267.428 688.572,275.429" style="fill:black" />
-<text x="789.286" y="261.429" fill="black" >N</text>
-<text x="804.286" y="261.429" fill="black" >13</text>
-<text x="824.286" y="261.429" fill="black" >1</text>
-<line x1="407.143" y1="271.429" x2="271.429" y2="407.143" stroke="black" />
-<polygon points=" 274.966,403.606 275.672,397.242 281.329,402.9" style="fill:black" />
-<text x="314.286" y="329.286" fill="black" >N</text>
-<text x="329.286" y="329.286" fill="black" >14</text>
-<text x="349.286" y="329.286" fill="black" >1</text>
-<line x1="678.571" y1="271.429" x2="814.286" y2="407.143" stroke="black" />
-<polygon points=" 810.75,403.607 804.391,402.895 810.038,397.248" style="fill:black" />
-<text x="721.429" y="329.286" fill="black" >N</text>
-<text x="736.429" y="329.286" fill="black" >15</text>
-<text x="756.429" y="329.286" fill="black" >1</text>
-<circle cx="271.429" cy="135.714" r="5" fill="purple" />
-<text x="271.429" y="125.714" fill="black" >A</text>
-<text x="271.429" y="145.714" fill="black" >0</text>
-<text x="261.429" y="125.714" fill="black" >0</text>
-<circle cx="814.286" cy="135.714" r="5" fill="purple" />
-<text x="814.286" y="125.714" fill="black" >B</text>
-<text x="814.286" y="145.714" fill="black" >0</text>
-<text x="804.286" y="125.714" fill="black" >1</text>
-<circle cx="135.714" cy="271.429" r="5" fill="purple" />
-<text x="135.714" y="261.429" fill="black" >C</text>
-<text x="135.714" y="281.429" fill="black" >0</text>
-<text x="125.714" y="261.429" fill="black" >2</text>
-<circle cx="407.143" cy="271.429" r="5" fill="purple" />
-<text x="407.143" y="261.429" fill="black" >D</text>
-<text x="407.143" y="281.429" fill="black" >0</text>
-<text x="397.143" y="261.429" fill="black" >3</text>
-<circle cx="542.857" cy="271.429" r="5" fill="purple" />
-<text x="542.857" y="261.429" fill="black" >E</text>
-<text x="542.857" y="281.429" fill="black" >0</text>
-<text x="532.857" y="261.429" fill="black" >4</text>
-<circle cx="678.571" cy="271.429" r="5" fill="purple" />
-<text x="678.571" y="261.429" fill="black" >F</text>
-<text x="678.571" y="281.429" fill="black" >0</text>
-<text x="668.571" y="261.429" fill="black" >5</text>
-<circle cx="950" cy="271.429" r="5" fill="purple" />
-<text x="950" y="261.429" fill="black" >G</text>
-<text x="950" y="281.429" fill="black" >0</text>
-<text x="940" y="261.429" fill="black" >6</text>
-<circle cx="271.429" cy="407.143" r="5" fill="purple" />
-<text x="271.429" y="397.143" fill="black" >H</text>
-<text x="271.429" y="417.143" fill="black" >0</text>
-<text x="261.429" y="397.143" fill="black" >7</text>
-<circle cx="814.286" cy="407.143" r="5" fill="purple" />
-<text x="814.286" y="397.143" fill="black" >I</text>
-<text x="814.286" y="417.143" fill="black" >0</text>
-<text x="804.286" y="397.143" fill="black" >8</text>
+<line x1="330" y1="110" x2="220" y2="220" stroke="black" />
+<polygon points=" 223.536,216.464 224.243,210.101 229.899,215.757" style="fill:black" />
+<text x="250" y="155" fill="black" >N</text>
+<text x="265" y="155" fill="black" >0</text>
+<text x="285" y="155" fill="black" >1</text>
+<line x1="330" y1="110" x2="440" y2="220" stroke="black" />
+<polygon points=" 436.464,216.464 430.1,215.757 435.757,210.1" style="fill:black" />
+<text x="360" y="155" fill="black" >N</text>
+<text x="375" y="155" fill="black" >1</text>
+<text x="395" y="155" fill="black" >1</text>
+<line x1="220" y1="220" x2="330" y2="330" stroke="black" />
+<polygon points=" 326.464,326.464 320.101,325.757 325.757,320.101" style="fill:black" />
+<text x="250" y="265" fill="black" >N</text>
+<text x="265" y="265" fill="black" >2</text>
+<text x="285" y="265" fill="black" >1</text>
+<line x1="440" y1="220" x2="330" y2="330" stroke="black" />
+<polygon points=" 333.536,326.464 334.242,320.1 339.9,325.758" style="fill:black" />
+<text x="360" y="265" fill="black" >N</text>
+<text x="375" y="265" fill="black" >3</text>
+<text x="395" y="265" fill="black" >1</text>
+<line x1="330" y1="330" x2="220" y2="440" stroke="red" />
+<polygon points=" 223.536,436.464 224.243,430.101 229.899,435.757" style="fill:red" />
+<text x="250" y="375" fill="black" >N</text>
+<text x="265" y="375" fill="black" >4</text>
+<text x="285" y="375" fill="black" >1</text>
+<line x1="330" y1="330" x2="440" y2="440" stroke="red" />
+<polygon points=" 436.464,436.464 430.1,435.757 435.757,430.1" style="fill:red" />
+<text x="360" y="375" fill="black" >N</text>
+<text x="375" y="375" fill="black" >5</text>
+<text x="395" y="375" fill="black" >1</text>
+<line x1="220" y1="220" x2="110" y2="550" stroke="red" />
+<polygon points=" 111.581,545.257 109.368,539.248 116.957,541.778" style="fill:red" />
+<text x="140" y="375" fill="black" >N</text>
+<text x="155" y="375" fill="black" >6</text>
+<text x="175" y="375" fill="black" >1</text>
+<line x1="440" y1="220" x2="550" y2="550" stroke="black" />
+<polygon points=" 548.419,545.257 543.041,541.779 550.634,539.248" style="fill:black" />
+<text x="470" y="375" fill="black" >N</text>
+<text x="485" y="375" fill="black" >7</text>
+<text x="505" y="375" fill="black" >1</text>
+<line x1="220" y1="440" x2="330" y2="440" stroke="black" />
+<polygon points=" 325,440 320,436 320,444" style="fill:black" />
+<text x="250" y="430" fill="black" >N</text>
+<text x="265" y="430" fill="black" >8</text>
+<text x="285" y="430" fill="black" >1</text>
+<line x1="330" y1="440" x2="440" y2="440" stroke="black" />
+<polygon points=" 435,440 430,436 430,444" style="fill:black" />
+<text x="360" y="430" fill="black" >N</text>
+<text x="375" y="430" fill="black" >9</text>
+<text x="395" y="430" fill="black" >1</text>
+<line x1="440" y1="440" x2="550" y2="550" stroke="black" />
+<polygon points=" 546.464,546.464 540.099,545.759 545.759,540.099" style="fill:black" />
+<text x="470" y="485" fill="black" >N</text>
+<text x="485" y="485" fill="black" >10</text>
+<text x="505" y="485" fill="black" >1</text>
+<line x1="220" y1="440" x2="110" y2="550" stroke="black" />
+<polygon points=" 113.536,546.464 114.242,540.1 119.9,545.758" style="fill:black" />
+<text x="140" y="485" fill="black" >N</text>
+<text x="155" y="485" fill="black" >11</text>
+<text x="175" y="485" fill="black" >1</text>
+<line x1="110" y1="550" x2="550" y2="550" stroke="black" />
+<polygon points=" 545,550 540,546 540,554" style="fill:black" />
+<text x="305" y="540" fill="black" >N</text>
+<text x="320" y="540" fill="black" >12</text>
+<text x="340" y="540" fill="black" >1</text>
+<line x1="330" y1="110" x2="330" y2="330" stroke="black" />
+<polygon points=" 330,325 326,320 334,320" style="fill:black" />
+<text x="305" y="210" fill="black" >N</text>
+<text x="320" y="210" fill="black" >13</text>
+<text x="340" y="210" fill="black" >1</text>
+<line x1="330" y1="330" x2="330" y2="440" stroke="black" />
+<polygon points=" 330,435 326,430 334,430" style="fill:black" />
+<text x="305" y="375" fill="black" >N</text>
+<text x="320" y="375" fill="black" >14</text>
+<text x="340" y="375" fill="black" >1</text>
+<circle cx="330" cy="110" r="5" fill="orange" />
+<text x="330" y="100" fill="black" >A</text>
+<text x="330" y="120" fill="black" >0.615385</text>
+<text x="320" y="100" fill="black" >0</text>
+<circle cx="220" cy="220" r="5" fill="red" />
+<text x="220" y="210" fill="black" >B</text>
+<text x="220" y="230" fill="black" >0.8</text>
+<text x="210" y="210" fill="black" >1</text>
+<circle cx="440" cy="220" r="5" fill="orange" />
+<text x="440" y="210" fill="black" >C</text>
+<text x="440" y="230" fill="black" >0.727273</text>
+<text x="430" y="210" fill="black" >2</text>
+<circle cx="330" cy="330" r="5" fill="red" />
+<text x="330" y="320" fill="black" >D</text>
+<text x="330" y="340" fill="black" >1.14286</text>
+<text x="320" y="320" fill="black" >3</text>
+<circle cx="220" cy="440" r="5" fill="red" />
+<text x="220" y="430" fill="black" >E</text>
+<text x="220" y="450" fill="black" >1.33333</text>
+<text x="210" y="430" fill="black" >4</text>
+<circle cx="330" cy="440" r="5" fill="red" />
+<text x="330" y="430" fill="black" >F</text>
+<text x="330" y="450" fill="black" >2.66667</text>
+<text x="320" y="430" fill="black" >5</text>
+<circle cx="440" cy="440" r="5" fill="red" />
+<text x="440" y="430" fill="black" >G</text>
+<text x="440" y="450" fill="black" >8</text>
+<text x="430" y="430" fill="black" >6</text>
+<circle cx="110" cy="550" r="5" fill="red" />
+<text x="110" y="540" fill="black" >H</text>
+<text x="110" y="560" fill="black" >8</text>
+<text x="100" y="540" fill="black" >7</text>
+<circle cx="550" cy="550" r="5" fill="red" />
+<text x="550" y="540" fill="black" >I</text>
+<text x="550" y="560" fill="black" >inf</text>
+<text x="540" y="540" fill="black" >8</text>
 
 
 </svg>

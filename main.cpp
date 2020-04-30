@@ -9,11 +9,11 @@
 
 void menu()
 {
-    //int dernier=0;
     Graphe nouv;
     {
         Svgfile svgout;
         nouv.afficher_Svgfile(svgout);
+        nouv.calcul_centralite();
         nouv.sauvegarde_aretes();
     }
     int choix=0;
@@ -22,8 +22,6 @@ void menu()
     {
         {
             Svgfile svgout;
-            nouv.calcul_centralite();
-            nouv.reinitialiser_centralite();
             nouv.afficher_Svgfile(svgout);
         }
 
@@ -167,6 +165,7 @@ void menu()
             std::cout << "Veuillez rentrer une reponse valide" << std::endl;
             break;
         }
+        nouv.reinitialiser_centralite();
         system("pause");
         system("cls");
     }

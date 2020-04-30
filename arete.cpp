@@ -177,7 +177,7 @@ std::pair<float, float> Arete::defsol(const float& x1, const float& y1, const fl
         b = ((-2)*x2 + 2*m*(h- y2));
         c = ((x2 * x2) + ((h - y2)*(h - y2)) - (r*r));
 
-        std::cout<<a<< " "<< b<< " "<< c <<std::endl;
+        //std::cout<<a<< " "<< b<< " "<< c <<std::endl;
 
 
          ix1= ((-b - std::sqrt((b * b) - 4*a*c)) / (2*a));
