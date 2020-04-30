@@ -230,7 +230,6 @@ void Graphe::centralite_vecteur_propre()
             lambda=lambda+(i->get_central()*i->get_central());
         }
         lambda=sqrt(lambda);
-        std::cout << " Lambda " << lambda << std::endl;
         /// On recalcule l'indice
         for(auto i: m_sommets)
         {

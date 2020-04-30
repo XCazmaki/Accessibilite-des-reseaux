@@ -1,5 +1,6 @@
 #include "sommet.h"
 
+/// Constructeur par défaut de Sommet
 Sommet::Sommet()
 {
     m_indice=-1;
@@ -17,6 +18,7 @@ Sommet::Sommet()
     }
 }
 
+/// Constructeur de Sommet avec paramètres
 Sommet::Sommet(int indice, std::string nom, float coordx, float coordy)
 {
     m_indice=indice;
@@ -34,9 +36,11 @@ Sommet::Sommet(int indice, std::string nom, float coordx, float coordy)
     }
 }
 
+/// Destructeur de Sommet
 Sommet::~Sommet()
 {}
 
+/// Affichache de Sommet dans la console
 /// Affiche le numéro du sommet et ses indices dans la console
 void Sommet::afficher_console() const
 {
@@ -48,7 +52,9 @@ void Sommet::afficher_console() const
     }
 }
 
-/// Affiche le sommet dans un Svgfile
+/// Affiche de Sommet dans Svgfile
+/// Affiche le Sommet, son nom, le dernier indice calculé (normalisé)
+/// Le Sommet sera affiché de différentes couleurs en fonction de son indices
 void Sommet::afficher_Svgfile(Svgfile &svgout, float indice)
 {
     std::string couleur="black";
