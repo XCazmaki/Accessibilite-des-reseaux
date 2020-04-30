@@ -114,8 +114,6 @@ public:
     void parcours_DFSF(int indice, std::vector<int> &couleurs);
 
 
-    //void BFS();
-    void parcours_DFS(int indice, std::vector<int> &couleur);
     /// Suppression arete/sommet
 
     void sauvegarde_aretes();

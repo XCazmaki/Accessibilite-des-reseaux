@@ -657,29 +657,6 @@ bool Graphe::testSel(int* selection, int& tour, Arete* a)
     return retour;
 }
 
-void Graphe::parcours_DFS(int indice,std::vector<int> &couleurs)
-{
-    couleurs[indice]=2;
-    std::cout << "On passe au sommet " << indice << std::endl;
-    for(auto i: m_aretes)
-    {
-        if(i->get_arc1()->get_indice()==indice&&couleurs[i->get_arc2()->get_indice()]!=2)
-        {
-            std::cout << "il a pour adjacent le sommet " << indice << std::endl;
-            parcours_DFS(i->get_arc2()->get_indice(),couleurs);
-        }
-        if(i->get_arc2()->get_indice()==indice&&couleurs[i->get_arc1()->get_indice()]!=2)
-        {
-            std::cout << "il a pour adjacent le sommet " << indice << std::endl;
-            parcours_DFS(i->get_arc1()->get_indice(),couleurs);
-        }
-    }
-    std::cout << "on termine le sommet " << indice << std::endl;
-}
-
-//void Graphe::sauvagarde_aretes()
-//=======
-
 void Graphe::forte_connexite()
 {
     bool connexe=true;
@@ -790,31 +767,33 @@ void Graphe::supprimer_aretes(int indice)
 
             if(m_aretes[i]->get_indice()==indice)
             {
+                //std::cout << "SUPRESSION arete :" << compteur<< " "<< i << std::endl;
+                //std::cout << "Entre " <<  m_aretes[i]->get_arc1()->get_indice() << " et " << m_aretes[i]->get_arc2()->get_indice() << std::endl;
                 m_aretes[i]->get_arc1()->set_degre(m_aretes[i]->get_arc1()->get_degre()-1);
                 m_aretes[i]->get_arc2()->set_degre(m_aretes[i]->get_arc2()->get_degre()-1);
                 m_aretes.erase(m_aretes.begin() + compteur);
+                //std::cout << "SUPRESSION arete :" << compteur << std::endl;
                 i--;
             }
             compteur++;
         }
     }
-<<<<<<< HEAD
     for(size_t i=0;i<m_sommets.size();++i)
     {
-        //i->set
+        m_sommets[i]->set_indice(i);
     }
 }
 
 //void Graphe::supprimer_aretes(int indice)
 
-
+/*
 void Graphe::restaurer_sommets()
 {
     m_sommets=m_sommets_originaux[m_sommets_originaux.size()-1];
     m_sommets_originaux.pop_back();
     restaurer_aretes();
-}
-
+}*/
+/*
 void Graphe::supprimer_sommets(int indice)
 {
     m_sommets_originaux.push_back(m_sommets);
@@ -828,7 +807,7 @@ void Graphe::supprimer_sommets(int indice)
         m_aretes[i]->set_indice(i);
     }
 }
-
+*/
 
 void Graphe::sauvegarde_sommets_indices()
 {
@@ -842,9 +821,6 @@ void Graphe::sauvegarde_sommets_indices()
 
     m_sommets_svg.push_back(svg);
 }
-
-<<<<<<< HEAD
-=======
 
 
 void Graphe::supprimer_sommet(int indice)
@@ -901,7 +877,6 @@ void Graphe::restaurer_sommets()
 
 
 
->>>>>>> Mathias
 void Graphe::comparer_indices()
 {
     if(m_sommets_svg.size()>0)
