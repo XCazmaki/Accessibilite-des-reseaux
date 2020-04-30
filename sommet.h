@@ -141,18 +141,16 @@ public:
         m_indices_centralite[num].second=val2;
     }
 
-<<<<<<< HEAD
+
     void set_afficher(bool x)
     {
         m_afficher=x;
     }
 
-=======
     void set_indiceS(const int& i)
     {
         m_indice = i;
     }
->>>>>>> Romain
     /// comparator
 
     struct SommetComparator
