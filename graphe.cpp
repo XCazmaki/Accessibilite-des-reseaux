@@ -3,14 +3,21 @@
 Graphe::Graphe()
 {
     /// On ouvre un fichier:
+
     std::string nom_fichier="";
     std::cout << "Entrez le nom du fichier de topologie : ";
     std::cin >> nom_fichier;
     std::ifstream monFlux(nom_fichier);
 
-    /// On teste si le fichier s'est bien ouvert:
     if(!monFlux)
-        throw std::runtime_error( "Impossible d'ouvrir en lecture " + nom_fichier );
+    {
+        std::cout<<"Fichier non trouvé, reessayez svp !\n"<<std::endl;
+        return;
+    }
+
+
+    /// On teste si le fichier s'est bien ouvert:
+
 
     /// On reccupere l'orientation
     int orient=0;
@@ -81,7 +88,10 @@ void Graphe::chargerPond()
     int tempTaille = 0;
 
     if(!ifs)
-        throw std::runtime_error( "Impossible d'ouvrir en lecture " + nomfic );
+    {
+        std::cout<<"Impossible d'ouvrir en lecture " + nomfic<<std::endl;
+        return;
+    }
 
     ifs >> tempTaille;
     ifs.ignore();
@@ -351,7 +361,6 @@ void Graphe::centralite_intermediarite()
         a->set_central_normA(0);
     }
 
-
     std::list<int>* adjacence;
     std::list<std::pair<int, float>>* pond;
     pond = new std::list<std::pair<int, float>>[m_sommets.size()];
@@ -378,6 +387,7 @@ void Graphe::centralite_intermediarite()
             int nCC = 0;
             std::vector<int> tab;
             std::vector<Arete*> tab2;
+
             seekAllPaths(d->get_indice(), f->get_indice(), visited, path, path_index, adjacence, pond, pcc, nCC, tab, tab2);
 
             calculCentraliteInterSommet(nCC, tab);
@@ -387,6 +397,7 @@ void Graphe::centralite_intermediarite()
             freeMem(visited, path, adjacence, pond);
         }
     }
+
     for(auto so : m_sommets)
     {
         so->DefcentralInterNorm(m_sommets.size());
@@ -407,6 +418,7 @@ void Graphe::calculCentraliteInterSommet(const int& nCC, std::vector<int>& tab)
     std::queue<std::pair<int, int>> temp;
     int i = 0;
     int ii = 0;
+
     while(i< (int)tab.size())
     {
         temp.push(std::make_pair(tab[i], 1));
@@ -551,6 +563,9 @@ void Graphe::reset()
 
 void Graphe::k_connexite()
 {
+    if(!connexite())
+        return;
+
     for(int i = 0; i< (int)(m_sommets.size()); ++i)
     {
         if(!k_connexite_test(i))
@@ -610,6 +625,40 @@ void Graphe::recursion(int* selection, int& tour, int curseur, bool& connexe)
             recursion(selection, tour, curseur +1, connexe);
         }
     }
+}
+
+bool Graphe::connexite()
+{
+    int* selection = (int*)malloc(sizeof(int));
+    selection[0] = m_aretes.size() +1;
+    int tour =0;
+    bool connexe = true;
+
+    std::vector<int> couleurs;
+    for(size_t i=0; i<m_sommets.size(); i++)
+    {
+        couleurs.push_back(0);
+    }
+
+    int depart = 0;
+    parcours_DFSK(depart,selection,couleurs, tour);
+
+    for(size_t i=0; i<couleurs.size(); i++)
+    {
+        if(couleurs[i]!=2)
+        {
+            connexe=false;
+        }
+        couleurs[i]=0;
+    }
+    if(connexe)
+        return true;
+    else
+    {
+        std::cout<<"Le graphe n est pas connexe"<<std::endl;
+        return false;
+    }
+
 }
 
 void Graphe::parcours_DFSK(int indice,int* selection, std::vector<int> &couleurs, int& tour)
@@ -683,11 +732,11 @@ void Graphe::parcours_DFS(int indice,std::vector<int> &couleurs)
     std::cout << "on termine le sommet " << indice << std::endl;
 }
 
-//void Graphe::sauvagarde_aretes()
-//=======
-
 void Graphe::forte_connexite()
 {
+    if(!connexite())
+        return;
+
     bool connexe=true;
     std::vector<int> couleurs;
     for(size_t i=0; i<m_sommets.size(); i++)
@@ -766,6 +815,8 @@ void Graphe::sauvegarde_aretes()
 
 void Graphe::restaurer_aretes()
 {
+    if(m_aretes_originales.size()>0)
+    {
     std::vector<float> degres_svg=m_degres_svg[m_degres_svg.size()-1];
     for(size_t i=0; i<m_sommets.size(); ++i)
     {
@@ -777,8 +828,19 @@ void Graphe::restaurer_aretes()
     m_aretes_originales.pop_back();
 
     for(int i = 0; i< (int)m_aretes.size(); ++i)
+<<<<<<< HEAD
     {
          m_aretes[i]->set_indiceA(i);
+=======
+        m_aretes[i]->set_indiceA(i);
+
+
+    for(auto i: m_aretes)
+    {
+        i->get_arc1()->set_afficher(true);
+        i->get_arc2()->set_afficher(true);
+    }
+>>>>>>> Romain
     }
 }
 
@@ -793,12 +855,20 @@ void Graphe::supprimer_aretes(int indice)
             {
                 i->get_arc1()->set_degre(i->get_arc1()->get_degre()-1);
                 i->get_arc2()->set_degre(i->get_arc2()->get_degre()-1);
+
                 m_aretes.erase(m_aretes.begin() + compteur);
+<<<<<<< HEAD
                 std::cout << "SUPRESSION " << compteur << std::endl;
+=======
+
+>>>>>>> Romain
             }
             compteur++;
         }
+        for(int i = 0; i< (int)m_aretes.size(); ++i)
+            m_aretes[i]->set_indiceA(i);
     }
+<<<<<<< HEAD
 }
 
 /*
@@ -818,6 +888,10 @@ void Graphe::supprimer_aretes(int indice)
 //void Graphe::supprimer_aretes(int indice)
 
 >>>>>>> dev
+=======
+}
+
+>>>>>>> Romain
 
 void Graphe::restaurer_sommets()
 {
@@ -902,6 +976,37 @@ void Graphe::supprimer_sommets(int indice)
 <<<<<<< Updated upstream
 
 
+void Graphe::supprimer_sommet_test(int indice)
+{
+    m_sommets[indice]->set_afficher(false);
+
+    for(auto i: m_aretes)
+    {
+        if(i->get_arc1()->get_indice()==indice||i->get_arc2()->get_indice()==indice)
+        {
+            sauvegarde_sommets_indices();
+            sauvegarde_aretes();
+            supprimer_aretes(i->get_indice());
+        }
+        for(int i = 0; i< (int)m_aretes.size(); ++i)
+            m_aretes[i]->set_indiceA(i);
+    }
+    for(auto i: m_aretes)
+    {
+        if(i->get_arc1()->get_indice()==indice||i->get_arc2()->get_indice()==indice)
+        {
+            sauvegarde_sommets_indices();
+            sauvegarde_aretes();
+            supprimer_aretes(i->get_indice());
+        }
+        for(int i = 0; i< (int)m_aretes.size(); ++i)
+            m_aretes[i]->set_indiceA(i);
+    }
+
+}
+
+
+
 void Graphe::sauvegarde_sommets_indices()
 {
 <<<<<<< HEAD
@@ -920,6 +1025,7 @@ void Graphe::sauvegarde_sommets_indices()
 
     m_sommets_svg.push_back(svg);
 }
+<<<<<<< HEAD
 
 void Graphe::supprimer_sommet(int indice)
 {
@@ -948,6 +1054,9 @@ void Graphe::restaurer_sommets()
 
 }
 
+=======
+/*
+>>>>>>> Romain
 void Graphe::comparer_indices()
 {
     for(size_t i=0; i<m_sommets.size(); ++i)
@@ -961,7 +1070,32 @@ void Graphe::comparer_indices()
             m_sommets_svg[j][i].afficher_console();
         }
     }
+}*/
+void Graphe::comparer_indices()
+{
+    if(m_sommets_svg.size()>0)
+    {
+        for(size_t i=0; i<m_sommets.size(); ++i)
+        {
+            std::cout << "Indices de centralites actuels :" << std::endl;
+            m_sommets[i]->afficher_console();
+
+            std::cout << "Indices de centralites au temps t-1 :" << std::endl;
+            m_sommets_svg[m_sommets_svg.size()-1][i].afficher_console();
+
+            std::cout << "Ils ont donc variés de : " << std::endl;
+
+            for(size_t j=0; j<4; ++j)
+            {
+                std::cout << ((m_sommets[i]->get_indice_central()[j].first)-(m_sommets_svg[m_sommets_svg.size()-1][i].get_indice_central()[j].first)) << " ";
+                std::cout << ((m_sommets[i]->get_indice_central()[j].second)-(m_sommets_svg[m_sommets_svg.size()-1][i].get_indice_central()[j].second)) << " ";
+                std::cout << std::endl;
+            }
+
+        }
+    }
 }
+
 
 
 void Graphe::sauvegarde_fichier()

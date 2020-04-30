@@ -109,6 +109,7 @@ public:
     void recursion(int*, int&, int, bool&);
     void parcours_DFSK(int, int*, std::vector<int>&, int&);
     bool testSel(int*, int&, Arete*);
+    bool connexite();
 
     void forte_connexite();
     void parcours_DFSF(int indice, std::vector<int> &couleurs);
@@ -134,6 +135,8 @@ public:
     //void sauvegarde_sommets_indices();
 //    void restaurer_sommets();
   //  void supprimer_sommets(int indice);
+
+    void supprimer_sommet_test(int indice);
 
     void sauvegarde_sommets_indices();
     //void restaurer_sommets();

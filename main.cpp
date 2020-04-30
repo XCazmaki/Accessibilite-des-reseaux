@@ -126,10 +126,19 @@ void menu()
             //nouv.restaurer_sommets();
             std::cout << "Quelle sommet voulez-vous supprimer ? " << std::endl;
             std::cin >> choix;
+<<<<<<< HEAD
             nouv.supprimer_sommet(choix);
             nouv.calcul_indice();
             nouv.afficher_Svgfile(svgout);
             choix=8;
+=======
+            //nouv.supprimer_sommets(choix);
+            nouv.supprimer_sommet_test(choix);
+            nouv.calcul_indice();
+            nouv.afficher_Svgfile(svgout);
+            choix=8;
+            dernier=1;
+>>>>>>> Romain
         }
         break;
         case 9 :
@@ -162,6 +171,7 @@ void menu()
         {
             Svgfile svgout;
             nouv.calcul_centralite();
+            nouv.calcul_indice();
             nouv.comparer_indices();
             nouv.afficher_Svgfile(svgout);
         }

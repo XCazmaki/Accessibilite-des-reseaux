@@ -284,7 +284,8 @@ bool Arete::testAppartenance(const Sommet* depart, const int& orient)
 
 void Arete::DefcentralInterArete(const int& nCC, const int& occurence)
 {
-    m_centralA += (occurence / nCC);
+    if(nCC > 0)
+        m_centralA += (occurence / nCC);
 }
 
 void Arete::DefcentralInterNormA(const int& n)
