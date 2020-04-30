@@ -3,14 +3,21 @@
 Graphe::Graphe()
 {
     /// On ouvre un fichier:
+
     std::string nom_fichier="";
     std::cout << "Entrez le nom du fichier de topologie : ";
     std::cin >> nom_fichier;
     std::ifstream monFlux(nom_fichier);
 
-    /// On teste si le fichier s'est bien ouvert:
     if(!monFlux)
-        throw std::runtime_error( "Impossible d'ouvrir en lecture " + nom_fichier );
+    {
+        std::cout<<"Fichier non trouvé, reessayez svp !\n"<<std::endl;
+        return;
+    }
+
+
+    /// On teste si le fichier s'est bien ouvert:
+
 
     /// On reccupere l'orientation
     int orient=0;
@@ -81,7 +88,10 @@ void Graphe::chargerPond()
     int tempTaille = 0;
 
     if(!ifs)
-        throw std::runtime_error( "Impossible d'ouvrir en lecture " + nomfic );
+    {
+        std::cout<<"Impossible d'ouvrir en lecture " + nomfic<<std::endl;
+        return;
+    }
 
     ifs >> tempTaille;
     ifs.ignore();
@@ -345,7 +355,6 @@ void Graphe::centralite_intermediarite()
         a->set_central_normA(0);
     }
 
-
     std::list<int>* adjacence;
     std::list<std::pair<int, float>>* pond;
     pond = new std::list<std::pair<int, float>>[m_sommets.size()];
@@ -372,6 +381,7 @@ void Graphe::centralite_intermediarite()
             int nCC = 0;
             std::vector<int> tab;
             std::vector<Arete*> tab2;
+
             seekAllPaths(d->get_indice(), f->get_indice(), visited, path, path_index, adjacence, pond, pcc, nCC, tab, tab2);
 
             calculCentraliteInterSommet(nCC, tab);
@@ -381,6 +391,7 @@ void Graphe::centralite_intermediarite()
             freeMem(visited, path, adjacence, pond);
         }
     }
+
     for(auto so : m_sommets)
     {
         so->DefcentralInterNorm(m_sommets.size());
@@ -401,6 +412,7 @@ void Graphe::calculCentraliteInterSommet(const int& nCC, std::vector<int>& tab)
     std::queue<std::pair<int, int>> temp;
     int i = 0;
     int ii = 0;
+
     while(i< (int)tab.size())
     {
         temp.push(std::make_pair(tab[i], 1));
@@ -545,6 +557,9 @@ void Graphe::reset()
 
 void Graphe::k_connexite()
 {
+    if(!connexite())
+        return;
+
     for(int i = 0; i< (int)(m_sommets.size()); ++i)
     {
         if(!k_connexite_test(i))
@@ -606,6 +621,40 @@ void Graphe::recursion(int* selection, int& tour, int curseur, bool& connexe)
     }
 }
 
+bool Graphe::connexite()
+{
+    int* selection = (int*)malloc(sizeof(int));
+    selection[0] = m_aretes.size() +1;
+    int tour =0;
+    bool connexe = true;
+
+    std::vector<int> couleurs;
+    for(size_t i=0; i<m_sommets.size(); i++)
+    {
+        couleurs.push_back(0);
+    }
+
+    int depart = 0;
+    parcours_DFSK(depart,selection,couleurs, tour);
+
+    for(size_t i=0; i<couleurs.size(); i++)
+    {
+        if(couleurs[i]!=2)
+        {
+            connexe=false;
+        }
+        couleurs[i]=0;
+    }
+    if(connexe)
+        return true;
+    else
+    {
+        std::cout<<"Le graphe n est pas connexe"<<std::endl;
+        return false;
+    }
+
+}
+
 void Graphe::parcours_DFSK(int indice,int* selection, std::vector<int> &couleurs, int& tour)
 {
     /// marquer le sommet s
@@ -657,8 +706,32 @@ bool Graphe::testSel(int* selection, int& tour, Arete* a)
     return retour;
 }
 
+void Graphe::parcours_DFS(int indice,std::vector<int> &couleurs)
+{
+    couleurs[indice]=2;
+    std::cout << "On passe au sommet " << indice << std::endl;
+    for(auto i: m_aretes)
+    {
+        if(i->get_arc1()->get_indice()==indice&&couleurs[i->get_arc2()->get_indice()]!=2)
+        {
+            std::cout << "il a pour adjacent le sommet " << indice << std::endl;
+            parcours_DFS(i->get_arc2()->get_indice(),couleurs);
+        }
+        if(i->get_arc2()->get_indice()==indice&&couleurs[i->get_arc1()->get_indice()]!=2)
+        {
+            std::cout << "il a pour adjacent le sommet " << indice << std::endl;
+            parcours_DFS(i->get_arc1()->get_indice(),couleurs);
+        }
+    }
+    std::cout << "on termine le sommet " << indice << std::endl;
+}
+
+
 void Graphe::forte_connexite()
 {
+    if(!connexite())
+        return;
+
     bool connexe=true;
     std::vector<int> couleurs;
     for(size_t i=0; i<m_sommets.size(); i++)
@@ -692,7 +765,6 @@ void Graphe::forte_connexite()
     {
         std::cout << "Le graphe est fortement connexe" << std::endl;
     }
-
 }
 
 
@@ -752,10 +824,8 @@ void Graphe::restaurer_aretes()
     m_degres_svg.pop_back();
     m_aretes_originales.pop_back();
 
-    for(size_t i=0;i<m_aretes.size();i++)
-    {
-        m_aretes[i]->set_indice(i);
-    }
+    for(int i = 0; i< (int)m_aretes.size(); ++i)
+        m_aretes[i]->set_indiceA(i);
 
 }
 
@@ -768,17 +838,16 @@ void Graphe::supprimer_aretes(int indice)
         {
             if(m_aretes[i]->get_indice()==indice)
             {
-                m_aretes[i]->get_arc1()->set_degre(m_aretes[i]->get_arc1()->get_degre()-1);
-                m_aretes[i]->get_arc2()->set_degre(m_aretes[i]->get_arc2()->get_degre()-1);
+                i->get_arc1()->set_degre(i->get_arc1()->get_degre()-1);
+                i->get_arc2()->set_degre(i->get_arc2()->get_degre()-1);
+
                 m_aretes.erase(m_aretes.begin() + compteur);
-                i--;
             }
             compteur++;
         }
-    }
-    for(size_t i=0;i<m_aretes.size();++i)
-    {
-        m_aretes[i]->set_indice(i);
+        for(int i = 0; i< (int)m_aretes.size(); ++i)
+            m_aretes[i]->set_indiceA(i);
+
     }
 }
 
@@ -795,6 +864,17 @@ void Graphe::sauvegarde_sommets_indices()
     m_sommets_svg.push_back(svg);
 }
 
+void Graphe::restaurer_sommets()
+{
+    m_sommets=m_sommets_originaux[m_sommets_originaux.size()-1];
+    m_sommets_originaux.pop_back();
+
+    for(int i = 0; i<(int)m_sommets.size();++i)
+        m_sommets[i]->set_indiceS(i);
+
+    restaurer_aretes();
+}
+
 
 void Graphe::supprimer_sommet(int indice)
 {
@@ -805,6 +885,8 @@ void Graphe::supprimer_sommet(int indice)
     {
         svg.push_back(i->get_afficher());
     }
+    for(int i = 0; i<(int)m_sommets.size();++i)
+        m_sommets[i]->set_indiceS(i);
 
     m_sommet_affichage_svg.push_back(svg);
     m_sommets[indice]->set_afficher(false);

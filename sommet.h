@@ -141,9 +141,15 @@ public:
         m_indices_centralite[num].second=val2;
     }
 
-    void set_afficher(bool x)
+
+    /*void set_afficher(bool x)
     {
         m_afficher=x;
+    }*/
+
+    void set_indiceS(const int& i)
+    {
+        m_indice = i;
     }
 
     /// comparator

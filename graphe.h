@@ -109,6 +109,7 @@ public:
     void recursion(int*, int&, int, bool&);
     void parcours_DFSK(int, int*, std::vector<int>&, int&);
     bool testSel(int*, int&, Arete*);
+    bool connexite();
 
     void forte_connexite();
     void parcours_DFSF(int indice, std::vector<int> &couleurs);
