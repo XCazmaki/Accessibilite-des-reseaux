@@ -553,6 +553,9 @@ void Graphe::reset()
 
 void Graphe::k_connexite()
 {
+    if(!connexite())
+        return;
+
     for(int i = 0; i< (int)(m_sommets.size()); ++i)
     {
         if(!k_connexite_test(i))
@@ -612,6 +615,40 @@ void Graphe::recursion(int* selection, int& tour, int curseur, bool& connexe)
             recursion(selection, tour, curseur +1, connexe);
         }
     }
+}
+
+bool Graphe::connexite()
+{
+    int* selection = (int*)malloc(sizeof(int));
+    selection[0] = m_aretes.size() +1;
+    int tour =0;
+    bool connexe = true;
+
+    std::vector<int> couleurs;
+    for(size_t i=0; i<m_sommets.size(); i++)
+    {
+        couleurs.push_back(0);
+    }
+
+    int depart = 0;
+    parcours_DFSK(depart,selection,couleurs, tour);
+
+    for(size_t i=0; i<couleurs.size(); i++)
+    {
+        if(couleurs[i]!=2)
+        {
+            connexe=false;
+        }
+        couleurs[i]=0;
+    }
+    if(connexe)
+        return true;
+    else
+    {
+        std::cout<<"Le graphe n est pas connexe"<<std::endl;
+        return false;
+    }
+
 }
 
 void Graphe::parcours_DFSK(int indice,int* selection, std::vector<int> &couleurs, int& tour)
@@ -687,6 +724,9 @@ void Graphe::parcours_DFS(int indice,std::vector<int> &couleurs)
 
 void Graphe::forte_connexite()
 {
+    if(!connexite())
+        return;
+
     bool connexe=true;
     std::vector<int> couleurs;
     for(size_t i=0; i<m_sommets.size(); i++)
@@ -790,9 +830,9 @@ void Graphe::supprimer_aretes(int indice)
             {
                 i->get_arc1()->set_degre(i->get_arc1()->get_degre()-1);
                 i->get_arc2()->set_degre(i->get_arc2()->get_degre()-1);
-                std::cout<<m_aretes.size()<<std::endl;
+
                 m_aretes.erase(m_aretes.begin() + compteur);
-                std::cout<<m_aretes.size()<<std::endl;
+
             }
             compteur++;
         }
