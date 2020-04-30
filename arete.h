@@ -61,6 +61,10 @@ public:
     }
 
     /// Setter
+    void set_indiceA(const int& i)
+    {
+        m_indice = i;
+    }
 
     void set_arc1(Sommet* nouv)
     {
@@ -86,7 +90,9 @@ public:
     bool changerPond(const std::pair<int, float>&);
     //void afficher() const;
     void afficher_console() const;
-    void afficher_Svgfile(Svgfile &svgout,float indice);
+    void afficher_Svgfile(Svgfile &svgout,float indice,const int&);
+    void dessinerTriangle(const float&, const float&, const float&, const float&, const std::string&, Svgfile&);
+    std::pair<float, float> defsol(const float&, const float&, const float&, const float&, const float&, const float&, const float&);
 
     bool testAppartenance(const Sommet*, const int&);
 

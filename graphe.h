@@ -119,7 +119,7 @@ public:
 
 
     //void BFS();
-    //void parcours_DFS(int indice, std::vector<int> &couleur);
+    void parcours_DFS(int indice, std::vector<int> &couleur);
 
     void sauvegarde_aretes();
     void restaurer_aretes();

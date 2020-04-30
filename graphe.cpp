@@ -10,7 +10,7 @@ Graphe::Graphe()
 
     /// On teste si le fichier s'est bien ouvert:
     if(!monFlux)
-        std::cout << "ERREUR: Impossible d'ouvrir le fichier." << std::endl;
+        throw std::runtime_error( "Impossible d'ouvrir en lecture " + nom_fichier );
 
     /// On reccupere l'orientation
     int orient=0;
@@ -127,7 +127,7 @@ void Graphe::afficher_Svgfile(Svgfile &svgout)
 
     for(auto i: m_aretes)
     {
-        i->afficher_Svgfile(svgout,indice);
+        i->afficher_Svgfile(svgout,indice, m_orientation);
     }
     for(auto i: m_sommets)
     {
@@ -663,6 +663,28 @@ bool Graphe::testSel(int* selection, int& tour, Arete* a)
     return retour;
 }
 
+void Graphe::parcours_DFS(int indice,std::vector<int> &couleurs)
+{
+    couleurs[indice]=2;
+    std::cout << "On passe au sommet " << indice << std::endl;
+    for(auto i: m_aretes)
+    {
+        if(i->get_arc1()->get_indice()==indice&&couleurs[i->get_arc2()->get_indice()]!=2)
+        {
+            std::cout << "il a pour adjacent le sommet " << indice << std::endl;
+            parcours_DFS(i->get_arc2()->get_indice(),couleurs);
+        }
+        if(i->get_arc2()->get_indice()==indice&&couleurs[i->get_arc1()->get_indice()]!=2)
+        {
+            std::cout << "il a pour adjacent le sommet " << indice << std::endl;
+            parcours_DFS(i->get_arc1()->get_indice(),couleurs);
+        }
+    }
+    std::cout << "on termine le sommet " << indice << std::endl;
+}
+
+//void Graphe::sauvagarde_aretes()
+//=======
 
 void Graphe::forte_connexite()
 {
@@ -755,10 +777,14 @@ void Graphe::restaurer_aretes()
     m_aretes_originales.pop_back();
 
     for(int i = 0; i< (int)m_aretes.size(); ++i)
+<<<<<<< HEAD
     {
          m_aretes[i]->set_indiceA(i);
     }
 
+=======
+        m_aretes[i]->set_indiceA(i);
+>>>>>>> Romain
 }
 
 void Graphe::supprimer_aretes(int indice)
@@ -778,6 +804,7 @@ void Graphe::supprimer_aretes(int indice)
             compteur++;
         }
     }
+<<<<<<< HEAD
 }
 
 /*
@@ -787,8 +814,14 @@ void Graphe::supprimer_aretes(int indice)
     {
         //i->set
     }
+=======
+
+    for(int i = 0; i< (int)m_aretes.size(); ++i)
+        m_aretes[i]->set_indiceA(i);
+>>>>>>> Romain
 }
 
+//void Graphe::supprimer_aretes(int indice)
 
 >>>>>>> dev
 
@@ -796,6 +829,10 @@ void Graphe::restaurer_sommets()
 {
     m_sommets=m_sommets_originaux[m_sommets_originaux.size()-1];
     m_sommets_originaux.pop_back();
+
+    for(int i = 0; i<(int)m_sommets.size();++i)
+        m_sommets[i]->set_indiceS(i);
+
     restaurer_aretes();
 }
 
@@ -857,13 +894,19 @@ void Graphe::supprimer_sommets(int indice)
 >>>>>>> Stashed changes
 
     }
+<<<<<<< HEAD
     for(size_t i=0;i<m_sommets.size();++i)
     {
         m_sommets[i]->set_indice(i);
     }
+=======
+    for(int i = 0; i<(int)m_sommets.size();++i)
+        m_sommets[i]->set_indiceS(i);
+>>>>>>> Romain
 
 }
 <<<<<<< Updated upstream
+
 
 void Graphe::sauvegarde_sommets_indices()
 {
@@ -884,6 +927,7 @@ void Graphe::sauvegarde_sommets_indices()
     m_sommets_svg.push_back(svg);
 }
 
+<<<<<<< HEAD
 
 
 void Graphe::supprimer_sommet(int indice)
@@ -915,6 +959,8 @@ void Graphe::restaurer_sommets()
 
 
 
+=======
+>>>>>>> Romain
 void Graphe::comparer_indices()
 {
     for(size_t i=0; i<m_sommets.size(); ++i)
@@ -964,5 +1010,10 @@ void Graphe::reinitialiser_centralite()
     {
         i->set_central(0);
         i->set_central_norm(0);
+    }
+    for(auto a : m_aretes)
+    {
+        a->set_centralA(0);
+        a->set_central_normA(0);
     }
 }
