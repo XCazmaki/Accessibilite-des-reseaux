@@ -113,7 +113,6 @@ void Graphe::afficher_console() const
         i->afficher_console();
     }
 
-    /*for(auto i: m_aretes)
     for(auto i: m_aretes)
     {
         i->afficher_console();
@@ -178,6 +177,7 @@ void Graphe::calcul_centralite()
     centralite_degre();
     std::cout << "vecteur" << std::endl;
     centralite_vecteur_propre();
+    std::cout << "proxy" << std::endl;
     centralite_proximite();
     std::cout << "int" << std::endl;
     afficher_console();
