@@ -173,10 +173,16 @@ float Graphe::calcul_indice()
 
 void Graphe::calcul_centralite()
 {
+    std::cout << "degre" << std::endl;
     centralite_degre();
+    std::cout << "vecteur" << std::endl;
     centralite_vecteur_propre();
+    std::cout << "proxy" << std::endl;
     centralite_proximite();
-    //centralite_intermediarite();
+    std::cout << "int" << std::endl;
+    afficher_console();
+    centralite_intermediarite();
+    std::cout << "FIN" << std::endl;
 }
 
 void Graphe::centralite_degre()
@@ -460,7 +466,7 @@ void Graphe::calculCentraliteInterArete(const int& nCC, std::vector<Arete*>& tab
 }
 
 void Graphe::seekAllPaths(int u, int d, bool visited[], int path[], int &path_index, std::list<int>* adj, std::list<std::pair<int, float>>* pond,
-                          const float& PCC, int& nCC, std::vector<int>& tab, std::vector<Arete*>& tab2)
+                           const float& PCC, int& nCC, std::vector<int>& tab, std::vector<Arete*>& tab2)
 {
     visited[u] = true;
     path[path_index] = u;
@@ -747,12 +753,6 @@ void Graphe::restaurer_aretes()
 
     m_degres_svg.pop_back();
     m_aretes_originales.pop_back();
-
-    for(size_t i=0;i<m_aretes.size();i++)
-    {
-        m_aretes[i]->set_indice(i);
-    }
-
 }
 
 void Graphe::supprimer_aretes(int indice)
@@ -760,31 +760,111 @@ void Graphe::supprimer_aretes(int indice)
     if(indice < (int)(m_aretes.size()+1))
     {
         int compteur=0;
-        //for(auto i:m_aretes)
-        for(size_t i=0; i<m_aretes.size(); ++i)
+        for(auto i:m_aretes)
         {
-            //std::cout << "test arete : " << i << std::endl;
-            //std::cout << "Entre " <<  m_aretes[i]->get_arc1()->get_indice() << " et " << m_aretes[i]->get_arc2()->get_indice() << std::endl;
-
-            if(m_aretes[i]->get_indice()==indice)
+            if(i->get_indice()==indice)
             {
-                //std::cout << "SUPRESSION arete :" << compteur<< " "<< i << std::endl;
-                //std::cout << "Entre " <<  m_aretes[i]->get_arc1()->get_indice() << " et " << m_aretes[i]->get_arc2()->get_indice() << std::endl;
-                m_aretes[i]->get_arc1()->set_degre(m_aretes[i]->get_arc1()->get_degre()-1);
-                m_aretes[i]->get_arc2()->set_degre(m_aretes[i]->get_arc2()->get_degre()-1);
+                i->get_arc1()->set_degre(i->get_arc1()->get_degre()-1);
+                i->get_arc2()->set_degre(i->get_arc2()->get_degre()-1);
                 m_aretes.erase(m_aretes.begin() + compteur);
-                //std::cout << "SUPRESSION arete :" << compteur << std::endl;
-                i--;
+                std::cout << "SUPRESSION " << compteur << std::endl;
             }
             compteur++;
         }
     }
-    for(size_t i=0;i<m_aretes.size();i++)
+}
+
+/*
+=======
+    }
+    for(size_t i=0;i<m_sommets.size();++i)
     {
-        m_aretes[i]->set_indice(i);
+        //i->set
     }
 }
 
+
+>>>>>>> dev
+
+void Graphe::restaurer_sommets()
+{
+    m_sommets=m_sommets_originaux[m_sommets_originaux.size()-1];
+    m_sommets_originaux.pop_back();
+    restaurer_aretes();
+}
+
+void Graphe::supprimer_sommets(int indice)
+{
+    m_sommets_originaux.push_back(m_sommets);
+    sauvegarde_aretes();
+<<<<<<< HEAD
+=======
+
+    if(indice < (int)(m_sommets.size()+1))
+    {
+        //int compteur=0;
+        for(auto i:m_sommets)
+        {
+            if(i->get_indice()==indice)
+            {
+                for(auto j: m_aretes)
+                {
+                    if(j->get_arc1()->get_indice()==indice)
+                    {
+                        supprimer_aretes(j->get_indice());
+                    }
+                    else if(j->get_arc2()->get_indice()==indice)
+                    {
+                        supprimer_aretes(j->get_indice());
+                    }
+                }
+                std::cout << "SUPRESSION " << indice << std::endl;
+                m_sommets.erase(m_sommets.begin() + indice);
+            }
+            //compteur++;
+        }
+>>>>>>> dev
+
+    if(indice < (int)(m_sommets.size()+1))
+    {
+        //int compteur=0;
+        for(auto i:m_sommets)
+        {
+            if(i->get_indice()==indice)
+            {
+                for(auto j: m_aretes)
+                {
+                    if(j->get_arc1()->get_indice()==indice)
+                    {
+                        supprimer_aretes(j->get_indice());
+                    }
+                    else if(j->get_arc2()->get_indice()==indice)
+                    {
+                        supprimer_aretes(j->get_indice());
+                    }
+                }
+                std::cout << "SUPRESSION " << indice << std::endl;
+                m_sommets.erase(m_sommets.begin() + indice);
+            }
+            //compteur++;
+        }
+>>>>>>> Stashed changes
+
+    }
+    for(size_t i=0;i<m_sommets.size();++i)
+    {
+        m_sommets[i]->set_indice(i);
+    }
+
+}
+<<<<<<< Updated upstream
+
+void Graphe::sauvegarde_sommets_indices()
+{
+<<<<<<< HEAD
+    afficher_console();
+=======
+*/
 void Graphe::sauvegarde_sommets_indices()
 {
     //afficher_console();
@@ -802,7 +882,6 @@ void Graphe::sauvegarde_sommets_indices()
 
 void Graphe::supprimer_sommet(int indice)
 {
-
     std::vector<bool> svg;
 
     for(auto i:m_sommets)
@@ -811,44 +890,20 @@ void Graphe::supprimer_sommet(int indice)
     }
 
     m_sommet_affichage_svg.push_back(svg);
+
+
     m_sommets[indice]->set_afficher(false);
-
-
-    /*for(auto i: m_aretes)
-    {
-        if((i->get_arc1()->get_indice()==indice)||(i->get_arc2()->get_indice()==indice))
-        {
-            sauvegarde_sommets_indices();
-            sauvegarde_aretes();
-            supprimer_aretes(i->get_indice());
-            reinitialiser_indice_aretes();
-        }
-    }*/
-
-
 }
 
 void Graphe::restaurer_sommets()
 {
-    /// On stocke le numéro du sommet reccupéré
-    int num=0;
-
     std::vector<bool> svg=m_sommet_affichage_svg[m_sommet_affichage_svg.size()-1];
     m_sommet_affichage_svg.pop_back();
 
-    for(size_t i=0; i<m_sommets.size(); i++)
+    for(size_t i; i<m_sommets.size();++i)
     {
-        if(m_sommets[i]->get_afficher()==false)
-            num=i;
-
         m_sommets[i]->set_afficher(svg[i]);
     }
-    /*
-        /// Revenir en ariere chez les aretes
-        for(int i=0; i<m_sommets[num]->get_degre();i++)
-        {
-            restaurer_aretes();
-        }*/
 
 }
 
@@ -856,25 +911,15 @@ void Graphe::restaurer_sommets()
 
 void Graphe::comparer_indices()
 {
-    if(m_sommets_svg.size()>0)
+    for(size_t i=0; i<m_sommets.size(); ++i)
     {
-        for(size_t i=0; i<m_sommets.size(); ++i)
+        std::cout << "Indices de centralites actuels :" << std::endl;
+        m_sommets[i]->afficher_console();
+
+        for(size_t j=0; j<m_sommets_svg.size(); ++j)
         {
-            std::cout << "Indices de centralites actuels :" << std::endl;
-            m_sommets[i]->afficher_console();
-
-            std::cout << "Indices de centralites au temps t-1 :" << std::endl;
-            m_sommets_svg[m_sommets_svg.size()-1][i].afficher_console();
-
-            std::cout << "Ils ont donc variés de : " << std::endl;
-
-            for(size_t j=0; j<4; ++j)
-            {
-                std::cout << ((m_sommets[i]->get_indice_central()[j].first)-(m_sommets_svg[m_sommets_svg.size()-1][i].get_indice_central()[j].first)) << " ";
-                std::cout << ((m_sommets[i]->get_indice_central()[j].second)-(m_sommets_svg[m_sommets_svg.size()-1][i].get_indice_central()[j].second)) << " ";
-                std::cout << std::endl;
-            }
-
+            std::cout << "Indices de centralites au temps t-" << j+1 <<" :" << std::endl;
+            m_sommets_svg[j][i].afficher_console();
         }
     }
 }
@@ -913,13 +958,5 @@ void Graphe::reinitialiser_centralite()
     {
         i->set_central(0);
         i->set_central_norm(0);
-    }
-}
-
-void Graphe::reinitialiser_indice_aretes()
-{
-    for(size_t i=0; i<m_aretes.size(); ++i)
-    {
-        m_aretes[i]->set_indice(i);
     }
 }

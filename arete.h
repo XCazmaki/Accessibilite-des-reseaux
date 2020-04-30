@@ -62,11 +62,6 @@ public:
 
     /// Setter
 
-    void set_indice(float nbr)
-    {
-        m_indice=nbr;
-    }
-
     void set_arc1(Sommet* nouv)
     {
         m_arc.first=nouv;

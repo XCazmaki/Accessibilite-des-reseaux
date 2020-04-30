@@ -91,7 +91,7 @@ void Sommet::afficher_Svgfile(Svgfile &svgout, float indice)
         svgout.addDisk(m_coordx*indice,m_coordy*indice,5,couleur);
         svgout.addText(m_coordx*indice,m_coordy*indice-10,m_nom,"black");
         svgout.addText(m_coordx*indice,m_coordy*indice+10,m_central_norm,"black");
-        svgout.addText(m_coordx*indice-10,m_coordy*indice-10,m_indice,"black");
+        svgout.addText(m_coordx*indice,m_coordy*indice-20,m_indice,"black");
     }
 }
 

@@ -113,19 +113,30 @@ public:
     void forte_connexite();
     void parcours_DFSF(int indice, std::vector<int> &couleurs);
 
+    //void DFS(int &indice,int selection,std::vector<int> &couleurs);
+    //void parcours_DFS1(int indice,int selection,std::vector<int> &couleurs);
+    //void parcours_DFS2(int indice,int selection1,int selection2,std::vector<int> &couleurs);
 
-    /// Suppression arete/sommet
+
+    //void BFS();
+    //void parcours_DFS(int indice, std::vector<int> &couleur);
 
     void sauvegarde_aretes();
     void restaurer_aretes();
     void supprimer_aretes(int indice);
-    void reinitialiser_indice_aretes();
-
     void sauvegarde_sommets();
-    void restaurer_sommets();
     void supprimer_sommet(int indice);
+    void restaurer_sommets();
+/*
+    void restaurer_sommets();
+    void supprimer_sommets(int indice);*/
+
+    //void sauvegarde_sommets_indices();
+//    void restaurer_sommets();
+  //  void supprimer_sommets(int indice);
 
     void sauvegarde_sommets_indices();
+    //void restaurer_sommets();
 
     void reinitialiser_centralite();
 
