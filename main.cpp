@@ -17,7 +17,7 @@ void menu()
     do
     {
         {
-            /// Affiche le graphe chargée
+            /// Affiche le graphe charg?
             Svgfile svgout;
             nouv.reinitialiser_centralite();
             nouv.afficher_Svgfile(svgout);

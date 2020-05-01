@@ -303,7 +303,241 @@ void Graphe::rechercheAdj(Sommet* depart, std::vector<std::pair<Sommet*, float>>
     }
 }
 
-std::list<int>* Graphe::defListeAdj(std::list<std::pair<int, float>>* pond)
+///-///////////////////////////////////////////////////
+/// INDICE INTERMEDIARITE /////////////////////////////
+///-///////////////////////////////////////////////////
+
+void Graphe::intermediarite()
+{
+    std::vector<int> marquage;
+    std::vector<int> preds;
+    std::vector<float> poids;
+
+    std::vector<std::pair<std::vector<int>,float>> chemins;
+
+    float plus_court=1000000;
+    float nombre_plus_courts=0;
+    float indice_norm=0;
+    /// Indice permettant de normaliser le code
+    indice_norm=((m_sommets.size()*m_sommets.size())-(3*m_sommets.size())+2)/2;
+
+    /// Utilisé pour calculer l'indice des aretes
+    int suiv=0;
+    int actu=0;
+
+
+
+
+    for(auto i:m_sommets)
+    {
+        marquage.push_back(0);
+        preds.push_back(-1);
+        poids.push_back(0);
+        i->set_central(0);
+        i->set_central_norm(0);
+    }
+
+    for(auto i: m_aretes)
+    {
+        i->set_centralA(0);
+        i->set_central_normA(0);
+    }
+
+    for(size_t i=0; i<m_sommets.size(); i++)
+    {
+        for(size_t j=0; j<m_sommets.size(); j++)
+        {
+            if(i!=j)
+            {
+                intermediarite_parcour(marquage,preds,i,j,i,poids,chemins);
+                for(size_t t=0; t<m_sommets.size(); t++)
+                {
+                    marquage[t]=0;
+                    preds[t]=-1;
+                    poids[t]=0;
+                }
+                plus_court=1000000;
+                /// Recherche du plus court chemin
+                for(auto i: chemins)
+                {
+                    if(i.second<plus_court)
+                    {
+                        plus_court=i.second;
+                    }
+                }
+
+                /// Suppression des chemin non plus court
+
+                for(size_t i=0; i<chemins.size(); ++i)
+                {
+                    if(chemins[i].second>plus_court)
+                    {
+                        chemins.erase(chemins.begin()+i);
+                        i--;
+                    }
+                }
+
+                /// Augmentation de l'indice des sommets
+                nombre_plus_courts=chemins.size();
+
+                for(auto i: chemins)
+                {
+                    for(auto j:i.first)
+                    {
+                        m_sommets[j]->set_central(m_sommets[j]->get_central()+((1/nombre_plus_courts)));
+                        m_sommets[j]->set_central_norm(m_sommets[j]->get_central()/indice_norm);
+                    }
+                }
+
+                /// Augmentation de l'indice des sommets
+
+                for(auto i: chemins)
+                {
+                    for(size_t j=0;j<i.first.size();++j)
+                    {
+                        /// i.first[j] = un num de sommet du parcours le plus court
+                        /// Il faut regarder avant et apres si c'est l'autre extremité de l'arete
+                        for(auto t: m_aretes)
+                        {
+                            /// Si le premier element de l'arete appartient au parcours le plus court
+                            if(t->get_arc1()->get_indice()==i.first[j])
+                            {
+                                /// Si j n'est pas le dernier element de la liste
+                                if(j!=i.first[i.first.size()-1])
+                                {
+                                    if(t->get_arc2()->get_indice()==i.first[j-1])
+                                    {
+                                        ///On met a jour l'indice
+                                        t->set_centralA(t->get_centralA()+((1/nombre_plus_courts)));
+                                        t->set_central_normA(t->get_centralA()/indice_norm);
+                                    }
+                                }
+                            }
+                            else if(t->get_arc2()->get_indice()==i.first[j])
+                            {
+                                /// Si j n'est pas le dernier element de la liste
+                                if(j!=i.first[i.first.size()-1])
+                                {
+                                    if(t->get_arc1()->get_indice()==i.first[j+1])
+                                    {
+                                        ///On met a jour l'indice
+                                        t->set_centralA(t->get_centralA()+((1/nombre_plus_courts)));
+                                        t->set_central_normA(t->get_centralA()/indice_norm);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                while(chemins.size()!=0)
+                {
+                    chemins.pop_back();
+                }
+            }
+
+        }
+    }
+
+    float maxS = 0.0;
+    float somme = 0.0;
+    float n = m_sommets.size();
+    float bG = 0.0;
+
+    for(auto s: m_sommets)
+    {
+        if(s->get_central_norm()> maxS)
+            maxS = s->get_central_norm();
+    }
+    for(auto i: m_sommets)
+    {
+        i->set_indice_central(3,i->get_central(),i->get_central_norm());
+
+        somme += (maxS - i->get_central_norm());
+    }
+    bG = (somme/((n -1)*((n*n)-(3*n)+2)));
+    std::cout<<"L indice globale de centralite d intermediarite est : " << bG<<std::endl;
+}
+
+void Graphe::intermediarite_parcour(std::vector<int> &marquage,
+                                    std::vector<int> &preds,int num_sommet,
+                                    int sfinal,int depart,std::vector<float> &poids,
+                                    std::vector<std::pair<std::vector<int>,float>> &chemins)
+{
+    /// On part du nœud initial, on le marque.
+    marquage[num_sommet]=1;
+    /// On regarde les successeurs non marqués
+    for(auto i:m_aretes)
+    {
+        /// Test successeur
+        if(i->get_arc1()->get_indice()==num_sommet)
+        {
+            /// Test marquage
+            if(marquage[i->get_arc2()->get_indice()]==0)
+            {
+                /// On test si c'est le sommet d'arivée
+                if(i->get_arc2()->get_indice()==sfinal)
+                {
+                    /// SAUVEGARDE PARCOURS
+                    poids[i->get_arc2()->get_indice()]=poids[num_sommet]+i->getPoids();
+                    preds[i->get_arc2()->get_indice()]=num_sommet;
+                    affichage_parcours(preds,depart,sfinal,poids,chemins);
+                }
+                else /// Sinon on le parcours
+                {
+                    poids[i->get_arc2()->get_indice()]=poids[num_sommet]+i->getPoids();
+                    preds[i->get_arc2()->get_indice()]=num_sommet;
+                    intermediarite_parcour(marquage,preds,i->get_arc2()->get_indice(),sfinal,depart,poids,chemins);
+                }
+            }
+        }
+        else if((i->get_arc2()->get_indice()==num_sommet)&&m_orientation==0)
+        {
+            /// Test marquage
+            if(marquage[i->get_arc1()->get_indice()]==0)
+            {
+                /// On test si c'est le sommet d'arivée
+                if(i->get_arc1()->get_indice()==sfinal)
+                {
+                    /// SAUVEGARDE PARCOURS
+                    poids[i->get_arc1()->get_indice()]=poids[num_sommet]+i->getPoids();
+                    preds[i->get_arc1()->get_indice()]=num_sommet;
+                    affichage_parcours(preds,depart,sfinal,poids,chemins);
+                }
+                else /// Sinon on le parcours
+                {
+                    poids[i->get_arc1()->get_indice()]=poids[num_sommet]+i->getPoids();
+                    preds[i->get_arc1()->get_indice()]=num_sommet;
+                    intermediarite_parcour(marquage,preds,i->get_arc1()->get_indice(),sfinal,depart,poids,chemins);
+                }
+            }
+        }
+    }
+    marquage[num_sommet]=0;
+}
+
+void Graphe::affichage_parcours(std::vector<int> preds,
+                                int num_sommet, int sfinal,std::vector<float> poids,
+                                std::vector<std::pair<std::vector<int>,float>> &chemins)
+{
+    std::pair<std::vector<int>,float> nouv;
+    chemins.push_back(nouv);
+
+    int actuel=preds[sfinal];
+
+    chemins[chemins.size()-1].first.push_back(sfinal);
+
+    while(actuel!=num_sommet)
+    {
+        chemins[chemins.size()-1].first.push_back(actuel);
+        actuel=preds[actuel];
+    }
+    chemins[chemins.size()-1].first.push_back(actuel);
+
+    chemins[chemins.size()-1].second=poids[sfinal];
+}
+
+/*std::list<int>* Graphe::defListeAdj(std::list<std::pair<int, float>>* pond)
 {
     std::list<int>* adjacence;
     adjacence = new std::list<int>[m_sommets.size()];
@@ -532,7 +766,7 @@ Arete* Graphe::seekArete(int& a, int& b)
         }
     }
     return nullptr;
-}
+}*/
 
 void Graphe::reset()
 {
@@ -960,13 +1194,13 @@ void Graphe::sauvegarde_fichier()
     }
 }
 
-void Graphe::freeMem(bool* visited, int* path, std::list<int>* adj, std::list<std::pair<int, float>>* pond)
+/*void Graphe::freeMem(bool* visited, int* path, std::list<int>* adj, std::list<std::pair<int, float>>* pond)
 {
     free(visited);
     free(path);
     free(adj);
     free(pond);
-}
+}*/
 
 void Graphe::reinitialiser_centralite()
 {

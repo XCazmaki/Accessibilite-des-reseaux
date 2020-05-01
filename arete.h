@@ -60,8 +60,6 @@ public:
         return  m_arc.second;
     }
 
-<<<<<<< HEAD
-=======
     float get_centralA()
     {
         return m_centralA;
@@ -72,7 +70,6 @@ public:
         return m_central_normA;
     }
 
->>>>>>> Romain
     /// Setter
 
     void set_indice(float nbr)
