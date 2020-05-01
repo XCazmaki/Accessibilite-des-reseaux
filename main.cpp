@@ -10,10 +10,13 @@
 void menu()
 {
     Graphe nouv;
+    if(nouv.get_orientation() == 2)
+        return;
+
     {
         Svgfile svgout;
         nouv.afficher_Svgfile(svgout);
-        nouv.calcul_centralite();
+        //nouv.calcul_centralite();
         nouv.sauvegarde_aretes();
     }
     int choix=0;

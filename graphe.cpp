@@ -11,7 +11,8 @@ Graphe::Graphe()
 
     if(!monFlux)
     {
-        std::cout<<"Fichier non trouvé, reessayez svp !\n"<<std::endl;
+        std::cout<<"Fichier non trouve, reessayez svp !\n"<<std::endl;
+        m_orientation = 2;
         return;
     }
 
