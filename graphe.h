@@ -79,6 +79,7 @@ public:
 
     void afficher_console() const;
     void afficher_Svgfile(Svgfile &svgout);
+    void dispLegend(Svgfile& svgout, float, float);
 
     /// Indices de centralité
 

@@ -157,7 +157,50 @@ void Graphe::afficher_Svgfile(Svgfile &svgout)
     {
         i->afficher_Svgfile(svgout,indice, maxS);
     }
+
+    dispLegend(svgout, maxS, maxA);
 }
+
+///permet d'afficher la legende
+void Graphe::dispLegend(Svgfile& svgout, float maxS, float maxA)
+{
+    svgout.addRectangle(0,10,15,10,15,15,0,15, "red");
+    svgout.addRectangle(0,15,15,15,15,20,0,20, "orange");
+    svgout.addRectangle(0,20,15,20,15,25,0,25, "gold");
+    svgout.addRectangle(0,25,15,25,15,30,0,30, "yellow");
+    svgout.addRectangle(0,30,15,30,15,35,0,35, "greenyellow");
+    svgout.addRectangle(0,35,15,35,15,40,0,40, "green");
+    svgout.addRectangle(0,40,15,40,15,45,0,45, "lightseagreen");
+    svgout.addRectangle(0,45,15,45,15,50,0,50, "lightskyblue");
+    svgout.addRectangle(0,50,15,50,15,55,0,55, "blue");
+    svgout.addRectangle(0,55,15,55,15,60,0,60, "purple");
+
+    if(maxS == 0)
+        maxS = 1;
+
+    svgout.addText(20, 13.5, maxS, "red");
+    svgout.addText(20, 39.25, "S", "black");
+    svgout.addText(20, 65, 0, "purple");
+
+    svgout.addRectangle(0,75,15,75,15,80,0,80, "red");
+    svgout.addRectangle(0,80,15,80,15,85,0,85, "orange");
+    svgout.addRectangle(0,85,15,85,15,90,0,90, "gold");
+    svgout.addRectangle(0,90,15,90,15,95,0,95, "yellow");
+    svgout.addRectangle(0,95,15,95,15,100,0,100, "greenyellow");
+    svgout.addRectangle(0,100,15,100,15,105,0,105, "green");
+    svgout.addRectangle(0,105,15,105,15,110,0,110, "lightseagreen");
+    svgout.addRectangle(0,110,15,110,15,115,0,115, "lightskyblue");
+    svgout.addRectangle(0,115,15,115,15,120,0,120, "blue");
+    svgout.addRectangle(0,120,15,120,15,125,0,125, "purple");
+
+    if(maxA == 0)
+        maxA = 1;
+
+    svgout.addText(20, 78.5, maxA, "red");
+    svgout.addText(20, 104.25,"A", "black");
+    svgout.addText(20, 130, 0, "purple");
+}
+
 /// Sous programme permettant de calculer l'indice d'ajustement de la taille du graphe lors de l'affichage
 float Graphe::calcul_indice()
 {

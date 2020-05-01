@@ -55,6 +55,7 @@ void menu()
         case 0 :
         {
             std::cout << "Fermeture du programme" << std::endl;
+            Svgfile svgout;
         }
         break;
         case 1 :
@@ -109,9 +110,9 @@ void menu()
         break;
         case 7 :
         {
-            Svgfile svgout;
             std::cout << "Quelle arete voulez-vous supprimer ? " << std::endl;
             std::cin >> choix;
+            Svgfile svgout;
             nouv.sauvegarde_sommets_indices();
             nouv.sauvegarde_aretes();
             nouv.supprimer_aretes(choix);
