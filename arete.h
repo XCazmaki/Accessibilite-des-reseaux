@@ -65,6 +65,11 @@ public:
         return m_central_normA;
     }
 
+    float get_centralA()
+    {
+        return m_centralA;
+    }
+
     /// Setter
     void set_indiceA(const int& i)
     {

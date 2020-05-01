@@ -135,14 +135,23 @@ public:
 
     ///Centralité intermédiaire
 
-    void centralite_intermediarite();
-    std::list<int>* defListeAdj(std::list<std::pair<int, float>>*);
-    void seekAllPaths(int, int, bool[], int[], int&, std::list<int>*, std::list<std::pair<int, float>>*, const float&, int&, std::vector<int>&, std::vector<Arete*>&);
-    void calculCentraliteInterSommet(const int&, std::vector<int>&);
-    void calculCentraliteInterArete(const int&, std::vector<Arete*>&);
-    Arete* seekArete(int&, int&);
-    void freeMem(bool*, int*, std::list<int>*, std::list<std::pair<int, float>>*);
+    //void centralite_intermediarite();
+    //std::list<int>* defListeAdj(std::list<std::pair<int, float>>*);
+    //void seekAllPaths(int, int, bool[], int[], int&, std::list<int>*, std::list<std::pair<int, float>>*, const float&, int&, std::vector<int>&, std::vector<Arete*>&);
+    //void calculCentraliteInterSommet(const int&, std::vector<int>&);
+    //void calculCentraliteInterArete(const int&, std::vector<Arete*>&);
+    //Arete* seekArete(int&, int&);
+    //void freeMem(bool*, int*, std::list<int>*, std::list<std::pair<int, float>>*);
 
+    ///centralite intermediarite 2
+    void intermediarite();
+    void intermediarite_parcour(std::vector<int> &marquage,
+                                    std::vector<int> &preds,int num_sommet,
+                                    int sfinal,int depart,std::vector<float> &poids,
+                                    std::vector<std::pair<std::vector<int>,float>> &chemins);
+    void affichage_parcours(std::vector<int> preds,
+                                int num_sommet, int sfinal,std::vector<float> poids,
+                                std::vector<std::pair<std::vector<int>,float>> &chemins);
 };
 
 #endif // GRAPHE_H_INCLUDED
