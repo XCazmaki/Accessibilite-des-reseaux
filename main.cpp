@@ -79,7 +79,8 @@ void menu()
         case 5 :
         {
             Svgfile svgout;
-            nouv.centralite_intermediarite();
+            //nouv.centralite_intermediarite();
+            nouv.intermediarite();
             nouv.afficher_Svgfile(svgout);
             break;
         }
