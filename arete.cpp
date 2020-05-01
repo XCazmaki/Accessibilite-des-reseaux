@@ -62,13 +62,17 @@ void Arete::afficher_Svgfile(Svgfile &svgout,float indice, const int& orient, fl
             cN = m_central_normA;
 
         std::string couleur="black";
-        if(cN>=0.80)
+        if(cN>= 0.90)
         {
-            couleur="red";
+            couleur = "red";
+        }
+        else if(cN>=0.80)
+        {
+            couleur="orange";
         }
         else if(cN>=0.70)
         {
-            couleur="orange";
+            couleur="gold";
         }
         else if(cN>=0.60)
         {
@@ -80,7 +84,7 @@ void Arete::afficher_Svgfile(Svgfile &svgout,float indice, const int& orient, fl
         }
         else if(cN>=0.40)
         {
-            couleur="lime";
+            couleur="green";
         }
         else if(cN>=0.30)
         {
@@ -88,7 +92,7 @@ void Arete::afficher_Svgfile(Svgfile &svgout,float indice, const int& orient, fl
         }
         else if(cN>=0.20)
         {
-            couleur="cyan";
+            couleur="lightskyblue";
         }
         else if(cN>=0.10)
         {

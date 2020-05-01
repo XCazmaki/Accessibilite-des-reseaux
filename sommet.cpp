@@ -71,13 +71,17 @@ void Sommet::afficher_Svgfile(Svgfile &svgout, float indice, float maxS = 1.0)
             cN = m_central_norm;
 
         std::string couleur="black";
-        if(cN>=0.80)
+        if(cN>= 0.90)
         {
-            couleur="red";
+            couleur = "red";
+        }
+        else if(cN>=0.80)
+        {
+            couleur="orange";
         }
         else if(cN>=0.70)
         {
-            couleur="orange";
+            couleur="gold";
         }
         else if(cN>=0.60)
         {
@@ -89,7 +93,7 @@ void Sommet::afficher_Svgfile(Svgfile &svgout, float indice, float maxS = 1.0)
         }
         else if(cN>=0.40)
         {
-            couleur="lime";
+            couleur="green";
         }
         else if(cN>=0.30)
         {
@@ -97,7 +101,7 @@ void Sommet::afficher_Svgfile(Svgfile &svgout, float indice, float maxS = 1.0)
         }
         else if(cN>=0.20)
         {
-            couleur="cyan";
+            couleur="lightskyblue";
         }
         else if(cN>=0.10)
         {
