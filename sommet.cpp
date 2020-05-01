@@ -52,6 +52,7 @@ void Sommet::afficher_console() const
     {
         std::cout << "Indices du sommet numero " << m_indice << std::endl;
         std::cout << "Son indice est : " << m_central << std::endl;
+        std::cout << "Son indice normalise est : " << m_central_norm << std::endl;
         /*std::cout << "Ses indices sont : " << std::endl;
         for(int i=0; i<4; ++i)
         {

@@ -32,6 +32,15 @@ public:
 
     /// Getters
 
+    float get_central_normA()
+    {
+        return m_central_normA;
+    }
+    float get_centralA()
+    {
+        return m_centralA;
+    }
+
     float getPoids()
     {
         return m_poids;

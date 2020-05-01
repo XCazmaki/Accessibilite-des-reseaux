@@ -191,13 +191,14 @@ int main()
     menu();
 
     //Graphe nouv;
-
-    /*nouv.intermediarite();
-    nouv.afficher_console();
-    nouv.intermediarite();
-    nouv.afficher_console();
-    nouv.intermediarite();
-    nouv.afficher_console();*/
+    //Svgfile svgout;
+    //nouv.afficher_Svgfile(svgout);
+    //nouv.intermediarite();
+    //nouv.afficher_console();
+    //nouv.intermediarite();
+    //nouv.afficher_console();
+    //nouv.intermediarite();
+    //nouv.afficher_console();
 
     std::cout << "hello";
     return 0;
