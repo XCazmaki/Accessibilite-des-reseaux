@@ -86,7 +86,8 @@ void menu()
         case 5 :
         {
             Svgfile svgout;
-            nouv.centralite_intermediarite();
+            //nouv.centralite_intermediarite();
+            nouv.intermediarite();
             nouv.afficher_Svgfile(svgout);
             break;
         }
@@ -187,11 +188,16 @@ void menu()
 
 int main()
 {
-    //menu();
+    menu();
 
-    Graphe nouv;
+    //Graphe nouv;
 
+    /*nouv.intermediarite();
+    nouv.afficher_console();
     nouv.intermediarite();
+    nouv.afficher_console();
+    nouv.intermediarite();
+    nouv.afficher_console();*/
 
     std::cout << "hello";
     return 0;

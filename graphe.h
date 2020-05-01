@@ -159,8 +159,11 @@ public:
 
 
     void intermediarite();
-    void intermediarite_parcour(std::vector<int> &marquage,std::vector<int> &preds, int num_sommet, int sfinal,int depart);
-    void affichage_parcours(std::vector<int> preds,int num_sommet, int sfinal);
+    void intermediarite_parcour(std::vector<int> &marquage,
+                                std::vector<int> &preds, int num_sommet,
+                                int sfinal,int depart,std::vector<float> &poids,
+                                std::vector<std::pair<std::vector<int>,float>> &chemins);
+    void affichage_parcours(std::vector<int> preds,int num_sommet, int sfinal,std::vector<float> poids,std::vector<std::pair<std::vector<int>,float>> &chemins);
 };
 
 #endif // GRAPHE_H_INCLUDED

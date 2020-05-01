@@ -183,16 +183,16 @@ float Graphe::calcul_indice()
 
 void Graphe::calcul_centralite()
 {
-    std::cout << "degre" << std::endl;
+    //std::cout << "degre" << std::endl;
     centralite_degre();
-    std::cout << "vecteur" << std::endl;
+    //std::cout << "vecteur" << std::endl;
     centralite_vecteur_propre();
-    std::cout << "proxy" << std::endl;
+    //std::cout << "proxy" << std::endl;
     centralite_proximite();
-    std::cout << "int" << std::endl;
-    afficher_console();
+    //std::cout << "int" << std::endl;
+    //afficher_console();
     centralite_intermediarite();
-    std::cout << "FIN" << std::endl;
+    //std::cout << "FIN" << std::endl;
 }
 
 void Graphe::centralite_degre()
@@ -1129,7 +1129,7 @@ void Graphe::reinitialiser_centralite()
 
 
 
-
+/// Intermediartie 2
 
 
 
@@ -1142,31 +1142,112 @@ void Graphe::intermediarite()
 {
     std::vector<int> marquage;
     std::vector<int> preds;
+    std::vector<float> poids;
+
+    std::vector<std::pair<std::vector<int>,float>> chemins;
+
+    float plus_court=1000000;
+    float nombre_plus_courts=0;
+    float indice_norm=0;
+    /// Indice permettant de normaliser le code
+    indice_norm=((m_sommets.size()*m_sommets.size())-(3*m_sommets.size())+2)/2;
+
+
 
 
     for(auto i:m_sommets)
     {
         marquage.push_back(0);
         preds.push_back(-1);
+        poids.push_back(0);
+        i->set_central(0);
     }
     for(size_t i=0; i<m_sommets.size(); i++)
     {
         for(size_t j=0; j<m_sommets.size(); j++)
         {
-            intermediarite_parcour(marquage,preds,i,j,i);
-            for(size_t t=0; t<m_sommets.size(); t++)
+            if(i!=j)
             {
-                marquage[t]=0;
-                preds[t]=-1;
+                //std::cout << "Parcours entre " << i+1 << " et " << j+1 << std::endl;
+                intermediarite_parcour(marquage,preds,i,j,i,poids,chemins);
+                for(size_t t=0; t<m_sommets.size(); t++)
+                {
+                    marquage[t]=0;
+                    preds[t]=-1;
+                    poids[t]=0;
+                }
+
+                /// Recherche du plus court chemin
+                for(auto i: chemins)
+                {
+                    if(i.second<plus_court)
+                    {
+                        plus_court=i.second;
+                    }
+                }
+
+                //std::cout << "Le chemin le plus court a un poid de  :" << plus_court << std::endl;
+
+                /// Suppression des chemin non plus court
+
+                for(size_t i=0;i<chemins.size();++i)
+                {
+                    if(chemins[i].second>plus_court)
+                    {
+                        chemins.erase(chemins.begin()+i);
+                        i--;
+                    }
+                }
+
+                /// Augmentation de l'indice
+                nombre_plus_courts=chemins.size();
+
+                for(auto i: chemins)
+                {
+                    for(auto j:i.first)
+                    {
+                        m_sommets[j]->set_central(m_sommets[j]->get_central()+((1/nombre_plus_courts)));
+                        m_sommets[j]->set_central_norm(m_sommets[j]->get_central()/indice_norm);
+
+                    }
+                }
+
+                //afficher_console();
+                /// Affichage du vecteur chemin
+                //std::cout << "Affichage des chemins :" << std::endl;
+                for(auto i: chemins)
+                {
+                    for(auto j: i.first)
+                    {
+                     //   std::cout << "<-"<<j;
+                    }
+                   // std::cout << std::endl << "Poids = " << i.second<< std::endl;
+                }
+
+                while(chemins.size()!=0)
+                {
+                    chemins.pop_back();
+                }
+
+                //system("pause");
             }
+
         }
+    }
+    for(auto i: m_sommets)
+    {
+        i->set_indice_central(3,i->get_central(),i->get_central_norm());
     }
 }
 
-void Graphe::intermediarite_parcour(std::vector<int> &marquage,std::vector<int> &preds,int num_sommet, int sfinal,int depart)
+void Graphe::intermediarite_parcour(std::vector<int> &marquage,
+                                    std::vector<int> &preds,int num_sommet,
+                                    int sfinal,int depart,std::vector<float> &poids,
+                                    std::vector<std::pair<std::vector<int>,float>> &chemins)
 {
     /// On part du nœud initial, on le marque.
     marquage[num_sommet]=1;
+    //std::cout << "On marque " << num_sommet << std::endl;
     /// On regarde les successeurs non marqués
     for(auto i:m_aretes)
     {
@@ -1179,17 +1260,21 @@ void Graphe::intermediarite_parcour(std::vector<int> &marquage,std::vector<int> 
                 /// On test si c'est le sommet d'arivée
                 if(i->get_arc2()->get_indice()==sfinal)
                 {
+                    //std::cout << "On est arrive a " << sfinal << std::endl;
                     /// SAUVEGARDE PARCOURS
-                    affichage_parcours(preds,depart,sfinal);
+                    poids[i->get_arc2()->get_indice()]=poids[num_sommet]+i->getPoids();
+                    preds[i->get_arc2()->get_indice()]=num_sommet;
+                    affichage_parcours(preds,depart,sfinal,poids,chemins);
                 }
                 else /// Sinon on le parcours
                 {
+                    poids[i->get_arc2()->get_indice()]=poids[num_sommet]+i->getPoids();
                     preds[i->get_arc2()->get_indice()]=num_sommet;
-                    intermediarite_parcour(marquage,preds,i->get_arc2()->get_indice(),sfinal,depart);
+                    intermediarite_parcour(marquage,preds,i->get_arc2()->get_indice(),sfinal,depart,poids,chemins);
                 }
             }
         }
-        else if(i->get_arc2()->get_indice()==num_sommet)
+        else if((i->get_arc2()->get_indice()==num_sommet)&&m_orientation==0)
         {
             /// Test marquage
             if(marquage[i->get_arc1()->get_indice()]==0)
@@ -1197,13 +1282,17 @@ void Graphe::intermediarite_parcour(std::vector<int> &marquage,std::vector<int> 
                 /// On test si c'est le sommet d'arivée
                 if(i->get_arc1()->get_indice()==sfinal)
                 {
+                    //std::cout << "On est arrive a " << sfinal << std::endl;
                     /// SAUVEGARDE PARCOURS
-                    affichage_parcours(preds,depart,sfinal);
+                    poids[i->get_arc1()->get_indice()]=poids[num_sommet]+i->getPoids();
+                    preds[i->get_arc1()->get_indice()]=num_sommet;
+                    affichage_parcours(preds,depart,sfinal,poids,chemins);
                 }
                 else /// Sinon on le parcours
                 {
+                    poids[i->get_arc1()->get_indice()]=poids[num_sommet]+i->getPoids();
                     preds[i->get_arc1()->get_indice()]=num_sommet;
-                    intermediarite_parcour(marquage,preds,i->get_arc1()->get_indice(),sfinal,depart);
+                    intermediarite_parcour(marquage,preds,i->get_arc1()->get_indice(),sfinal,depart,poids,chemins);
                 }
             }
         }
@@ -1211,13 +1300,39 @@ void Graphe::intermediarite_parcour(std::vector<int> &marquage,std::vector<int> 
     marquage[num_sommet]=0;
 }
 
-void Graphe::affichage_parcours(std::vector<int> preds,int num_sommet, int sfinal)
+void Graphe::affichage_parcours(std::vector<int> preds,
+                                int num_sommet, int sfinal,std::vector<float> poids,
+                                std::vector<std::pair<std::vector<int>,float>> &chemins)
 {
+    std::pair<std::vector<int>,float> nouv;
+    chemins.push_back(nouv);
+    for(size_t i=0;i<preds.size();i++)
+    {
+        //std::cout << preds[i] << " ";
+    }
     int actuel=preds[sfinal];
-    std::cout << "On part de "<< sfinal << std::endl;
+   // std::cout << std::endl << "Un chemin est "<< sfinal+1;
+
+    chemins[chemins.size()-1].first.push_back(sfinal);
+
     while(actuel!=num_sommet)
     {
-        std::cout << "num = " << actuel << std::endl;
+        //std::cout << "<-" << actuel+1;
+        chemins[chemins.size()-1].first.push_back(actuel);
         actuel=preds[actuel];
     }
+    //std::cout << "<-"<< num_sommet+1 << std::endl;
+    chemins[chemins.size()-1].first.push_back(actuel);
+
+    //std::cout << "Le poids est de "<< poids[sfinal] << std::endl;
+    chemins[chemins.size()-1].second=poids[sfinal];
+
+    for(auto i: chemins[chemins.size()-1].first)
+    {
+        //std::cout << " sommet : " << i+1;
+    }
+    //std::cout << std::endl;
+
+    //std::cout <<" Le poid est " << chemins[chemins.size()-1].second << std::endl;
+
 }
