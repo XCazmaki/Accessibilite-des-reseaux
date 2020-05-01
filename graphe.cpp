@@ -11,7 +11,8 @@ Graphe::Graphe()
 
     if(!monFlux)
     {
-        std::cout<<"Fichier non trouvé, reessayez svp !\n"<<std::endl;
+        std::cout<<"Fichier non trouve, reessayez svp !\n"<<std::endl;
+        m_orientation = 2;
         return;
     }
 
@@ -134,14 +135,27 @@ void Graphe::afficher_console() const
 void Graphe::afficher_Svgfile(Svgfile &svgout)
 {
     float indice=this->calcul_indice();
+    float maxS = 0.0;
+    for(auto s: m_sommets)
+    {
+        if(s->get_central_norm()> maxS)
+            maxS = s->get_central_norm();
+    }
+
+    float maxA = 0.0;
+    for(auto a: m_aretes)
+    {
+        if(a->get_central_normA()> maxA)
+            maxA = a->get_central_normA();
+    }
 
     for(auto i: m_aretes)
     {
-        i->afficher_Svgfile(svgout,indice, m_orientation);
+        i->afficher_Svgfile(svgout,indice, m_orientation, maxA);
     }
     for(auto i: m_sommets)
     {
-        i->afficher_Svgfile(svgout,indice);
+        i->afficher_Svgfile(svgout,indice, maxS);
     }
 }
 /// Sous programme permettant de calculer l'indice d'ajustement de la taille du graphe lors de l'affichage
@@ -183,27 +197,35 @@ float Graphe::calcul_indice()
 
 void Graphe::calcul_centralite()
 {
-    std::cout << "degre" << std::endl;
     centralite_degre();
-    std::cout << "vecteur" << std::endl;
     centralite_vecteur_propre();
-    std::cout << "proxy" << std::endl;
     centralite_proximite();
-    std::cout << "int" << std::endl;
-    afficher_console();
-    centralite_intermediarite();
-    std::cout << "FIN" << std::endl;
+    //centralite_intermediarite();
 }
 
 void Graphe::centralite_degre()
 {
+    float cG = 0.0;
+    float m = 0.0;
+    float somme= 0.0;
+    float n = (float)m_sommets.size();
     for(auto i: m_sommets)
     {
         /// l'indice de chaque sommet equivaux à son degrès
+        if(i->get_degre()>m)
+            m =i->get_degre();
+
         i->set_central(i->get_degre());
         i->set_central_norm(i->get_degre()/(m_sommets.size()-1));
         i->set_indice_central(0,i->get_central(),i->get_central_norm());
     }
+
+    for(auto s : m_sommets)
+    {
+        somme+= (m - (float)s->get_degre());
+    }
+    cG = (somme / ((n*n) - (3*n) +2));
+    std::cout<<"L indice globale de centralite de degre est : " << cG<<std::endl;
 }
 
 void Graphe::centralite_vecteur_propre()
@@ -265,6 +287,7 @@ void Graphe::centralite_vecteur_propre()
 
 void Graphe::centralite_proximite()
 {
+    float m = 0.0;
     for(auto s: m_sommets)
     {
 
@@ -288,12 +311,23 @@ void Graphe::centralite_proximite()
         s->set_central(1/poidsTot);
         s->set_central_norm((m_sommets.size() - 1)/ poidsTot);
 
+        if(s->get_central_norm() > m)
+            m = s->get_central_norm();
+
         reset();/// on reset les parametres de parcours des sommets
     }
+
+    float somme = 0.0;
+    float pG = 0.0;
+    float n = m_sommets.size();
     for(auto i: m_sommets)
     {
         i->set_indice_central(2,i->get_central(),i->get_central_norm());
+
+        somme += (m - i->get_central_norm());
     }
+    pG = ((somme * ((2 * n) - 3))/((n*n)-(3*n)+2));
+    std::cout<<"L indice globale de centralite de proximite est : " << pG<<std::endl;
 }
 
 void Graphe::dijkstra(Sommet* d)
@@ -398,8 +432,15 @@ void Graphe::centralite_intermediarite()
         }
     }
 
+    float m=0.0;
+    float somme =0.0;
+    float bG= 0.0;
+    float n = (float)m_sommets.size();
     for(auto so : m_sommets)
     {
+        if(so->get_central_norm()> m)
+            m = so->get_central_norm();
+
         so->DefcentralInterNorm(m_sommets.size());
     }
 
@@ -409,7 +450,11 @@ void Graphe::centralite_intermediarite()
     for(auto i: m_sommets)
     {
         i->set_indice_central(3,i->get_central(),i->get_central_norm());
+
+        somme += (m - i->get_central_norm());
     }
+    bG = (somme/((n -1)*((n*n)-(3*n)+2)));
+    std::cout<<"L indice globale de centralite d intermediarite est : " << bG<<std::endl;
 }
 
 void Graphe::calculCentraliteInterSommet(const int& nCC, std::vector<int>& tab)
@@ -478,7 +523,7 @@ void Graphe::calculCentraliteInterArete(const int& nCC, std::vector<Arete*>& tab
 }
 
 void Graphe::seekAllPaths(int u, int d, bool visited[], int path[], int &path_index, std::list<int>* adj, std::list<std::pair<int, float>>* pond,
-                           const float& PCC, int& nCC, std::vector<int>& tab, std::vector<Arete*>& tab2)
+                          const float& PCC, int& nCC, std::vector<int>& tab, std::vector<Arete*>& tab2)
 {
     visited[u] = true;
     path[path_index] = u;
@@ -732,6 +777,7 @@ void Graphe::parcours_DFS(int indice,std::vector<int> &couleurs)
     std::cout << "on termine le sommet " << indice << std::endl;
 }
 
+
 void Graphe::forte_connexite()
 {
     if(!connexite())
@@ -770,7 +816,6 @@ void Graphe::forte_connexite()
     {
         std::cout << "Le graphe est fortement connexe" << std::endl;
     }
-
 }
 
 
@@ -811,6 +856,11 @@ void Graphe::sauvegarde_aretes()
 
     m_degres_svg.push_back(degres_svg);
     m_aretes_originales.push_back(m_aretes);
+
+    for(size_t i=0;i<m_aretes.size();i++)
+    {
+        m_aretes[i]->set_indice(i);
+    }
 }
 
 void Graphe::restaurer_aretes()
@@ -848,19 +898,31 @@ void Graphe::supprimer_aretes(int indice)
         {
             if(i->get_indice()==indice)
             {
-                i->get_arc1()->set_degre(i->get_arc1()->get_degre()-1);
-                i->get_arc2()->set_degre(i->get_arc2()->get_degre()-1);
+                (i->get_arc1())->set_degre(i->get_arc1()->get_degre()-1);
+                (i->get_arc2())->set_degre(i->get_arc2()->get_degre()-1);
 
                 m_aretes.erase(m_aretes.begin() + compteur);
-
             }
             compteur++;
         }
         for(int i = 0; i< (int)m_aretes.size(); ++i)
             m_aretes[i]->set_indiceA(i);
+
     }
 }
 
+
+void Graphe::sauvegarde_sommets_indices()
+{
+    std::vector<Sommet> svg;
+
+    for(auto i: m_sommets)
+    {
+        svg.push_back(*i);
+    }
+
+    m_sommets_svg.push_back(svg);
+}
 
 void Graphe::restaurer_sommets()
 {
@@ -942,13 +1004,12 @@ void Graphe::supprimer_sommet_test(int indice)
 
 void Graphe::sauvegarde_sommets_indices()
 {
-    //afficher_console();
-    std::vector<Sommet> svg;
-
-    for(auto i: m_sommets)
+    if(m_sommets_svg.size()>0)
     {
-        svg.push_back(*i);
-    }
+        for(size_t i=0; i<m_sommets.size(); ++i)
+        {
+            std::cout << "Indices de centralites actuels :" << std::endl;
+            m_sommets[i]->afficher_console();
 
     m_sommets_svg.push_back(svg);
 }
@@ -959,11 +1020,20 @@ void Graphe::comparer_indices()
     {
         std::cout << "Indices de centralites actuels :" << std::endl;
         m_sommets[i]->afficher_console();
+=======
+            std::cout << "Indices de centralites au temps t-1 :" << std::endl;
+            m_sommets_svg[m_sommets_svg.size()-1][i].afficher_console();
 
-        for(size_t j=0; j<m_sommets_svg.size(); ++j)
-        {
-            std::cout << "Indices de centralites au temps t-" << j+1 <<" :" << std::endl;
-            m_sommets_svg[j][i].afficher_console();
+            std::cout << "Ils ont donc variés de : " << std::endl;
+
+            for(size_t j=0; j<4; ++j)
+            {
+                std::cout << ((m_sommets[i]->get_indice_central()[j].first)-(m_sommets_svg[m_sommets_svg.size()-1][i].get_indice_central()[j].first)) << " ";
+                std::cout << ((m_sommets[i]->get_indice_central()[j].second)-(m_sommets_svg[m_sommets_svg.size()-1][i].get_indice_central()[j].second)) << " ";
+                std::cout << std::endl;
+            }
+>>>>>>> 35959b0188b371fd33cbb9dc1b293febebea6b83
+
         }
     }
 }*/
@@ -1032,5 +1102,13 @@ void Graphe::reinitialiser_centralite()
     {
         a->set_centralA(0);
         a->set_central_normA(0);
+    }
+}
+
+void Graphe::reinitialiser_indice_aretes()
+{
+    for(size_t i=0; i<m_aretes.size(); ++i)
+    {
+        m_aretes[i]->set_indice(i);
     }
 }

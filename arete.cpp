@@ -47,7 +47,7 @@ void Arete::afficher_console() const
 
 /// Affiche l'Arete dans Svgfile
 /// Affiche l'Arete, son numéro et son poid
-void Arete::afficher_Svgfile(Svgfile &svgout,float indice, const int& orient)
+void Arete::afficher_Svgfile(Svgfile &svgout,float indice, const int& orient, float maxA = 1)
 {
     float x=0;
     float y=0;
@@ -55,27 +55,54 @@ void Arete::afficher_Svgfile(Svgfile &svgout,float indice, const int& orient)
     x=(m_arc.first->get_coordx()+m_arc.second->get_coordx())/2;
     y=(m_arc.first->get_coordy()+m_arc.second->get_coordy())/2;
 
-    std::string couleur="black";
-    if(m_central_normA>0.80)
-    {
-        couleur="red";
-    }
-    else if(m_central_normA>0.60)
-    {
-        couleur="orange";
-    }
-    else if(m_central_normA>0.40)
-    {
-        couleur="yellow";
-    }
-    else if(m_central_normA>0.20)
-    {
-        couleur="blue";
-    }
-    else if(m_central_normA<=0.20)
-    {
-        couleur="purple";
-    }
+        float cN =0.0;
+        if(maxA >0)
+            cN = m_central_normA / maxA;
+        else
+            cN = m_central_normA;
+
+        std::string couleur="black";
+        if(cN>= 0.90)
+        {
+            couleur = "red";
+        }
+        else if(cN>=0.80)
+        {
+            couleur="orange";
+        }
+        else if(cN>=0.70)
+        {
+            couleur="gold";
+        }
+        else if(cN>=0.60)
+        {
+            couleur="yellow";
+        }
+        else if(cN>=0.50)
+        {
+            couleur="greenyellow";
+        }
+        else if(cN>=0.40)
+        {
+            couleur="green";
+        }
+        else if(cN>=0.30)
+        {
+            couleur="lightseagreen";
+        }
+        else if(cN>=0.20)
+        {
+            couleur="lightskyblue";
+        }
+        else if(cN>=0.10)
+        {
+            couleur="blue";
+        }
+        else if(cN<0.10)
+        {
+            couleur="black";
+        }
+
     svgout.addLine(m_arc.first->get_coordx()*indice,m_arc.first->get_coordy()*indice,m_arc.second->get_coordx()*indice,m_arc.second->get_coordy()*indice,couleur);
     if(orient == 1)
         dessinerTriangle(m_arc.first->get_coordx()*indice,m_arc.first->get_coordy()*indice,m_arc.second->get_coordx()*indice,m_arc.second->get_coordy()*indice,couleur, svgout);
@@ -175,7 +202,7 @@ std::pair<float, float> Arete::defsol(const float& x1, const float& y1, const fl
         b = ((-2)*x2 + 2*m*(h- y2));
         c = ((x2 * x2) + ((h - y2)*(h - y2)) - (r*r));
 
-        std::cout<<a<< " "<< b<< " "<< c <<std::endl;
+        //std::cout<<a<< " "<< b<< " "<< c <<std::endl;
 
 
          ix1= ((-b - std::sqrt((b * b) - 4*a*c)) / (2*a));

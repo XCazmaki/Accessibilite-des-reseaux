@@ -60,10 +60,20 @@ public:
         return  m_arc.second;
     }
 
+    float get_central_normA()
+    {
+        return m_central_normA;
+    }
+
     /// Setter
     void set_indiceA(const int& i)
     {
         m_indice = i;
+    }
+
+    void set_indice(float nbr)
+    {
+        m_indice=nbr;
     }
 
     void set_arc1(Sommet* nouv)
@@ -90,7 +100,7 @@ public:
     bool changerPond(const std::pair<int, float>&);
     //void afficher() const;
     void afficher_console() const;
-    void afficher_Svgfile(Svgfile &svgout,float indice,const int&);
+    void afficher_Svgfile(Svgfile &svgout,float indice,const int&, float);
     void dessinerTriangle(const float&, const float&, const float&, const float&, const std::string&, Svgfile&);
     std::pair<float, float> defsol(const float&, const float&, const float&, const float&, const float&, const float&, const float&);
 

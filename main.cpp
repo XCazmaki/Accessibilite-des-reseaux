@@ -9,11 +9,14 @@
 
 void menu()
 {
-    int dernier=0;
     Graphe nouv;
+    if(nouv.get_orientation() == 2)
+        return;
+
     {
         Svgfile svgout;
         nouv.afficher_Svgfile(svgout);
+        //nouv.calcul_centralite();
         nouv.sauvegarde_aretes();
     }
     int choix=0;
@@ -22,6 +25,7 @@ void menu()
     {
         {
             Svgfile svgout;
+
             //nouv.calcul_centralite();
 
             nouv.reinitialiser_centralite();
@@ -37,7 +41,7 @@ void menu()
         std::cout << "6: Etudier la connexite du graphe" << std::endl;
         std::cout << "7: Supprimer une arete du graphe" << std::endl;
         std::cout << "8: Supprimer un sommet du graphe" << std::endl;
-        std::cout << "9: Restituer l'etat precedent du graphe" << std::endl;
+        std::cout << "9: Restituer l'etat precedent des aretes" << std::endl;
         std::cout << "10: Lancer l'affichage en console" << std::endl;
         std::cout << "11: Sauvegarder dans un fichier" << std::endl;
         std::cout << "12: Conparer indices" << std::endl;
@@ -114,13 +118,12 @@ void menu()
             nouv.calcul_indice();
             nouv.afficher_Svgfile(svgout);
             choix=7;
-            dernier=0;
         }
         break;
         case 8 :
         {
             Svgfile svgout;
-            std::cout << "Quelle arete voulez-vous supprimer ? " << std::endl;
+            std::cout << "Quelle sommet voulez-vous supprimer ? " << std::endl;
             std::cin >> choix;
             //nouv.supprimer_sommets(choix);
             nouv.supprimer_sommet_test(choix);
@@ -139,6 +142,7 @@ void menu()
             //if(dernier==1)
             //nouv.restaurer_sommets();
 
+            nouv.restaurer_aretes();
             nouv.afficher_Svgfile(svgout);
         }
         break;
@@ -168,6 +172,7 @@ void menu()
         case 13 :
         {
             Svgfile svgout;
+            nouv.restaurer_sommets();
             nouv.afficher_Svgfile(svgout);
         }
         break;
@@ -176,6 +181,7 @@ void menu()
             std::cout << "Veuillez rentrer une reponse valide" << std::endl;
             break;
         }
+        nouv.reinitialiser_centralite();
         system("pause");
         system("cls");
     }
