@@ -1180,7 +1180,6 @@ void Graphe::intermediarite()
         {
             if(i!=j)
             {
-                //std::cout << "Parcours entre " << i << " et " << j << std::endl;
                 intermediarite_parcour(marquage,preds,i,j,i,poids,chemins);
                 for(size_t t=0; t<m_sommets.size(); t++)
                 {
@@ -1208,12 +1207,6 @@ void Graphe::intermediarite()
                         i--;
                     }
                 }
-                /*std::cout << "Chemin plus court" << std::endl;
-                for(auto i: chemins[0].first)
-                {
-                    std::cout << " sommet : " << i+1;
-                }
-                std::cout << std::endl;*/
 
                 /// Augmentation de l'indice des sommets
                 nombre_plus_courts=chemins.size();
@@ -1233,28 +1226,21 @@ void Graphe::intermediarite()
                 {
                     for(size_t j=0;j<i.first.size();++j)
                     {
-                        std::cout << "j=" << j << std::endl;
                         /// i.first[j] = un num de sommet du parcours le plus court
                         /// Il faut regarder avant et apres si c'est l'autre extremité de l'arete
                         for(auto t: m_aretes)
                         {
-                            std::cout << "t->get_arc1()->get_indice()=" << t->get_arc1()->get_indice()<< std::endl;
                             /// Si le premier element de l'arete appartient au parcours le plus court
-                            std::cout << "i.first[j]" << i.first[j]<< std::endl;
                             if(t->get_arc1()->get_indice()==i.first[j])
                             {
-                                std::cout << "On rentre " << std::endl;
                                 /// Si j n'est pas le dernier element de la liste
                                 if(j!=i.first[i.first.size()-1])
                                 {
-                                    std::cout << "l'arete est bonne " << i.first[j-1] << std::endl;
                                     if(t->get_arc2()->get_indice()==i.first[j-1])
                                     {
-                                        std::cout << "l'arete correspond " << std::endl;
                                         ///On met a jour l'indice
-                                        t->set_centralA(t->get_centralA()+((1/*/nombre_plus_courts*/)));
+                                        t->set_centralA(t->get_centralA()+((1/nombre_plus_courts)));
                                         t->set_central_normA(t->get_centralA()/indice_norm);
-                                        std::cout << "Changement arete " << t->get_centralA() << std::endl;
                                     }
                                 }
                             }
@@ -1266,7 +1252,8 @@ void Graphe::intermediarite()
                                     if(t->get_arc1()->get_indice()==i.first[j+1])
                                     {
                                         ///On met a jour l'indice
-
+                                        t->set_centralA(t->get_centralA()+((1/nombre_plus_courts)));
+                                        t->set_central_normA(t->get_centralA()/indice_norm);
                                     }
                                 }
                             }
@@ -1274,24 +1261,10 @@ void Graphe::intermediarite()
                     }
                 }
 
-                //afficher_console();
-                /// Affichage du vecteur chemin
-                //std::cout << "Affichage des chemins :" << std::endl;
-                /*for(auto i: chemins)
-                {
-                    for(auto j: i.first)
-                    {
-                        //   std::cout << "<-"<<j;
-                    }
-                    // std::cout << std::endl << "Poids = " << i.second<< std::endl;
-                }*/
-
                 while(chemins.size()!=0)
                 {
                     chemins.pop_back();
                 }
-
-                //system("pause");
             }
 
         }
@@ -1309,7 +1282,6 @@ void Graphe::intermediarite_parcour(std::vector<int> &marquage,
 {
     /// On part du nœud initial, on le marque.
     marquage[num_sommet]=1;
-    //std::cout << "On marque " << num_sommet << std::endl;
     /// On regarde les successeurs non marqués
     for(auto i:m_aretes)
     {
@@ -1322,7 +1294,6 @@ void Graphe::intermediarite_parcour(std::vector<int> &marquage,
                 /// On test si c'est le sommet d'arivée
                 if(i->get_arc2()->get_indice()==sfinal)
                 {
-                    //std::cout << "On est arrive a " << sfinal << std::endl;
                     /// SAUVEGARDE PARCOURS
                     poids[i->get_arc2()->get_indice()]=poids[num_sommet]+i->getPoids();
                     preds[i->get_arc2()->get_indice()]=num_sommet;
@@ -1344,7 +1315,6 @@ void Graphe::intermediarite_parcour(std::vector<int> &marquage,
                 /// On test si c'est le sommet d'arivée
                 if(i->get_arc1()->get_indice()==sfinal)
                 {
-                    //std::cout << "On est arrive a " << sfinal << std::endl;
                     /// SAUVEGARDE PARCOURS
                     poids[i->get_arc1()->get_indice()]=poids[num_sommet]+i->getPoids();
                     preds[i->get_arc1()->get_indice()]=num_sommet;
@@ -1368,33 +1338,17 @@ void Graphe::affichage_parcours(std::vector<int> preds,
 {
     std::pair<std::vector<int>,float> nouv;
     chemins.push_back(nouv);
-    for(size_t i=0; i<preds.size(); i++)
-    {
-        //std::cout << preds[i] << " ";
-    }
+
     int actuel=preds[sfinal];
-    //std::cout << std::endl << "Un chemin est "<< sfinal+1;
 
     chemins[chemins.size()-1].first.push_back(sfinal);
 
     while(actuel!=num_sommet)
     {
-        //std::cout << "<-" << actuel+1;
         chemins[chemins.size()-1].first.push_back(actuel);
         actuel=preds[actuel];
     }
-    //std::cout << "<-"<< num_sommet+1 << std::endl;
     chemins[chemins.size()-1].first.push_back(actuel);
 
-    //std::cout << "Le poids est de "<< poids[sfinal] << std::endl;
     chemins[chemins.size()-1].second=poids[sfinal];
-
-    for(auto i: chemins[chemins.size()-1].first)
-    {
-        //std::cout << " sommet : " << i+1;
-    }
-    //std::cout << std::endl;
-
-    //std::cout <<" Le poid est " << chemins[chemins.size()-1].second << std::endl;
-
 }
