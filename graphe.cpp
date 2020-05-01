@@ -192,13 +192,27 @@ void Graphe::calcul_centralite()
 
 void Graphe::centralite_degre()
 {
+    float cG = 0.0;
+    float m = 0.0;
+    float somme= 0.0;
+    float n = (float)m_sommets.size();
     for(auto i: m_sommets)
     {
         /// l'indice de chaque sommet equivaux à son degrès
+        if(i->get_degre()>m)
+            m =i->get_degre();
+
         i->set_central(i->get_degre());
         i->set_central_norm(i->get_degre()/(m_sommets.size()-1));
         i->set_indice_central(0,i->get_central(),i->get_central_norm());
     }
+
+    for(auto s : m_sommets)
+    {
+        somme+= (m - (float)s->get_degre());
+    }
+    cG = (somme / ((n*n) - (3*n) +2));
+    std::cout<<"L indice globale de centralite de degre est : " << cG<<std::endl;
 }
 
 void Graphe::centralite_vecteur_propre()
@@ -260,6 +274,7 @@ void Graphe::centralite_vecteur_propre()
 
 void Graphe::centralite_proximite()
 {
+    float m = 0.0;
     for(auto s: m_sommets)
     {
 
@@ -283,12 +298,23 @@ void Graphe::centralite_proximite()
         s->set_central(1/poidsTot);
         s->set_central_norm((m_sommets.size() - 1)/ poidsTot);
 
+        if(s->get_central_norm() > m)
+            m = s->get_central_norm();
+
         reset();/// on reset les parametres de parcours des sommets
     }
+
+    float somme = 0.0;
+    float pG = 0.0;
+    float n = m_sommets.size();
     for(auto i: m_sommets)
     {
         i->set_indice_central(2,i->get_central(),i->get_central_norm());
+
+        somme += (m - i->get_central_norm());
     }
+    pG = ((somme * ((2 * n) - 3))/((n*n)-(3*n)+2));
+    std::cout<<"L indice globale de centralite de proximite est : " << pG<<std::endl;
 }
 
 void Graphe::dijkstra(Sommet* d)
