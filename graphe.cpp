@@ -135,14 +135,27 @@ void Graphe::afficher_console() const
 void Graphe::afficher_Svgfile(Svgfile &svgout)
 {
     float indice=this->calcul_indice();
+    float maxS = 0.0;
+    for(auto s: m_sommets)
+    {
+        if(s->get_central_norm()> maxS)
+            maxS = s->get_central_norm();
+    }
+
+    float maxA = 0.0;
+    for(auto a: m_aretes)
+    {
+        if(a->get_central_normA()> maxA)
+            maxA = a->get_central_normA();
+    }
 
     for(auto i: m_aretes)
     {
-        i->afficher_Svgfile(svgout,indice, m_orientation);
+        i->afficher_Svgfile(svgout,indice, m_orientation, maxA);
     }
     for(auto i: m_sommets)
     {
-        i->afficher_Svgfile(svgout,indice);
+        i->afficher_Svgfile(svgout,indice, maxS);
     }
 }
 /// Sous programme permettant de calculer l'indice d'ajustement de la taille du graphe lors de l'affichage

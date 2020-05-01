@@ -47,7 +47,7 @@ void Arete::afficher_console() const
 
 /// Affiche l'Arete dans Svgfile
 /// Affiche l'Arete, son numéro et son poid
-void Arete::afficher_Svgfile(Svgfile &svgout,float indice, const int& orient)
+void Arete::afficher_Svgfile(Svgfile &svgout,float indice, const int& orient, float maxA = 1)
 {
     float x=0;
     float y=0;
@@ -55,28 +55,49 @@ void Arete::afficher_Svgfile(Svgfile &svgout,float indice, const int& orient)
     x=(m_arc.first->get_coordx()+m_arc.second->get_coordx())/2;
     y=(m_arc.first->get_coordy()+m_arc.second->get_coordy())/2;
 
+        float cN =0.0;
+        if(maxA >0)
+            cN = m_central_normA / maxA;
+        else
+            cN = m_central_normA;
 
-    std::string couleur="black";
-    if(m_central_normA>0.080)
-    {
-        couleur="red";
-    }
-    else if(m_central_normA>0.060)
-    {
-        couleur="orange";
-    }
-    else if(m_central_normA>0.040)
-    {
-        couleur="yellow";
-    }
-    else if(m_central_normA>0.020)
-    {
-        couleur="blue";
-    }
-    else if(m_central_normA<=0.020)
-    {
-        couleur="black";
-    }
+        std::string couleur="black";
+        if(cN>=0.80)
+        {
+            couleur="red";
+        }
+        else if(cN>=0.70)
+        {
+            couleur="orange";
+        }
+        else if(cN>=0.60)
+        {
+            couleur="yellow";
+        }
+        else if(cN>=0.50)
+        {
+            couleur="greenyellow";
+        }
+        else if(cN>=0.40)
+        {
+            couleur="lime";
+        }
+        else if(cN>=0.30)
+        {
+            couleur="lightseagreen";
+        }
+        else if(cN>=0.20)
+        {
+            couleur="cyan";
+        }
+        else if(cN>=0.10)
+        {
+            couleur="blue";
+        }
+        else if(cN<0.10)
+        {
+            couleur="black";
+        }
 
     svgout.addLine(m_arc.first->get_coordx()*indice,m_arc.first->get_coordy()*indice,m_arc.second->get_coordx()*indice,m_arc.second->get_coordy()*indice,couleur);
     if(orient == 1)

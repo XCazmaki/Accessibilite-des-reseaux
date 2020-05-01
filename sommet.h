@@ -177,7 +177,7 @@ public:
 
     /// Methodes d'affichage
     void afficher_console() const;
-    void afficher_Svgfile(Svgfile &svgout, float indice);
+    void afficher_Svgfile(Svgfile &svgout, float indice, float maxS);
 };
 
 #endif // SOMMET_H_INCLUDED

@@ -60,30 +60,50 @@ void Sommet::afficher_console() const
 /// Affiche de Sommet dans Svgfile
 /// Affiche le Sommet, son nom, le dernier indice calculé (normalisé)
 /// Le Sommet sera affiché de différentes couleurs en fonction de son indices
-void Sommet::afficher_Svgfile(Svgfile &svgout, float indice)
+void Sommet::afficher_Svgfile(Svgfile &svgout, float indice, float maxS = 1.0)
 {
-
-
     if(m_afficher==true)
     {
+        float cN =0.0;
+        if(maxS >0)
+            cN = m_central_norm / maxS;
+        else
+            cN = m_central_norm;
+
         std::string couleur="black";
-        if(m_central_norm>0.80)
+        if(cN>=0.80)
         {
             couleur="red";
         }
-        else if(m_central_norm>0.60)
+        else if(cN>=0.70)
         {
             couleur="orange";
         }
-        else if(m_central_norm>0.40)
+        else if(cN>=0.60)
         {
             couleur="yellow";
         }
-        else if(m_central_norm>0.20)
+        else if(cN>=0.50)
+        {
+            couleur="greenyellow";
+        }
+        else if(cN>=0.40)
+        {
+            couleur="lime";
+        }
+        else if(cN>=0.30)
+        {
+            couleur="lightseagreen";
+        }
+        else if(cN>=0.20)
+        {
+            couleur="cyan";
+        }
+        else if(cN>=0.10)
         {
             couleur="blue";
         }
-        else if(m_central_norm<=0.20)
+        else if(cN<0.10)
         {
             couleur="purple";
         }
