@@ -60,6 +60,8 @@ public:
         return  m_arc.second;
     }
 
+<<<<<<< HEAD
+=======
     float get_centralA()
     {
         return m_centralA;
