@@ -26,7 +26,7 @@ private:
     float m_coordy;           /// Coordonnée en Y du sommet
     float m_central;        /// Indice de centralité
     float m_central_norm;   /// Indice de centralité normalisé
-    bool m_afficher;
+    //bool m_afficher;
 
     /// Vecteur qui va contenir l'ensemble des indice de centralité de chaque sommet
     /// par exemple vector[0].second correspond à l'indice de centralité de degre normalisé
@@ -38,6 +38,9 @@ private:
 
     /// Stocke le degré du sommet
     float m_degre;
+
+    /// Selection si on doit afficher le sommet ou pas
+    bool m_afficher;
 
 public:
 
@@ -103,6 +106,11 @@ public:
 
     /// Setter
 
+    void set_indice(int x)
+    {
+        m_indice=x;
+    }
+
     void set_degre(float x)
     {
         m_degre=x;
@@ -133,6 +141,12 @@ public:
         m_indices_centralite[num].first=val1;
         m_indices_centralite[num].second=val2;
     }
+
+
+    /*void set_afficher(bool x)
+    {
+        m_afficher=x;
+    }*/
 
     void set_indiceS(const int& i)
     {
@@ -169,7 +183,7 @@ public:
 
     /// Methodes d'affichage
     void afficher_console() const;
-    void afficher_Svgfile(Svgfile &svgout, float indice);
+    void afficher_Svgfile(Svgfile &svgout, float indice, float maxS);
 };
 
 #endif // SOMMET_H_INCLUDED

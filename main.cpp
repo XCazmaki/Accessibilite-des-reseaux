@@ -130,7 +130,6 @@ void menu()
             nouv.calcul_indice();
             nouv.afficher_Svgfile(svgout);
             choix=8;
-            dernier=1;
         }
         break;
         case 9 :

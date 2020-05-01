@@ -1000,9 +1000,7 @@ void Graphe::supprimer_sommet_test(int indice)
 
 }
 
-
-
-void Graphe::sauvegarde_sommets_indices()
+void Graphe::comparer_indices()
 {
     if(m_sommets_svg.size()>0)
     {
@@ -1010,9 +1008,15 @@ void Graphe::sauvegarde_sommets_indices()
         {
             std::cout << "Indices de centralites actuels :" << std::endl;
             m_sommets[i]->afficher_console();
-
-    m_sommets_svg.push_back(svg);
+        }
+    }
+    //m_sommets_svg.push_back(svg);
 }
+
+
+//void Graphe::sauvegarde_sommets_indices()
+
+
 /*
 void Graphe::comparer_indices()
 {
@@ -1036,7 +1040,7 @@ void Graphe::comparer_indices()
 
         }
     }
-}*/
+}
 void Graphe::comparer_indices()
 {
     if(m_sommets_svg.size()>0)
@@ -1060,7 +1064,7 @@ void Graphe::comparer_indices()
 
         }
     }
-}
+}*/
 
 
 
