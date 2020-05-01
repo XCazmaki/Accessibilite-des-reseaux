@@ -419,8 +419,15 @@ void Graphe::centralite_intermediarite()
         }
     }
 
+    float m=0.0;
+    float somme =0.0;
+    float bG= 0.0;
+    float n = (float)m_sommets.size();
     for(auto so : m_sommets)
     {
+        if(so->get_central_norm()> m)
+            m = so->get_central_norm();
+
         so->DefcentralInterNorm(m_sommets.size());
     }
 
@@ -430,7 +437,11 @@ void Graphe::centralite_intermediarite()
     for(auto i: m_sommets)
     {
         i->set_indice_central(3,i->get_central(),i->get_central_norm());
+
+        somme += (m - i->get_central_norm());
     }
+    bG = (somme/((n -1)*((n*n)-(3*n)+2)));
+    std::cout<<"L indice globale de centralite d intermediarite est : " << bG<<std::endl;
 }
 
 void Graphe::calculCentraliteInterSommet(const int& nCC, std::vector<int>& tab)
