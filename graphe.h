@@ -125,6 +125,8 @@ public:
     void restaurer_sommets();
     void supprimer_sommet(int indice);
 
+    void supprimer_sommet_test(int indice);
+
     void sauvegarde_sommets_indices();
 
     void reinitialiser_centralite();

@@ -742,6 +742,8 @@ void Graphe::sauvegarde_aretes()
 
 void Graphe::restaurer_aretes()
 {
+    if(m_aretes_originales.size()>0)
+    {
     std::vector<float> degres_svg=m_degres_svg[m_degres_svg.size()-1];
     for(size_t i=0; i<m_sommets.size(); ++i)
     {
@@ -757,6 +759,13 @@ void Graphe::restaurer_aretes()
         m_aretes[i]->set_indice(i);
     }
 
+
+    for(auto i: m_aretes)
+    {
+        i->get_arc1()->set_afficher(true);
+        i->get_arc2()->set_afficher(true);
+    }
+    }
 }
 
 void Graphe::supprimer_aretes(int indice)
@@ -835,7 +844,76 @@ void Graphe::restaurer_sommets()
 }
 
 
+void Graphe::supprimer_sommet_test(int indice)
+{
+    m_sommets[indice]->set_afficher(false);
 
+    for(auto i: m_aretes)
+    {
+        if(i->get_arc1()->get_indice()==indice||i->get_arc2()->get_indice()==indice)
+        {
+            sauvegarde_sommets_indices();
+            sauvegarde_aretes();
+            supprimer_aretes(i->get_indice());
+        }
+        for(int i = 0; i< (int)m_aretes.size(); ++i)
+            m_aretes[i]->set_indiceA(i);
+    }
+    for(auto i: m_aretes)
+    {
+        if(i->get_arc1()->get_indice()==indice||i->get_arc2()->get_indice()==indice)
+        {
+            sauvegarde_sommets_indices();
+            sauvegarde_aretes();
+            supprimer_aretes(i->get_indice());
+        }
+        for(int i = 0; i< (int)m_aretes.size(); ++i)
+            m_aretes[i]->set_indiceA(i);
+    }
+
+}
+
+void Graphe::comparer_indices()
+{
+    if(m_sommets_svg.size()>0)
+    {
+        for(size_t i=0; i<m_sommets.size(); ++i)
+        {
+            std::cout << "Indices de centralites actuels :" << std::endl;
+            m_sommets[i]->afficher_console();
+        }
+    }
+    //m_sommets_svg.push_back(svg);
+}
+
+
+//void Graphe::sauvegarde_sommets_indices()
+
+
+/*
+void Graphe::comparer_indices()
+{
+    for(size_t i=0; i<m_sommets.size(); ++i)
+    {
+        std::cout << "Indices de centralites actuels :" << std::endl;
+        m_sommets[i]->afficher_console();
+=======
+            std::cout << "Indices de centralites au temps t-1 :" << std::endl;
+            m_sommets_svg[m_sommets_svg.size()-1][i].afficher_console();
+
+            std::cout << "Ils ont donc variés de : " << std::endl;
+
+            for(size_t j=0; j<4; ++j)
+            {
+                std::cout << ((m_sommets[i]->get_indice_central()[j].first)-(m_sommets_svg[m_sommets_svg.size()-1][i].get_indice_central()[j].first)) << " ";
+                std::cout << ((m_sommets[i]->get_indice_central()[j].second)-(m_sommets_svg[m_sommets_svg.size()-1][i].get_indice_central()[j].second)) << " ";
+                std::cout << std::endl;
+            }
+>>>>>>> 35959b0188b371fd33cbb9dc1b293febebea6b83
+
+        }
+    }
+}
 void Graphe::comparer_indices()
 {
     if(m_sommets_svg.size()>0)
@@ -859,7 +937,8 @@ void Graphe::comparer_indices()
 
         }
     }
-}
+}*/
+
 
 
 void Graphe::sauvegarde_fichier()

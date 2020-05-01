@@ -117,6 +117,8 @@ void menu()
             std::cout << "Quelle sommet voulez-vous supprimer ? " << std::endl;
             std::cin >> choix;
             nouv.supprimer_sommet(choix);
+            //nouv.supprimer_sommets(choix);
+            nouv.supprimer_sommet_test(choix);
             nouv.calcul_indice();
             nouv.afficher_Svgfile(svgout);
             choix=8;
@@ -125,6 +127,12 @@ void menu()
         case 9 :
         {
             Svgfile svgout;
+            //if(dernier==0)
+            nouv.restaurer_aretes();
+
+            //if(dernier==1)
+            //nouv.restaurer_sommets();
+
             nouv.restaurer_aretes();
             nouv.afficher_Svgfile(svgout);
         }
@@ -147,6 +155,7 @@ void menu()
         {
             Svgfile svgout;
             nouv.calcul_centralite();
+            nouv.calcul_indice();
             nouv.comparer_indices();
             nouv.afficher_Svgfile(svgout);
         }

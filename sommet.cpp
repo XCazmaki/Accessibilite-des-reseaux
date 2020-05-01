@@ -13,6 +13,7 @@ Sommet::Sommet()
     m_etat = 'B';
     m_degre=0;
     m_afficher=true;
+
     for(int i=0; i<4; ++i)
     {
         m_indices_centralite.push_back(std::make_pair(0,0));
@@ -32,6 +33,7 @@ Sommet::Sommet(int indice, std::string nom, float coordx, float coordy)
     m_etat = 'B';
     m_degre=0;
     m_afficher=true;
+
     for(int i=0; i<4; ++i)
     {
         m_indices_centralite.push_back(std::make_pair(0,0));
@@ -87,6 +89,7 @@ void Sommet::afficher_Svgfile(Svgfile &svgout, float indice)
         {
             couleur="purple";
         }
+
 
         svgout.addDisk(m_coordx*indice,m_coordy*indice,5,couleur);
         svgout.addText(m_coordx*indice,m_coordy*indice-10,m_nom,"black");
